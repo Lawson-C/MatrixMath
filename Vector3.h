@@ -116,26 +116,4 @@ public:
         *(daten + 2) *= v.get(2);
         return *this;
     };
-
-    template <int Zeilen>
-    Vector3 operator*(Matrix<Zeilen, 3> &v)
-    {
-        double neueDaten[Zeilen];
-        for (int i = 0; i < Zeilen; i++)
-        {
-            neueDaten[i] = *(daten)*v.get(i, 0) + *(daten + 1) * v.get(i, 1) + *(daten + 2) * v.get(i, 2);
-        };
-        return Vector3(neueDaten);
-    };
-
-    Vector3 &operator*=(Matrix<3, 3> &v)
-    {
-        double *neueDaten = (double *)malloc(2 * sizeof(double));
-        *(neueDaten) = *(daten)*v.get(0, 0) + *(daten + 1) * v.get(1, 0) + *(daten + 2) * v.get(2, 0);
-        *(neueDaten + 1) = *(daten)*v.get(0, 1) + *(daten + 1) * v.get(1, 1) + *(daten + 2) * v.get(2, 1);
-        *(neueDaten + 2) = *(daten)*v.get(0, 2) + *(daten + 1) * v.get(1, 2) + *(daten + 2) * v.get(2, 2);
-        free(daten);
-        daten = neueDaten;
-        return *this;
-    };
 };

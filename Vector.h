@@ -3,8 +3,6 @@
 #include <cstring>
 #include <cmath>
 
-#include "Matrix.h"
-
 template <int Länge>
 class Vector
 {
@@ -38,6 +36,15 @@ public:
     ~Vector()
     {
         free(daten);
+    };
+
+    /*
+     * ersetzt die alten Daten mit den eingegebenen neuen Daten
+     */
+    void replace(double *neueDaten)
+    {
+        free(daten);
+        daten = neueDaten;
     };
 
     /*
@@ -178,47 +185,6 @@ public:
         {
             *(daten + n) *= *(daten + n) * k;
         };
-        return *this;
-    };
-
-    // Matrixenmultiplikation
-
-    /*
-     * multipliziert den Vektor mit einer Matrix, wo deren Spaltenlänge gleich wie die Länge des Vektors ist
-     */
-    template <int Zeilen>
-    Vector<Zeilen> operator*(Matrix<Zeilen, Länge> &m)
-    {
-        Vector<Länge> v = Vector<Länge>();
-        for (int i = 0; i < Zeilen; i++)
-        {
-            double sum = 0;
-            for (int j = 0; j < Länge; j++)
-            {
-                sum += *(daten + j) * m.get(i, j);
-            };
-            v.set(i, sum);
-        };
-        return v;
-    };
-
-    /*
-     * multipliziert den Vektor mit einer Matrix, wo deren Spalten- und Zeilenlängen gleich wie die Länge des Vektors ist
-     */
-    Vector<Länge> &operator*(Matrix<Länge, Länge> &m)
-    {
-        double *neueDaten = malloc(Länge * sizeof(double));
-        for (int i = 0; i < Länge; i++)
-        {
-            double sum = 0;
-            for (int j = 0; j < Länge; j++)
-            {
-                sum += *(daten + j) * m.get(i, j);
-            };
-            *(neueDaten + i) = sum;
-        };
-        free(daten);
-        daten = neueDaten;
         return *this;
     };
 
