@@ -4,7 +4,7 @@
 
 void testAdd();
 void testSub();
-void testMult();
+void testSkalarMult();
 void testNormalize();
 
 int main()
@@ -17,7 +17,7 @@ int main()
               << v._str() << std::endl;
     testAdd();
     testSub();
-    testMult();
+    testSkalarMult();
     testNormalize();
     return 0;
 };
@@ -56,7 +56,20 @@ void testSub()
               << v._str() << std::endl;
 };
 
-void testMult() {
+void testSkalarMult() {
+    std::cout << std::endl
+              << "Testen zur Vektorenmultiplikation" << std::endl;
+    double data[4] = {
+        4, 6, 8, -2};
+    double data2[4] = {
+        1, -2, 5, 4};
+    Vector4 v = Vector4(data);
+    Vector4 v2 = Vector4(data2);
+    std::cout << "v * v2:\t" << std::endl
+              << (v * v2)._str() << std::endl;
+    v *= v2;
+    std::cout << "v * v2:\t" << std::endl
+              << v._str() << std::endl;
 };
 
 void testNormalize()
