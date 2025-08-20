@@ -108,4 +108,48 @@ public:
         *(daten + 3) -= a.get(3);
         return *this;
     };
+
+    // Vectorenmultiplikation
+
+    Vector4 operator*(Vector<4> &v)
+    {
+        double neueDaten[4] = {
+            *(daten)*v.get(0),
+            *(daten + 1) * v.get(1),
+            *(daten + 2) * v.get(2),
+            *(daten + 3) * v.get(3)};
+        return Vector4(neueDaten);
+    };
+
+    Vector4 &operator*=(Vector<4> &v)
+    {
+        *(daten) *= v.get(0);
+        *(daten + 1) *= v.get(1);
+        *(daten + 2) *= v.get(2);
+        *(daten + 3) *= v.get(3);
+        return *this;
+    };
+
+    template <int Zeilen>
+    Vector4 operator*(Matrix<Zeilen, 4> &v)
+    {
+        double neueDaten[Zeilen];
+        for (int i = 0; i < Zeilen; i++)
+        {
+            neueDaten[i] = *(daten)*v.get(i, 0) + *(daten + 1) * v.get(i, 1) + *(daten + 2) * v.get(i, 2) + *(daten + 3) * v.get(i, 3);
+        };
+        return Vector4(neueDaten);
+    };
+
+    Vector4 &operator*=(Matrix<4, 4> &v)
+    {
+        double *neueDaten = (double *)malloc(2 * sizeof(double));
+        *(neueDaten) = *(daten)*v.get(0, 0) + *(daten + 1) * v.get(1, 0) + *(daten + 2) * v.get(2, 0) + *(daten + 3) * v.get(3, 0);
+        *(neueDaten + 1) = *(daten)*v.get(0, 1) + *(daten + 1) * v.get(1, 1) + *(daten + 2) * v.get(2, 1) + *(daten + 3) * v.get(3, 1);
+        *(neueDaten + 2) = *(daten)*v.get(0, 2) + *(daten + 1) * v.get(1, 2) + *(daten + 2) * v.get(2, 2) + *(daten + 3) * v.get(3, 2);
+        *(neueDaten + 3) = *(daten)*v.get(0, 3) + *(daten + 1) * v.get(1, 3) + *(daten + 2) * v.get(2, 3) + *(daten + 3) * v.get(3, 3);
+        free(daten);
+        daten = neueDaten;
+        return *this;
+    };
 };

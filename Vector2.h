@@ -83,7 +83,7 @@ public:
     Vector2 operator-(Vector<2> &a)
     {
         double data[2] = {
-            *(daten) - a.get(0), *(daten + 1) - a.get(1)};
+            *(daten)-a.get(0), *(daten + 1) - a.get(1)};
         return Vector2(data);
     };
 
@@ -91,6 +91,44 @@ public:
     {
         *(daten) -= a.get(0);
         *(daten + 1) -= a.get(1);
+        return *this;
+    };
+
+    // Vectorenmultiplikation
+
+    Vector2 operator*(Vector<2> &v)
+    {
+        double neueDaten[2] = {
+            *(daten)*v.get(0),
+            *(daten + 1) * v.get(1)};
+        return Vector2(neueDaten);
+    };
+
+    Vector2 &operator*=(Vector<2> &v)
+    {
+        *(daten) *= v.get(0);
+        *(daten + 1) *= v.get(1);
+        return *this;
+    };
+
+    template <int Zeilen>
+    Vector2 operator*(Matrix<Zeilen, 2> &v)
+    {
+        double neueDaten[Zeilen];
+        for (int i = 0; i < Zeilen; i++)
+        {
+            neueDaten[i] = *(daten) * v.get(i, 0) + *(daten + 1) * v.get(i, 1);
+        };
+        return Vector2(neueDaten);
+    };
+
+    Vector2 &operator*=(Matrix<2, 2> &v)
+    {
+        double *neueDaten = (double *)malloc(2 * sizeof(double));
+        *(neueDaten) = *(daten)*v.get(0, 0) + *(daten + 1) * v.get(1, 0);
+        *(neueDaten + 1) = *(daten)*v.get(0, 1) + *(daten + 1) * v.get(1, 1);
+        free(daten);
+        daten = neueDaten;
         return *this;
     };
 };
