@@ -255,7 +255,7 @@ public:
             int sum = 0;
             for (int s = 0; s < Spalten; s++)
             {
-                sum += *wertPtr(z, s) * v.get(i);
+                sum += *wertPtr(z, s) * v.get(z);
             };
             neueDaten[z] = sum;
         };
@@ -283,6 +283,3 @@ public:
         return out;
     };
 };
-
-typedef Matrix<3, 3> Matrix33;
-typedef Matrix<4, 4> Matrix44;
