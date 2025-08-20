@@ -247,6 +247,7 @@ public:
     /*
      * multipliziert eine Matrix mit einem Vektor und ergibt jenen Vektor
      */
+    template <int Zeilen>
     Vector<Zeilen> operator*(Vector<Zeilen> &v)
     {
         double neueDaten[Zeilen];
