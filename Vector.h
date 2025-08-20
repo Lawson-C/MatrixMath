@@ -3,7 +3,7 @@
 #include <cstring>
 #include <cmath>
 
-#include "matrixmath.h"
+#include "Matrix.h"
 
 template <int Länge>
 class Vector

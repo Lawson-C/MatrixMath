@@ -1,8 +1,9 @@
 #pragma once
-#include "Matrix.h"
 
 #include <cstring>
 #include <malloc.h>
+
+#include "matrixmath.h"
 
 class Matrix22 : public Matrix<2, 2>
 {
@@ -21,16 +22,17 @@ public:
         return m;
     };
 
-    double determinant() {
+    double determinant()
+    {
         return (*(daten) * *(daten + 3)) - (*(daten + 1) * *(daten + 2));
     };
 
-    Matrix<2, 2> inverse() {
+    Matrix<2, 2> inverse()
+    {
         double d = determinant();
         double neueDaten[4] = {
             *(daten + 3) / d, -*(daten + 1) / d,
-            -*(daten + 2) / d, *(daten) / d
-        };
+            -*(daten + 2) / d, *(daten) / d};
         return Matrix<2, 2>(neueDaten);
     };
 
@@ -91,6 +93,19 @@ public:
 
     // matrix multiplikation
 
+    Matrix22 operator*(Matrix<2, 2> &m)
+    {
+        double neueDaten[4] =
+            {
+                *(daten)*m.get(0, 0) + *(daten + 1) * m.get(1, 0),
+                *(daten) * m.get(0, 1) + *(daten + 1) * m.get(1, 1),
+
+                *(daten + 2) * m.get(0, 0) + *(daten + 3) * m.get(1, 0),
+                *(daten + 2) * m.get(0, 1) + *(daten + 3) * m.get(1, 1)};
+
+        return Matrix22(neueDaten);
+    };
+
     Matrix22 &operator*=(Matrix<2, 2> &m)
     {
         double *neueDaten = (double *)malloc(4 * sizeof(double));
@@ -101,5 +116,18 @@ public:
         free(daten);
         daten = neueDaten;
         return *this;
+    };
+
+    // Vectorenmultiplikation
+
+    /*
+     * multipliziert eine Matrix mit einem Vektor und ergibt jenen Vektor
+     */
+    Vector2 operator*(Vector<2> &v)
+    {
+        double neueDaten[2] = {
+            *(daten)*v.get(0) + *(daten + 1) * v.get(1),
+            *(daten + 2) * v.get(0) + *(daten + 3) * v.get(1)};
+        return Vector2(neueDaten);
     };
 };

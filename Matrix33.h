@@ -1,8 +1,9 @@
 #pragma once
-#include "Matrix.h"
 
 #include <cstring>
 #include <malloc.h>
+
+#include "matrixmath.h"
 
 class Matrix33 : public Matrix<3, 3>
 {
@@ -100,6 +101,25 @@ public:
 
     // matrix multiplikation
 
+    Matrix33 operator*(Matrix<3, 3> &m)
+    {
+        double neueDaten[9] =
+            {
+                *(daten)*m.get(0, 0) + *(daten + 1) * m.get(1, 0) + *(daten + 2) * m.get(2, 0),
+                *(daten)*m.get(0, 1) + *(daten + 1) * m.get(1, 1) + *(daten + 2) * m.get(2, 1),
+                *(daten)*m.get(0, 2) + *(daten + 1) * m.get(1, 2) + *(daten + 2) * m.get(2, 2),
+
+                *(daten + 3) * m.get(0, 0) + *(daten + 4) * m.get(1, 0) + *(daten + 5) * m.get(2, 0),
+                *(daten + 3) * m.get(0, 1) + *(daten + 4) * m.get(1, 1) + *(daten + 5) * m.get(2, 1),
+                *(daten + 3) * m.get(0, 2) + *(daten + 4) * m.get(1, 2) + *(daten + 5) * m.get(2, 2),
+
+                *(daten + 6) * m.get(0, 0) + *(daten + 7) * m.get(1, 0) + *(daten + 8) * m.get(2, 0),
+                *(daten + 6) * m.get(0, 1) + *(daten + 7) * m.get(1, 1) + *(daten + 8) * m.get(2, 1),
+                *(daten + 6) * m.get(0, 2) + *(daten + 7) * m.get(1, 2) + *(daten + 8) * m.get(2, 2)};
+
+        return Matrix33(neueDaten);
+    };
+
     Matrix33 &operator*=(Matrix<3, 3> &m)
     {
         double *neueDaten = (double *)malloc(4 * sizeof(double));
@@ -119,5 +139,19 @@ public:
         free(daten);
         daten = neueDaten;
         return *this;
+    };
+
+    // Vectorenmultiplikation
+
+    /*
+     * multipliziert eine Matrix mit einem Vektor und ergibt jenen Vektor
+     */
+    Vector3 operator*(Vector<3> &v)
+    {
+        double neueDaten[3] = {
+            *(daten)*v.get(0) + *(daten + 1) * v.get(1) + *(daten + 2) * v.get(2),
+            *(daten + 3) * v.get(0) + *(daten + 4) * v.get(1) + *(daten + 5) * v.get(2),
+            *(daten + 6) * v.get(0) + *(daten + 7) * v.get(1) + *(daten + 8) * v.get(2)};
+        return Vector3(neueDaten);
     };
 };
