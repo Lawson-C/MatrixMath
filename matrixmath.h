@@ -1,5 +1,10 @@
 #pragma once
 
+template<int Zeilen, int Spalten>
+class Matrix;
+template<int Länge>
+class Vector;
+
 #include "Matrix.h"
 #include "Matrix22.h"
 #include "Matrix33.h"

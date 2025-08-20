@@ -3,7 +3,7 @@
 #include <malloc.h>
 #include <cstring>
 
-#include "Vector.h"
+#include "matrixmath.h"
 
 template <int Zeilen, int Spalten>
 class Matrix

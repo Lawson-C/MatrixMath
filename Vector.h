@@ -3,7 +3,7 @@
 #include <cstring>
 #include <cmath>
 
-#include <matrixmath.h>
+#include "matrixmath.h"
 
 template <int Länge>
 class Vector
@@ -218,7 +218,7 @@ public:
             *(neueDaten + i) = sum;
         };
         free(daten);
-        daten = neueDaten
+        daten = neueDaten;
         return *this;
     };
 
