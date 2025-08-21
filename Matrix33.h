@@ -125,12 +125,12 @@ public:
         double *neueDaten = (double *)malloc(4 * sizeof(double));
 
         *(neueDaten) = *(daten)*m.get(0, 0) + *(daten + 1) * m.get(1, 0) + *(daten + 2) * m.get(2, 0);
-        *(neueDaten + 1) = *(daten)*m.get(0, 1) + *(daten + 1) * m.get(1, 1) + *(daten)*m.get(2, 1);
-        *(neueDaten + 2) = *(daten)*m.get(0, 2) + *(daten + 1) * m.get(1, 2) + *(daten)*m.get(2, 2);
+        *(neueDaten + 1) = *(daten)*m.get(0, 1) + *(daten + 1) * m.get(1, 1) + *(daten + 2)*m.get(2, 1);
+        *(neueDaten + 2) = *(daten)*m.get(0, 2) + *(daten + 1) * m.get(1, 2) + *(daten + 2)*m.get(2, 2);
 
-        *(neueDaten + 3) = *(daten + 3) * m.get(0, 0) + *(daten + 3) * m.get(1, 0) + *(daten + 4) * m.get(2, 0);
-        *(neueDaten + 4) = *(daten + 3) * m.get(0, 1) + *(daten + 3) * m.get(1, 1) + *(daten + 4) * m.get(2, 1);
-        *(neueDaten + 5) = *(daten + 3) * m.get(0, 2) + *(daten + 3) * m.get(1, 2) + *(daten + 4) * m.get(2, 2);
+        *(neueDaten + 3) = *(daten + 3) * m.get(0, 0) + *(daten + 4) * m.get(1, 0) + *(daten + 5) * m.get(2, 0);
+        *(neueDaten + 4) = *(daten + 3) * m.get(0, 1) + *(daten + 4) * m.get(1, 1) + *(daten + 5) * m.get(2, 1);
+        *(neueDaten + 5) = *(daten + 3) * m.get(0, 2) + *(daten + 4) * m.get(1, 2) + *(daten + 5) * m.get(2, 2);
 
         *(neueDaten + 6) = *(daten + 6) * m.get(0, 0) + *(daten + 7) * m.get(1, 0) + *(daten + 8) * m.get(2, 0);
         *(neueDaten + 7) = *(daten + 6) * m.get(0, 1) + *(daten + 7) * m.get(1, 1) + *(daten + 8) * m.get(2, 1);

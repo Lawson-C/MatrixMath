@@ -110,8 +110,8 @@ public:
     {
         double *neueDaten = (double *)malloc(4 * sizeof(double));
         *(neueDaten) = *(daten)*m.get(0, 0) + *(daten + 1) * m.get(1, 0);
-        *(neueDaten + 1) = *(daten)*m.get(0, 1) + *(daten + 1) * m.get(0, 1);
-        *(neueDaten + 2) = *(daten + 2) * m.get(0, 1) + *(daten + 3) * m.get(1, 1);
+        *(neueDaten + 1) = *(daten)*m.get(0, 1) + *(daten + 1) * m.get(1, 1);
+        *(neueDaten + 2) = *(daten + 2) * m.get(0, 0) + *(daten + 3) * m.get(1, 0);
         *(neueDaten + 3) = *(daten + 2) * m.get(0, 1) + *(daten + 3) * m.get(1, 1);
         free(daten);
         daten = neueDaten;

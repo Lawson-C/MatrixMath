@@ -5,6 +5,7 @@
 void testAdd();
 void testSub();
 void testSkalarMult();
+void testMatrixMult();
 void testTranspose();
 void testInverse();
 
@@ -20,6 +21,7 @@ int main()
     testAdd();
     testSub();
     testSkalarMult();
+    testMatrixMult();
     testTranspose();
     testInverse();
     return 0;
@@ -107,6 +109,37 @@ void testMatrixMult()
     m *= m2;
     std::cout << "m * m2:\t" << std::endl
               << m._str() << std::endl;
+
+    double data3[9] = {
+        1, -2, 6,
+        4, 5, -8,
+        5, 1, 7};
+    double data4[9] = {
+        5, -7, 3,
+        2, -5, 9,
+        3, 4, 5};
+    Matrix33 m3 = Matrix33(data3);
+    Matrix33 m4 = Matrix33(data4);
+    std::cout << "m3 * m4:\t" << std::endl
+              << (m3 * m4)._str() << std::endl;
+    m3 *= m4;
+    std::cout << "m3 * m4:\t" << std::endl
+              << m3._str() << std::endl;
+
+    double data5[4] = {
+        -2, 6,
+        4, -8};
+    double data6[4] = {
+        -5, 9,
+        3, 5};
+    Matrix22 m5 = Matrix22(data5);
+    Matrix22 m6 = Matrix22(data6);
+    std::cout << "m5 * m6:\t" << std::endl
+              << (m5 * m6)._str() << std::endl;
+    m5 *= m6;
+    std::cout << "m5 * m6:\t" << std::endl
+              << m5._str() << std::endl;
+
     double data7[6] = {
         1, -2, 6,
         8, 2, 3};
