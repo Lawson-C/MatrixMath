@@ -107,7 +107,7 @@ Vector4 &operator*=(Vector4 &v, Matrix<4, 4> &m)
     *(neueDaten) = v.get(0) * m.get(0, 0) + v.get(1) * m.get(1, 0) + v.get(2) * m.get(2, 0) + v.get(3) * m.get(3, 0);
     *(neueDaten + 1) = v.get(0) * m.get(0, 1) + v.get(1) * m.get(1, 1) + v.get(2) * m.get(2, 1) + v.get(3) * m.get(3, 1);
     *(neueDaten + 2) = v.get(0) * m.get(0, 2) + v.get(1) * m.get(1, 2) + v.get(2) * m.get(2, 2) + v.get(3) * m.get(3, 2);
-    *(neueDaten + 2) = v.get(0) * m.get(0, 3) + v.get(1) * m.get(1, 3) + v.get(2) * m.get(2, 3) + v.get(3) * m.get(3, 3);
+    *(neueDaten + 3) = v.get(0) * m.get(0, 3) + v.get(1) * m.get(1, 3) + v.get(2) * m.get(2, 3) + v.get(3) * m.get(3, 3);
     v.replace(neueDaten);
     return v;
 };
