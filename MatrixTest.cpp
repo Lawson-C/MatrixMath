@@ -6,6 +6,7 @@ void testAdd();
 void testSub();
 void testSkalarMult();
 void testMatrixMult();
+void testVektorMult();
 void testTranspose();
 void testInverse();
 
@@ -22,6 +23,7 @@ int main()
     testSub();
     testSkalarMult();
     testMatrixMult();
+    testVektorMult();
     testTranspose();
     testInverse();
     return 0;
@@ -154,6 +156,54 @@ void testMatrixMult()
     m7 *= m8;
     std::cout << "m7 * m8:\t" << std::endl
               << m7._str() << std::endl;
+};
+
+void testVektorMult()
+{
+    std::cout << std::endl
+              << "Testen zur Vektorenmultiplikation" << std::endl;
+    double data[16] = {
+        1, -2, 6, 5,
+        8, 2, -3, 5,
+        4, 5, -8, 8,
+        5, 1, -5, 7};
+    double data2[4] = {
+        5, -3, -7, 3};
+    Matrix44 m = Matrix44(data);
+    Vector4 v = Vector4(data2);
+    std::cout << "m * v:\t" << std::endl
+              << (m * v)._str() << std::endl;
+
+    double data3[9] = {
+        1, -2, 6,
+        4, 5, -8,
+        5, 1, 7};
+    double data4[3] = {
+        5, -7, 3};
+    Matrix33 m2 = Matrix33(data3);
+    Vector3 v2 = Vector3(data4);
+    std::cout << "m2 * v2:\t" << std::endl
+              << (m2 * v2)._str() << std::endl;
+
+    double data5[4] = {
+        -2, 6,
+        4, -8};
+    double data6[4] = {
+        -5, 9};
+    Matrix22 m3 = Matrix22(data5);
+    Vector2 v3 = Vector2(data6);
+    std::cout << "m3 * v3:\t" << std::endl
+              << (m3 * v3)._str() << std::endl;
+
+    double data7[6] = {
+        1, -2, 6,
+        8, 2, 3};
+    double data8[3] = {
+        5, -3, 7};
+    Matrix<2, 3> m4 = Matrix<2, 3>(data7);
+    Vector3 v4 = Vector3(data8);
+    std::cout << "m4 * v4:\t" << std::endl
+              << (m4 * v4)._str() << std::endl;
 };
 
 void testTranspose()
