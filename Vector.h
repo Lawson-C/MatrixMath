@@ -188,6 +188,31 @@ public:
         return *this;
     };
 
+    // Vektorenmultiplikation
+
+    /*
+     * multipliziert einen Vektor mit einem anderen, ohne Datenänderung
+     */
+    Vector<Länge> &operator*(Vector<Länge> &v)
+    {
+        double data[Länge];
+        for (int i = 0; i < Länge; i++) {
+            data[i] = *(daten + i) * v.get(i);
+        };
+        return Vector<Länge>(data);
+    };
+
+    /*
+     * multipliziert einen Vektor mit einem anderen, mit Datenänderung
+     */
+    Vector<Länge> &operator*(Vector<Länge> &v)
+    {
+        for (int i = 0; i < Länge; i++) {
+            *(daten + i) *= v.get(i);
+        };
+        return *this;
+    };
+
     // string repräsentation
 
     /*
