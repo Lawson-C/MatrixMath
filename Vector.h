@@ -205,7 +205,7 @@ public:
     /*
      * multipliziert einen Vektor mit einem anderen, mit Datenänderung
      */
-    Vector<Länge> &operator*(Vector<Länge> &v)
+    Vector<Länge> &operator*=(Vector<Länge> &v)
     {
         for (int i = 0; i < Länge; i++) {
             *(daten + i) *= v.get(i);
