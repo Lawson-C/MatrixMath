@@ -122,7 +122,7 @@ public:
 
     Matrix33 &operator*=(Matrix<3, 3> &m)
     {
-        double *neueDaten = (double *)malloc(4 * sizeof(double));
+        double *neueDaten = (double *)malloc(9 * sizeof(double));
 
         *(neueDaten) = *(daten)*m.get(0, 0) + *(daten + 1) * m.get(1, 0) + *(daten + 2) * m.get(2, 0);
         *(neueDaten + 1) = *(daten)*m.get(0, 1) + *(daten + 1) * m.get(1, 1) + *(daten + 2)*m.get(2, 1);

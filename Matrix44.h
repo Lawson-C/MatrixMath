@@ -161,7 +161,7 @@ public:
 
     Matrix44 &operator*=(Matrix<4, 4> &m)
     {
-        double *neueDaten = (double *)malloc(4 * sizeof(double));
+        double *neueDaten = (double *)malloc(16 * sizeof(double));
 
         *(neueDaten) = *(daten)*m.get(0, 0) + *(daten + 1) * m.get(1, 0) + *(daten + 2) * m.get(2, 0) + *(daten + 3) * m.get(3, 0);
         *(neueDaten + 1) = *(daten)*m.get(0, 1) + *(daten + 1) * m.get(1, 1) + *(daten + 2)*m.get(2, 1) + *(daten + 3) * m.get(3, 1);
