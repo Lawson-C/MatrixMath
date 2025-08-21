@@ -247,9 +247,9 @@ public:
     /*
      * multipliziert eine Matrix mit einem Vektor und ergibt jenen Vektor
      */
-    Vector<Zeilen> operator*(Vector<Zeilen> &v)
+    Vector<Spalten> operator*(Vector<Spalten> &v)
     {
-        double neueDaten[Zeilen];
+        double neueDaten[Spalten];
         for (int z = 0; z < Zeilen; z++)
         {
             int sum = 0;
@@ -259,7 +259,7 @@ public:
             };
             neueDaten[z] = sum;
         };
-        return Vector<Zeilen>(neueDaten);
+        return Vector<Spalten>(neueDaten);
     };
 
     // string repräsentation
