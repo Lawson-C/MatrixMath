@@ -15,19 +15,17 @@ protected:
     /*
      * ergibt den Pointer eines Eintrages der Matrix, erzeugt von einem Offset des "Daten"-Pointers
      */
-    double *wertPtr(int z, int s)
+    inline double *wertPtr(int z, int s)
     {
-        int offset = (z * Spalten + s);
-        return daten + offset;
+        return daten + (z * Spalten + s);
     };
 
     /*
      * ergibt den Pointer eines Eintrages der Matrix, erzeugt von einem Offset des eingegebenen "d"-Pointers
      */
-    double *wertPtr(double *d, int z, int s)
+    inline double *wertPtr(double *d, int z, int s)
     {
-        int offset = (z * Spalten + s);
-        return d + offset;
+        return d + (z * Spalten + s);
     };
 
 public:
@@ -65,17 +63,17 @@ public:
     /*
      * gibt den Wert des Eintrags zur eingegebenen Position zurück
      */
-    double get(int z, int s)
+    inline double get(int z, int s)
     {
-        return *wertPtr(z, s);
+        return daten + (z * Spalten + s);
     };
 
     /*
      * ändert den Wert des Eintrags zur eingegebenen Position
      */
-    void set(int z, int s, double d)
+    inline void set(int z, int s, double d)
     {
-        *wertPtr(z, s) = d;
+        *(daten + (z * Spalten + s)) = d;
     };
 
     /*
