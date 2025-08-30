@@ -57,12 +57,9 @@ public:
 
     Vector3 &operator*=(double k)
     {
-        double *neueDaten = (double *)malloc(2 * sizeof(double));
-        *(neueDaten) = *(daten)*k;
-        *(neueDaten + 1) = *(daten + 1) * k;
-        *(neueDaten + 2) = *(daten + 2) * k;
-        free(daten);
-        daten = neueDaten;
+        *(daten) *= k;
+        *(daten + 1) *= k;
+        *(daten + 2) *= k;
         return *this;
     };
 
@@ -86,7 +83,7 @@ public:
     Vector3 operator-(Vector<3> &a)
     {
         double data[3] = {
-            *(daten) - a.get(0), *(daten + 1) - a.get(1), *(daten + 2) - a.get(2)};
+            *(daten)-a.get(0), *(daten + 1) - a.get(1), *(daten + 2) - a.get(2)};
         return Vector3(data);
     };
 

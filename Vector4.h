@@ -59,13 +59,10 @@ public:
 
     Vector4 &operator*=(double k)
     {
-        double *neueDaten = (double *)malloc(2 * sizeof(double));
-        *(neueDaten) = *(daten)*k;
-        *(neueDaten + 1) = *(daten + 1) * k;
-        *(neueDaten + 2) = *(daten + 2) * k;
-        *(neueDaten + 3) = *(daten + 3) * k;
-        free(daten);
-        daten = neueDaten;
+        *(daten) *= k;
+        *(daten + 1) *= k;
+        *(daten + 2) *= k;
+        *(daten + 3) *= k;
         return *this;
     };
 

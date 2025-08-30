@@ -56,11 +56,8 @@ public:
 
     Vector2 &operator*=(double k)
     {
-        double *neueDaten = (double *)malloc(2 * sizeof(double));
-        *(neueDaten) = *(daten)*k;
-        *(neueDaten + 1) = *(daten + 1) * k;
-        free(daten);
-        daten = neueDaten;
+        *(daten) *= k;
+        *(daten + 1) *= k;
         return *this;
     };
 
