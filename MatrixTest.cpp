@@ -57,7 +57,7 @@ void testSub()
     std::cout << "m - m2:\t" << std::endl
               << (m - m2)._str() << std::endl;
     m -= m2;
-    std::cout << "m - m2:\t" << std::endl
+    std::cout << "m -= m2:\t" << std::endl
               << m._str() << std::endl;
 };
 
@@ -72,7 +72,7 @@ void testSkalarMult()
     std::cout << "m * 3 * 3:\t" << std::endl
               << (m * 3)._str() << std::endl;
     m *= 3;
-    std::cout << "m * 3:\t" << std::endl
+    std::cout << "m *= 3:\t" << std::endl
               << m._str() << std::endl;
     double data2[6] = {
         1, -2, 6,
@@ -86,7 +86,7 @@ void testSkalarMult()
     std::cout << "m2 * m3:\t" << std::endl
               << (m2 * m3)._str() << std::endl;
     m2 *= m3;
-    std::cout << "m2 * m3:\t" << std::endl
+    std::cout << "m2 *= m3:\t" << std::endl
               << m2._str() << std::endl;
 };
 
@@ -109,7 +109,7 @@ void testMatrixMult()
     std::cout << "m * m2:\t" << std::endl
               << (m * m2)._str() << std::endl;
     m *= m2;
-    std::cout << "m * m2:\t" << std::endl
+    std::cout << "m *= m2:\t" << std::endl
               << m._str() << std::endl;
 
     double data3[9] = {
@@ -125,7 +125,7 @@ void testMatrixMult()
     std::cout << "m3 * m4:\t" << std::endl
               << (m3 * m4)._str() << std::endl;
     m3 *= m4;
-    std::cout << "m3 * m4:\t" << std::endl
+    std::cout << "m3 *= m4:\t" << std::endl
               << m3._str() << std::endl;
 
     double data5[4] = {
@@ -139,7 +139,7 @@ void testMatrixMult()
     std::cout << "m5 * m6:\t" << std::endl
               << (m5 * m6)._str() << std::endl;
     m5 *= m6;
-    std::cout << "m5 * m6:\t" << std::endl
+    std::cout << "m5 *= m6:\t" << std::endl
               << m5._str() << std::endl;
 
     double data7[6] = {
@@ -154,7 +154,7 @@ void testMatrixMult()
     std::cout << "m7 * m8:\t" << std::endl
               << (m7 * m8)._str() << std::endl;
     m7 *= m8;
-    std::cout << "m7 * m8:\t" << std::endl
+    std::cout << "m7 *= m8:\t" << std::endl
               << m7._str() << std::endl;
 };
 
