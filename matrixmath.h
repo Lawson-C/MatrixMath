@@ -55,7 +55,7 @@ Vector<Zeilen> operator*(Vector2 &v, Matrix<Zeilen, 2> &m)
     double neueDaten[Zeilen];
     for (int i = 0; i < Zeilen; i++)
     {
-        neueDaten[i] = v.get(0)*m.get(i, 0) + v.get(1) * m.get(i, 1);
+        neueDaten[i] = v.get(0)*m.get(0, i) + v.get(1) * m.get(1, i);
     };
     return Vector<Zeilen>(neueDaten);
 };
@@ -75,7 +75,7 @@ Vector<Zeilen> operator*(Vector3 &v, Matrix<Zeilen, 3> &m)
     double neueDaten[Zeilen];
     for (int i = 0; i < Zeilen; i++)
     {
-        neueDaten[i] = v.get(0) * m.get(i, 0) + v.get(1) * m.get(i, 1) + v.get(2) * m.get(i, 2);
+        neueDaten[i] = v.get(0) * m.get(0, i) + v.get(1) * m.get(1, i) + v.get(2) * m.get(2, i);
     };
     return Vector<Zeilen>(neueDaten);
 };
