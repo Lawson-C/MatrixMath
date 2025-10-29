@@ -39,7 +39,7 @@ void testAdd()
     std::cout << "v + v2:\t" << std::endl
               << (v + v2)._str() << std::endl;
     v += v2;
-    std::cout << "v + v2:\t" << std::endl
+    std::cout << "v += v2:\t" << std::endl
               << v._str() << std::endl;
 };
 
@@ -56,7 +56,7 @@ void testSub()
     std::cout << "v - v2:\t" << std::endl
               << (v - v2)._str() << std::endl;
     v -= v2;
-    std::cout << "v - v2:\t" << std::endl
+    std::cout << "v -= v2:\t" << std::endl
               << v._str() << std::endl;
 };
 
@@ -70,7 +70,7 @@ void testSkalarMult() {
     std::cout << "v * 4:\t" << std::endl
               << (v * 4)._str() << std::endl;
     v *= 4;
-    std::cout << "v * 4:\t" << std::endl
+    std::cout << "v *= 4:\t" << std::endl
               << v._str() << std::endl;
 };
 
@@ -86,7 +86,7 @@ void testVectorMult() {
     std::cout << "v * v2:\t" << std::endl
               << (v * v2)._str() << std::endl;
     v *= v2;
-    std::cout << "v * v2:\t" << std::endl
+    std::cout << "v *= v2:\t" << std::endl
               << v._str() << std::endl;
     double data3[3] = {
         4, 6, 8};
@@ -97,7 +97,7 @@ void testVectorMult() {
     std::cout << "v3 * v4:\t" << std::endl
               << (v3 * v4)._str() << std::endl;
     v3 *= v4;
-    std::cout << "v3 * v4:\t" << std::endl
+    std::cout << "v3 *= v4:\t" << std::endl
               << v3._str() << std::endl;
     double data5[2] = {
         4, 8};
@@ -108,7 +108,7 @@ void testVectorMult() {
     std::cout << "v5 * v6:\t" << std::endl
               << (v5 * v6)._str() << std::endl;
     v5 *= v6;
-    std::cout << "v5 * v6:\t" << std::endl
+    std::cout << "v5 *= v6:\t" << std::endl
               << v5._str() << std::endl;
 };
 
@@ -127,8 +127,34 @@ void testMatrixMult() {
     std::cout << "v * m:\t" << std::endl
               << (v * m)._str() << std::endl;
     v *= m;
-    std::cout << "v * m:\t" << std::endl
+    std::cout << "v *= m:\t" << std::endl
               << v._str() << std::endl;
+
+    double data3[3] = {
+        4, 6, 8};
+    double data4[16] = {
+        1, -2, 5,
+        8, 9, 0,
+        4, 2, 1};
+    Vector3 v2 = Vector3(data3);
+    Matrix33 m2 = Matrix33(data4);
+    std::cout << "v2 * m2:\t" << std::endl
+              << (v2 * m2)._str() << std::endl;
+    v2 *= m2;
+    std::cout << "v2 *= m2:\t" << std::endl
+              << v2._str() << std::endl;
+    double data5[4] = {
+        4, -2};
+    double data6[16] = {
+        1, 0,
+        -3, 7};
+    Vector2 v3 = Vector2(data5);
+    Matrix22 m3 = Matrix22(data6);
+    std::cout << "v3 * m3:\t" << std::endl
+              << (v3 * m3)._str() << std::endl;
+    v3 *= m3;
+    std::cout << "v3 *= m3:\t" << std::endl
+              << v3._str() << std::endl;
 };
 
 void testNormalize()
