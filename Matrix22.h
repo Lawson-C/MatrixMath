@@ -3,8 +3,6 @@
 #include <cstring>
 #include <malloc.h>
 
-#include "matrixmath.h"
-
 class Matrix22 : public Matrix<2, 2>
 {
 public:

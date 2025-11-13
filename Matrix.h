@@ -3,8 +3,6 @@
 #include <malloc.h>
 #include <cstring>
 
-#include "matrixmath.h"
-
 template <int Zeilen, int Spalten>
 class Matrix
 {

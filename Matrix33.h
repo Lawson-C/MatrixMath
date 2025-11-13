@@ -3,8 +3,6 @@
 #include <cstring>
 #include <malloc.h>
 
-#include "matrixmath.h"
-
 class Matrix33 : public Matrix<3, 3>
 {
 public:
