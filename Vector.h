@@ -47,7 +47,7 @@ public:
     /*
      * ergibt den Wert zur gegebenen Position des Vektors
      */
-    double get(int n)
+    inline double get(int n)
     {
         return GET(n);
     };
@@ -55,7 +55,7 @@ public:
     /*
      * ersetzt den Wert zur gegebenen Position des Vektors mit eingegebenem Wert d
      */
-    void set(int n, double d)
+    inline void set(int n, double d)
     {
         GET(n) = d;
     };
