@@ -13,20 +13,20 @@
 /*
  * multipliziert den Vektor mit einer Matrix, wo deren Spaltenlänge gleich wie die Länge des Vektors ist
  */
-template <int Länge, int Zeilen>
-Vector<Zeilen> operator*(Vector<Länge> &v, Matrix<Zeilen, Länge> &m)
+template <int Länge, int Spalten>
+Vector<Spalten> operator*(Vector<Länge> &v, Matrix<Länge, Spalten> &m)
 {
-    double neueDaten[Länge];
-    for (int i = 0; i < Länge; i++)
+    double neueDaten[Spalten];
+    for (int i = 0; i < Spalten; i++)
     {
         double sum = 0;
-        for (int j = 0; j < Zeilen; j++)
+        for (int j = 0; j < Länge; j++)
         {
             sum += v.get(j) * m.get(j, i);
         };
         *(neueDaten + i) = sum;
     };
-    return Vector<Zeilen>(neueDaten);
+    return Vector<Spalten>(neueDaten);
 };
 
 /*
