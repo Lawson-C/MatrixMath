@@ -110,3 +110,8 @@ public:
         return *this;
     };
 };
+
+#undef M11
+#undef M12
+#undef M21
+#undef M22
