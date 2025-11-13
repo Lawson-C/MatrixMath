@@ -1,5 +1,11 @@
 #pragma once
 
+
+#define V1 (*(daten))
+#define V2 (*(daten + 1))
+#define V3 (*(daten + 2))
+#define V4 (*(daten + 3))
+
 #include <malloc.h>
 #include <cstring>
 
@@ -11,9 +17,9 @@ public:
     Vector4(double data[4]) : Vector<4>(data) {
                               };
 
-    double magnitude()
+    inline double magnitude()
     {
-        return std::sqrt(*(daten) * *(daten) + *(daten + 1) * *(daten + 1) + *(daten + 2) * *(daten + 2) + *(daten + 3) * *(daten + 3));
+        return std::sqrt(V1 * V1 + V2 * V2 + V3 * V3 + V4 * V4);
     };
 
     /*
@@ -24,10 +30,10 @@ public:
         double mag = magnitude();
         if (mag == 1)
             return *this;
-        *(daten) /= mag;
-        *(daten + 1) /= mag;
-        *(daten + 2) /= mag;
-        *(daten + 3) /= mag;
+        V1 /= mag;
+        V2 /= mag;
+        V3 /= mag;
+        V4 /= mag;
         return *this;
     };
 
@@ -40,10 +46,10 @@ public:
         if (mag == 1)
             return Vector4(daten);
         double normalizierteDaten[4] = {
-            *(daten) / mag,
-            *(daten + 1) / mag,
-            *(daten + 2) / mag,
-            *(daten + 3) / mag};
+            V1 / mag,
+            V2 / mag,
+            V3 / mag,
+            V4 / mag};
         Vector4 v = Vector4(normalizierteDaten);
         return v;
     };
@@ -53,17 +59,17 @@ public:
     Vector4 operator*(double k)
     {
         double data[4] = {
-            *(daten)*k, *(daten + 1) * k, *(daten + 2) * k, *(daten + 3) * k};
+            V1*k, V2 * k, V3 * k, V4 * k};
         return Vector4(data);
     };
 
     Vector4 &operator*=(double k)
     {
         double *neueDaten = (double *)malloc(2 * sizeof(double));
-        *(neueDaten) = *(daten)*k;
-        *(neueDaten + 1) = *(daten + 1) * k;
-        *(neueDaten + 2) = *(daten + 2) * k;
-        *(neueDaten + 3) = *(daten + 3) * k;
+        *(neueDaten) = V1*k;
+        *(neueDaten + 1) = V2 * k;
+        *(neueDaten + 2) = V3 * k;
+        *(neueDaten + 3) = V4 * k;
         free(daten);
         daten = neueDaten;
         return *this;
@@ -74,38 +80,43 @@ public:
     Vector4 operator+(Vector<4> &a)
     {
         double data[4] = {
-            *(daten) + a.get(0),
-            *(daten + 1) + a.get(1),
-            *(daten + 2) + a.get(2),
-            *(daten + 3) + a.get(3)};
+            V1 + a.get(0),
+            V2 + a.get(1),
+            V3 + a.get(2),
+            V4 + a.get(3)};
         return Vector4(data);
     };
 
     Vector4 &operator+=(Vector<4> &a)
     {
-        *(daten) += a.get(0);
-        *(daten + 1) += a.get(1);
-        *(daten + 2) += a.get(2);
-        *(daten + 3) += a.get(3);
+        V1 += a.get(0);
+        V2 += a.get(1);
+        V3 += a.get(2);
+        V4 += a.get(3);
         return *this;
     };
 
     Vector4 operator-(Vector<4> &a)
     {
         double data[4] = {
-            *(daten)-a.get(0),
-            *(daten + 1) - a.get(1),
-            *(daten + 2) - a.get(2),
-            *(daten + 3) - a.get(3)};
+            V1-a.get(0),
+            V2 - a.get(1),
+            V3 - a.get(2),
+            V4 - a.get(3)};
         return Vector4(data);
     };
 
     Vector4 &operator-=(Vector<4> &a)
     {
-        *(daten) -= a.get(0);
-        *(daten + 1) -= a.get(1);
-        *(daten + 2) -= a.get(2);
-        *(daten + 3) -= a.get(3);
+        V1 -= a.get(0);
+        V2 -= a.get(1);
+        V3 -= a.get(2);
+        V4 -= a.get(3);
         return *this;
     };
 };
+
+#undef V1
+#undef V2
+#undef V3
+#undef V4
