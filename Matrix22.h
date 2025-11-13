@@ -27,7 +27,7 @@ public:
         return m;
     };
 
-    double determinant()
+    inline double determinant()
     {
         return (M11 * M22) - (M12 * M21);
     };
