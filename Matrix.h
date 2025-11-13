@@ -287,3 +287,8 @@ public:
         return out;
     };
 };
+
+#undef GETPTR
+#undef GETDPTR
+#undef GET
+#undef GETD

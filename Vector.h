@@ -242,3 +242,6 @@ public:
         return out;
     };
 };
+
+#undef GET
+#undef GETD
