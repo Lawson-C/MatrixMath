@@ -55,14 +55,14 @@ public:
     Vector3 operator*(double k)
     {
         double data[3] = {
-            V1*k, V2 * k, V3 * k};
+            V1 * k, V2 * k, V3 * k};
         return Vector3(data);
     };
 
     Vector3 &operator*=(double k)
     {
         double *neueDaten = (double *)malloc(2 * sizeof(double));
-        *(neueDaten) = V1*k;
+        *(neueDaten) = V1 * k;
         *(neueDaten + 1) = V2 * k;
         *(neueDaten + 2) = V3 * k;
         free(daten);

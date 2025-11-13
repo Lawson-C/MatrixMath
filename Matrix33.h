@@ -64,7 +64,7 @@ public:
     Matrix<3, 3> operator-(Matrix<3, 3> &a)
     {
         double data[9] = {
-            M11-a.get(0, 0), M12 - a.get(0, 1), M13 - a.get(0, 2),
+            M11 - a.get(0, 0), M12 - a.get(0, 1), M13 - a.get(0, 2),
             M21 - a.get(1, 0), M22 - a.get(1, 1), M23 - a.get(1, 2),
             M31 - a.get(2, 0), M32 - a.get(2, 1), M33 - a.get(2, 2)};
         return Matrix<3, 3>(data);
@@ -89,7 +89,7 @@ public:
     Matrix<3, 3> operator*(double k)
     {
         double data[9] = {
-            M11*k, M12 * k, M13 * k,
+            M11 * k, M12 * k, M13 * k,
             M21 * k, M22 * k, M23 * k,
             M31 * k, M32 * k, M33 * k};
         return Matrix<3, 3>(data);
@@ -115,9 +115,9 @@ public:
     {
         double *neueDaten = (double *)malloc(4 * sizeof(double));
 
-        *(neueDaten) = M11*m.get(0, 0) + M12 * m.get(1, 0) + M13 * m.get(2, 0);
-        *(neueDaten + 1) = M11*m.get(0, 1) + M12 * m.get(1, 1) + M11*m.get(2, 1);
-        *(neueDaten + 2) = M11*m.get(0, 2) + M12 * m.get(1, 2) + M11*m.get(2, 2);
+        *(neueDaten) = M11 * m.get(0, 0) + M12 * m.get(1, 0) + M13 * m.get(2, 0);
+        *(neueDaten + 1) = M11 * m.get(0, 1) + M12 * m.get(1, 1) + M11 * m.get(2, 1);
+        *(neueDaten + 2) = M11 * m.get(0, 2) + M12 * m.get(1, 2) + M11 * m.get(2, 2);
 
         *(neueDaten + 3) = M21 * m.get(0, 0) + M21 * m.get(1, 0) + M22 * m.get(2, 0);
         *(neueDaten + 4) = M21 * m.get(0, 1) + M21 * m.get(1, 1) + M22 * m.get(2, 1);

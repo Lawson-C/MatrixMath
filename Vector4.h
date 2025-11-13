@@ -1,6 +1,5 @@
 #pragma once
 
-
 #define V1 (*(daten))
 #define V2 (*(daten + 1))
 #define V3 (*(daten + 2))
@@ -59,14 +58,14 @@ public:
     Vector4 operator*(double k)
     {
         double data[4] = {
-            V1*k, V2 * k, V3 * k, V4 * k};
+            V1 * k, V2 * k, V3 * k, V4 * k};
         return Vector4(data);
     };
 
     Vector4 &operator*=(double k)
     {
         double *neueDaten = (double *)malloc(2 * sizeof(double));
-        *(neueDaten) = V1*k;
+        *(neueDaten) = V1 * k;
         *(neueDaten + 1) = V2 * k;
         *(neueDaten + 2) = V3 * k;
         *(neueDaten + 3) = V4 * k;
@@ -99,7 +98,7 @@ public:
     Vector4 operator-(Vector<4> &a)
     {
         double data[4] = {
-            V1-a.get(0),
+            V1 - a.get(0),
             V2 - a.get(1),
             V3 - a.get(2),
             V4 - a.get(3)};

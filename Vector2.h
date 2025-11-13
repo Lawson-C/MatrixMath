@@ -53,14 +53,14 @@ public:
     Vector2 operator*(double k)
     {
         double data[2] = {
-            (*daten) * k, (V2) * k};
+            (*daten) * k, (V2)*k};
         return Vector2(data);
     };
 
     Vector2 &operator*=(double k)
     {
         double *neueDaten = (double *)malloc(2 * sizeof(double));
-        *(neueDaten) = V1*k;
+        *(neueDaten) = V1 * k;
         *(neueDaten + 1) = V2 * k;
         free(daten);
         daten = neueDaten;
