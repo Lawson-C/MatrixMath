@@ -240,26 +240,6 @@ public:
         return *this;
     };
 
-    // Vectorenmultiplikation
-
-    /*
-     * multipliziert eine Matrix mit einem Vektor und ergibt jenen Vektor
-     */
-    Vector<Spalten> operator*(Vector<Spalten> &v)
-    {
-        double neueDaten[Spalten];
-        for (int z = 0; z < Zeilen; z++)
-        {
-            int sum = 0;
-            for (int s = 0; s < Spalten; s++)
-            {
-                sum += *wertPtr(z, s) * v.get(z);
-            };
-            neueDaten[z] = sum;
-        };
-        return Vector<Spalten>(neueDaten);
-    };
-
     // string repräsentation
 
     /*

@@ -138,18 +138,4 @@ public:
         daten = neueDaten;
         return *this;
     };
-
-    // Vectorenmultiplikation
-
-    /*
-     * multipliziert eine Matrix mit einem Vektor und ergibt jenen Vektor
-     */
-    Vector3 operator*(Vector<3> &v)
-    {
-        double neueDaten[3] = {
-            *(daten)*v.get(0) + *(daten + 1) * v.get(1) + *(daten + 2) * v.get(2),
-            *(daten + 3) * v.get(0) + *(daten + 4) * v.get(1) + *(daten + 5) * v.get(2),
-            *(daten + 6) * v.get(0) + *(daten + 7) * v.get(1) + *(daten + 8) * v.get(2)};
-        return Vector3(neueDaten);
-    };
 };

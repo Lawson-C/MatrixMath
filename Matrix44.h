@@ -185,20 +185,4 @@ public:
         daten = neueDaten;
         return *this;
     };
-
-    // Vectorenmultiplikation
-
-    /*
-     * multipliziert eine Matrix mit einem Vektor und ergibt jenen Vektor
-     */
-    Vector4 operator*(Vector<4> &v)
-    {
-        double neueDaten[4] = {
-            *(daten)*v.get(0) + *(daten + 1) * v.get(1) + *(daten + 2) * v.get(2) + *(daten + 3) * v.get(3),
-            *(daten + 4) * v.get(0) + *(daten + 5) * v.get(1) + *(daten + 6) * v.get(2) + *(daten + 7) * v.get(3),
-            *(daten + 8) * v.get(0) + *(daten + 9) * v.get(1) + *(daten + 10) * v.get(2) + *(daten + 11) * v.get(3),
-            *(daten + 12) * v.get(0) + *(daten + 13) * v.get(1) + *(daten + 14) * v.get(2) + *(daten + 15) * v.get(3)};
-
-        return Vector4(neueDaten);
-    };
 };
