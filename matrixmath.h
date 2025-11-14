@@ -22,7 +22,7 @@ Vector<Spalten> operator*(Matrix<Zeilen, Spalten> &m, Vector<Spalten> &v)
         int sum = 0;
         for (int s = 0; s < Spalten; s++)
         {
-            sum += *wertPtr(z, s) * v.get(z);
+            sum += m.get(z, s) * v.get(z);
         };
         neueDaten[z] = sum;
     };
@@ -32,27 +32,27 @@ Vector<Spalten> operator*(Matrix<Zeilen, Spalten> &m, Vector<Spalten> &v)
 Vector2 operator*(Matrix22 &m, Vector<2> &v)
 {
     double neueDaten[2] = {
-        m.get(0) * v.get(0) + m.get(1) * v.get(1),
-        m.get(2) * v.get(0) + m.get(3) * v.get(1)};
+        m.get(0, 0) * v.get(0) + m.get(0, 1) * v.get(1),
+        m.get(1, 0) * v.get(0) + m.get(1, 1) * v.get(1)};
     return Vector2(neueDaten);
 };
 
 Vector3 operator*(Matrix33 &m, Vector<3> &v)
 {
     double neueDaten[3] = {
-        m.get(0) * v.get(0) + m.get(1) * v.get(1) + m.get(2) * v.get(2),
-        m.get(3) * v.get(0) + m.get(4) * v.get(1) + m.get(5) * v.get(2),
-        m.get(6) * v.get(0) + m.get(7) * v.get(1) + m.get(8) * v.get(2)};
+        m.get(0, 0) * v.get(0) + m.get(0, 1) * v.get(1) + m.get(0, 2) * v.get(2),
+        m.get(1, 0) * v.get(0) + m.get(1, 1) * v.get(1) + m.get(1, 2) * v.get(2),
+        m.get(2, 0) * v.get(0) + m.get(2, 1) * v.get(1) + m.get(2, 2) * v.get(2)};
     return Vector3(neueDaten);
 };
 
 Vector4 operator*(Matrix44 &m, Vector<4> &v)
 {
     double neueDaten[4] = {
-        m.get(0) * v.get(0) + m.get(1) * v.get(1) + m.get(2) * v.get(2) + m.get(3) * v.get(3),
-        m.get(4) * v.get(0) + m.get(5) * v.get(1) + m.get(6) * v.get(2) + m.get(7) * v.get(3),
-        m.get(8) * v.get(0) + m.get(9) * v.get(1) + m.get(10) * v.get(2) + m.get(11) * v.get(3),
-        m.get(12) * v.get(0) + m.get(13) * v.get(1) + m.get(14) * v.get(2) + m.get(15) * v.get(3)};
+        m.get(0, 0) * v.get(0) + m.get(0, 1) * v.get(1) + m.get(0, 2) * v.get(2) + m.get(0, 3) * v.get(3),
+        m.get(1, 0) * v.get(0) + m.get(1, 1) * v.get(1) + m.get(1, 2) * v.get(2) + m.get(1, 3) * v.get(3),
+        m.get(2, 0) * v.get(0) + m.get(2, 1) * v.get(1) + m.get(2, 2) * v.get(2) + m.get(2, 3) * v.get(3),
+        m.get(3, 0) * v.get(0) + m.get(3, 1) * v.get(1) + m.get(3, 2) * v.get(2) + m.get(3, 3) * v.get(3)};
     return Vector4(neueDaten);
 };
 
