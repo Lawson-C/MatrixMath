@@ -1,14 +1,14 @@
 #pragma once
 
-#define M11 (*(daten))
-#define M12 (*(daten + 1))
-#define M13 (*(daten + 2))
-#define M21 (*(daten + 3))
-#define M22 (*(daten + 4))
-#define M23 (*(daten + 5))
-#define M31 (*(daten + 6))
-#define M32 (*(daten + 7))
-#define M33 (*(daten + 8))
+#define M00 (*(daten))
+#define M01 (*(daten + 1))
+#define M02 (*(daten + 2))
+#define M10 (*(daten + 3))
+#define M11 (*(daten + 4))
+#define M12 (*(daten + 5))
+#define M20 (*(daten + 6))
+#define M21 (*(daten + 7))
+#define M22 (*(daten + 8))
 
 #include "Matrix.h"
 
@@ -27,12 +27,12 @@ public:
     Matrix<3, 3> transpose()
     {
         Matrix<3, 3> m = Matrix<3, 3>(daten);
-        m.set(0, 1, M21);
-        m.set(0, 2, M31);
-        m.set(1, 2, M32);
-        m.set(1, 0, M12);
-        m.set(2, 0, M13);
-        m.set(2, 1, M23);
+        m.set(0, 1, M10);
+        m.set(0, 2, M20);
+        m.set(1, 2, M21);
+        m.set(1, 0, M01);
+        m.set(2, 0, M02);
+        m.set(2, 1, M12);
         return m;
     };
 
@@ -41,46 +41,46 @@ public:
     Matrix<3, 3> operator+(Matrix<3, 3> &a)
     {
         double data[9] = {
-            M11 + a.get(0, 0), M12 + a.get(0, 1), M13 + a.get(0, 2),
-            M21 + a.get(1, 0), M22 + a.get(1, 1), M23 + a.get(1, 2),
-            M31 + a.get(2, 0), M32 + a.get(2, 1), M33 + a.get(2, 2)};
+            M00 + a.get(0, 0), M01 + a.get(0, 1), M02 + a.get(0, 2),
+            M10 + a.get(1, 0), M11 + a.get(1, 1), M12 + a.get(1, 2),
+            M20 + a.get(2, 0), M21 + a.get(2, 1), M22 + a.get(2, 2)};
         return Matrix<3, 3>(data);
     };
 
     Matrix33 &operator+=(Matrix<3, 3> &a)
     {
-        M11 += a.get(0, 0);
-        M12 += a.get(0, 1);
-        M13 += a.get(0, 2);
-        M21 += a.get(1, 0);
-        M22 += a.get(1, 1);
-        M23 += a.get(1, 2);
-        M31 += a.get(2, 0);
-        M32 += a.get(2, 1);
-        M33 += a.get(2, 2);
+        M00 += a.get(0, 0);
+        M01 += a.get(0, 1);
+        M02 += a.get(0, 2);
+        M10 += a.get(1, 0);
+        M11 += a.get(1, 1);
+        M12 += a.get(1, 2);
+        M20 += a.get(2, 0);
+        M21 += a.get(2, 1);
+        M22 += a.get(2, 2);
         return *this;
     };
 
     Matrix<3, 3> operator-(Matrix<3, 3> &a)
     {
         double data[9] = {
-            M11 - a.get(0, 0), M12 - a.get(0, 1), M13 - a.get(0, 2),
-            M21 - a.get(1, 0), M22 - a.get(1, 1), M23 - a.get(1, 2),
-            M31 - a.get(2, 0), M32 - a.get(2, 1), M33 - a.get(2, 2)};
+            M00 - a.get(0, 0), M01 - a.get(0, 1), M02 - a.get(0, 2),
+            M10 - a.get(1, 0), M11 - a.get(1, 1), M12 - a.get(1, 2),
+            M20 - a.get(2, 0), M21 - a.get(2, 1), M22 - a.get(2, 2)};
         return Matrix<3, 3>(data);
     };
 
     Matrix33 &operator-=(Matrix<3, 3> &a)
     {
-        M11 -= a.get(0, 0);
-        M12 -= a.get(0, 1);
-        M13 -= a.get(0, 2);
-        M21 -= a.get(1, 0);
-        M22 -= a.get(1, 1);
-        M23 -= a.get(1, 2);
-        M31 -= a.get(2, 0);
-        M32 -= a.get(2, 1);
-        M33 -= a.get(2, 2);
+        M00 -= a.get(0, 0);
+        M01 -= a.get(0, 1);
+        M02 -= a.get(0, 2);
+        M10 -= a.get(1, 0);
+        M11 -= a.get(1, 1);
+        M12 -= a.get(1, 2);
+        M20 -= a.get(2, 0);
+        M21 -= a.get(2, 1);
+        M22 -= a.get(2, 2);
         return *this;
     };
 
@@ -89,23 +89,23 @@ public:
     Matrix<3, 3> operator*(double k)
     {
         double data[9] = {
-            M11 * k, M12 * k, M13 * k,
-            M21 * k, M22 * k, M23 * k,
-            M31 * k, M32 * k, M33 * k};
+            M00 * k, M01 * k, M02 * k,
+            M10 * k, M11 * k, M12 * k,
+            M20 * k, M21 * k, M22 * k};
         return Matrix<3, 3>(data);
     };
 
     Matrix33 &operator*=(double k)
     {
+        M00 *= k;
+        M01 *= k;
+        M02 *= k;
+        M10 *= k;
         M11 *= k;
         M12 *= k;
-        M13 *= k;
+        M20 *= k;
         M21 *= k;
         M22 *= k;
-        M23 *= k;
-        M31 *= k;
-        M32 *= k;
-        M33 *= k;
         return *this;
     };
 
@@ -115,17 +115,17 @@ public:
     {
         double *neueDaten = (double *)malloc(4 * sizeof(double));
 
-        *(neueDaten) = M11 * m.get(0, 0) + M12 * m.get(1, 0) + M13 * m.get(2, 0);
-        *(neueDaten + 1) = M11 * m.get(0, 1) + M12 * m.get(1, 1) + M11 * m.get(2, 1);
-        *(neueDaten + 2) = M11 * m.get(0, 2) + M12 * m.get(1, 2) + M11 * m.get(2, 2);
+        *(neueDaten) = M00 * m.get(0, 0) + M01 * m.get(1, 0) + M02 * m.get(2, 0);
+        *(neueDaten + 1) = M00 * m.get(0, 1) + M01 * m.get(1, 1) + M00 * m.get(2, 1);
+        *(neueDaten + 2) = M00 * m.get(0, 2) + M01 * m.get(1, 2) + M00 * m.get(2, 2);
 
-        *(neueDaten + 3) = M21 * m.get(0, 0) + M21 * m.get(1, 0) + M22 * m.get(2, 0);
-        *(neueDaten + 4) = M21 * m.get(0, 1) + M21 * m.get(1, 1) + M22 * m.get(2, 1);
-        *(neueDaten + 5) = M21 * m.get(0, 2) + M21 * m.get(1, 2) + M22 * m.get(2, 2);
+        *(neueDaten + 3) = M10 * m.get(0, 0) + M10 * m.get(1, 0) + M11 * m.get(2, 0);
+        *(neueDaten + 4) = M10 * m.get(0, 1) + M10 * m.get(1, 1) + M11 * m.get(2, 1);
+        *(neueDaten + 5) = M10 * m.get(0, 2) + M10 * m.get(1, 2) + M11 * m.get(2, 2);
 
-        *(neueDaten + 6) = M31 * m.get(0, 0) + M32 * m.get(1, 0) + M33 * m.get(2, 0);
-        *(neueDaten + 7) = M31 * m.get(0, 1) + M32 * m.get(1, 1) + M33 * m.get(2, 1);
-        *(neueDaten + 8) = M31 * m.get(0, 2) + M32 * m.get(1, 2) + M33 * m.get(2, 2);
+        *(neueDaten + 6) = M20 * m.get(0, 0) + M21 * m.get(1, 0) + M22 * m.get(2, 0);
+        *(neueDaten + 7) = M20 * m.get(0, 1) + M21 * m.get(1, 1) + M22 * m.get(2, 1);
+        *(neueDaten + 8) = M20 * m.get(0, 2) + M21 * m.get(1, 2) + M22 * m.get(2, 2);
 
         free(daten);
         daten = neueDaten;
@@ -133,12 +133,12 @@ public:
     };
 };
 
+#undef M00
+#undef M01
+#undef M02
+#undef M10
 #undef M11
 #undef M12
-#undef M13
+#undef M20
 #undef M21
 #undef M22
-#undef M23
-#undef M31
-#undef M32
-#undef M33
