@@ -1,5 +1,9 @@
 #pragma once
 
+#define V1 (*(daten))
+#define V2 (*(daten + 1))
+#define V3 (*(daten + 2))
+
 #include <malloc.h>
 #include <cstring>
 
@@ -13,7 +17,7 @@ public:
 
     double magnitude()
     {
-        return std::sqrt(*(daten) * *(daten) + *(daten + 1) * *(daten + 1) + *(daten + 2) * *(daten + 2));
+        return std::sqrt(V1 * V1 + V2 * V2 + V3 * V3);
     };
 
     /*
@@ -24,9 +28,9 @@ public:
         double mag = magnitude();
         if (mag == 1)
             return *this;
-        *(daten) /= mag;
-        *(daten + 1) /= mag;
-        *(daten + 2) /= mag;
+        V1 /= mag;
+        V2 /= mag;
+        V3 /= mag;
         return *this;
     };
 
@@ -39,9 +43,9 @@ public:
         if (mag == 1)
             return Vector3(daten);
         double normalizierteDaten[3] = {
-            *(daten) / mag,
-            *(daten + 1) / mag,
-            *(daten + 2) / mag};
+            V1 / mag,
+            V2 / mag,
+            V3 / mag};
         Vector3 v = Vector3(normalizierteDaten);
         return v;
     };
@@ -51,16 +55,16 @@ public:
     Vector3 operator*(double k)
     {
         double data[3] = {
-            *(daten)*k, *(daten + 1) * k, *(daten + 2) * k};
+            V1 * k, V2 * k, V3 * k};
         return Vector3(data);
     };
 
     Vector3 &operator*=(double k)
     {
         double *neueDaten = (double *)malloc(2 * sizeof(double));
-        *(neueDaten) = *(daten)*k;
-        *(neueDaten + 1) = *(daten + 1) * k;
-        *(neueDaten + 2) = *(daten + 2) * k;
+        *(neueDaten) = V1 * k;
+        *(neueDaten + 1) = V2 * k;
+        *(neueDaten + 2) = V3 * k;
         free(daten);
         daten = neueDaten;
         return *this;
@@ -71,30 +75,34 @@ public:
     Vector3 operator+(Vector<3> &a)
     {
         double data[3] = {
-            *(daten) + a.get(0), *(daten + 1) + a.get(1), *(daten + 2) + a.get(2)};
+            V1 + a.get(0), V2 + a.get(1), V3 + a.get(2)};
         return Vector3(data);
     };
 
     Vector3 &operator+=(Vector<3> &a)
     {
-        *(daten) -= a.get(0);
-        *(daten + 1) -= a.get(1);
-        *(daten + 2) -= a.get(2);
+        V1 -= a.get(0);
+        V2 -= a.get(1);
+        V3 -= a.get(2);
         return *this;
     };
 
     Vector3 operator-(Vector<3> &a)
     {
         double data[3] = {
-            *(daten) - a.get(0), *(daten + 1) - a.get(1), *(daten + 2) - a.get(2)};
+            V1 - a.get(0), V2 - a.get(1), V3 - a.get(2)};
         return Vector3(data);
     };
 
     Vector3 &operator-=(Vector<3> &a)
     {
-        *(daten) -= a.get(0);
-        *(daten + 1) -= a.get(1);
-        *(daten + 2) -= a.get(2);
+        V1 -= a.get(0);
+        V2 -= a.get(1);
+        V3 -= a.get(2);
         return *this;
     };
 };
+
+#undef V1
+#undef V2
+#undef V3

@@ -1,4 +1,8 @@
 #pragma once
+
+#define GET(n) (*(daten + n))
+#define GETD(d, n) (*(d + n))
+
 #include <malloc.h>
 #include <cstring>
 #include <cmath>
@@ -28,7 +32,7 @@ public:
         daten = (double *)std::malloc(Länge * sizeof(double));
         for (int n = 0; n < Länge; n++)
         {
-            *(daten + n) = *(data + n);
+            GET(n) = GETD(data, n);
         };
     };
 
@@ -43,17 +47,17 @@ public:
     /*
      * ergibt den Wert zur gegebenen Position des Vektors
      */
-    double get(int n)
+    inline double get(int n)
     {
-        return *(daten + n);
+        return GET(n);
     };
 
     /*
      * ersetzt den Wert zur gegebenen Position des Vektors mit eingegebenem Wert d
      */
-    void set(int n, double d)
+    inline void set(int n, double d)
     {
-        *(daten + n) = d;
+        GET(n) = d;
     };
 
     /*
@@ -64,7 +68,7 @@ public:
         double sum = 0;
         for (int i = 0; i < Länge; i++)
         {
-            sum += *(daten + i) * *(daten + 1);
+            sum += GET(i) * GET(i);
         };
         return std::sqrt(sum);
     };
@@ -79,7 +83,7 @@ public:
             return *this;
         for (int i = 0; i < Länge; i++)
         {
-            *(daten + i) /= mag;
+            GET(i) /= mag;
         };
         return *this;
     };
@@ -95,7 +99,7 @@ public:
         double normalizierteDaten[Länge] = {};
         for (int i = 0; i < Länge; i++)
         {
-            normalizierteDaten[i] = *(daten + i) / mag;
+            normalizierteDaten[i] = GET(i) / mag;
         };
         Vector<Länge> v = Vector<Länge>(normalizierteDaten);
         return v;
@@ -111,7 +115,7 @@ public:
         Vector<Länge> c = Vector<Länge>();
         for (int n = 0; n < Länge; n++)
         {
-            c.set(n, this->get(n) + b.get(n));
+            c.set(n, GET(n) + b.get(n));
         };
         return c;
     };
@@ -123,7 +127,7 @@ public:
     {
         for (int n = 0; n < Länge; n++)
         {
-            *(daten + n) += *a.get(n);
+            GET(n) += *a.get(n);
         };
         return a;
     };
@@ -136,7 +140,7 @@ public:
         Vector<Länge> c = Vector<Länge>();
         for (int n = 0; n < Länge; n++)
         {
-            *c.set(n, this->get(n) - b.get(n));
+            *c.set(n, GET(n) - b.get(n));
         };
         return c;
     };
@@ -148,7 +152,7 @@ public:
     {
         for (int n = 0; n < Länge; n++)
         {
-            *(daten + n) -= a.get(n);
+            GET(n) -= a.get(n);
         };
         return a;
     };
@@ -164,7 +168,7 @@ public:
         Vector<Länge> v = Vector<Länge>();
         for (int n = 0; n < Länge; n++)
         {
-            *v.set(n, this->get(n) * k);
+            *v.set(n, GET(n) * k);
         };
         return v;
     };
@@ -176,7 +180,7 @@ public:
     {
         for (int n = 0; n < Länge; n++)
         {
-            *(daten + n) *= *(daten + n) * k;
+            GET(n) *= GET(n) * k;
         };
         return *this;
     };
@@ -195,7 +199,7 @@ public:
             double sum = 0;
             for (int j = 0; j < Länge; j++)
             {
-                sum += *(daten + j) * m.get(i, j);
+                sum += GET(j) * m.get(i, j);
             };
             v.set(i, sum);
         };
@@ -213,9 +217,9 @@ public:
             double sum = 0;
             for (int j = 0; j < Länge; j++)
             {
-                sum += *(daten + j) * m.get(i, j);
+                sum += GET(j) * m.get(i, j);
             };
-            *(neueDaten + i) = sum;
+            GET(i) = sum;
         };
         free(daten);
         daten = neueDaten;
@@ -232,9 +236,12 @@ public:
         std::string out = "(\t";
         for (int n = 0; n < Länge; n++)
         {
-            out += std::to_string(*(daten + n)) + "\t";
+            out += std::to_string(GET(n)) + "\t";
         };
         out += ')';
         return out;
     };
 };
+
+#undef GET
+#undef GETD
