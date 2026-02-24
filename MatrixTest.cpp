@@ -26,6 +26,7 @@ int main()
     testVektorMult();
     testTranspose();
     testInverse();
+    std::cout << "s is scho voabei" << std::endl;
     return 0;
 };
 
@@ -40,6 +41,9 @@ void testAdd()
     Matrix22 m2 = Matrix22(data);
     std::cout << "m + m:" << std::endl
               << (m + m2)._str() << std::endl;
+    m += m2;
+    std::cout << "m += m:" << std::endl
+              << (m)._str() << std::endl;
 };
 
 void testSub()
@@ -69,25 +73,11 @@ void testSkalarMult()
         1, -2,
         3, 2};
     Matrix22 m = Matrix22(data);
-    std::cout << "m * 3 * 3:\t" << std::endl
+    std::cout << "m * 3:\t" << std::endl
               << (m * 3)._str() << std::endl;
     m *= 3;
     std::cout << "m *= 3:\t" << std::endl
               << m._str() << std::endl;
-    double data2[6] = {
-        1, -2, 6,
-        8, 2, 3};
-    double data3[9] = {
-        5, -3, 7,
-        3, 2, -5,
-        2, -2, 6};
-    Matrix<2, 3> m2 = Matrix<2, 3>(data2);
-    Matrix33 m3 = Matrix33(data3);
-    std::cout << "m2 * m3:\t" << std::endl
-              << (m2 * m3)._str() << std::endl;
-    m2 *= m3;
-    std::cout << "m2 *= m3:\t" << std::endl
-              << m2._str() << std::endl;
 };
 
 void testMatrixMult()

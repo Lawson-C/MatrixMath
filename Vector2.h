@@ -1,5 +1,8 @@
 #pragma once
 
+#define V1 (*(daten))
+#define V2 (*(daten + 1))
+
 #include <malloc.h>
 #include <cstring>
 
@@ -11,9 +14,9 @@ public:
     Vector2(double data[2]) : Vector<2>(data) {
                               };
 
-    double magnitude()
+    inline double magnitude()
     {
-        return std::sqrt(*(daten) * *(daten) + *(daten + 1) * *(daten + 1));
+        return std::sqrt(V1 * V1 + V2 * V2);
     };
 
     /*
@@ -24,8 +27,8 @@ public:
         double mag = magnitude();
         if (mag == 1)
             return *this;
-        *(daten) /= mag;
-        *(daten + 1) /= mag;
+        V1 /= mag;
+        V2 /= mag;
         return *this;
     };
 
@@ -38,9 +41,8 @@ public:
         if (mag == 1)
             return Vector2(daten);
         double normalizierteDaten[3] = {
-            *(daten) / mag,
-            *(daten + 1) / mag,
-            *(daten + 2) / mag};
+            V1 / mag,
+            V2 / mag};
         Vector2 v = Vector2(normalizierteDaten);
         return v;
     };
@@ -50,14 +52,14 @@ public:
     Vector2 operator*(double k)
     {
         double data[2] = {
-            (*daten) * k, (*(daten + 1)) * k};
+            (V1)*k, (V2)*k};
         return Vector2(data);
     };
 
     Vector2 &operator*=(double k)
     {
-        *(daten) *= k;
-        *(daten + 1) *= k;
+        V1 *= k;
+        V2 *= k;
         return *this;
     };
 
@@ -66,28 +68,29 @@ public:
     Vector2 operator+(Vector<2> &a)
     {
         double data[2] = {
-            *(daten) + a.get(0), *(daten + 1) + a.get(1)};
+            V1 + a.get(0), V2 + a.get(1)};
         return Vector2(data);
     };
 
     Vector2 &operator+=(Vector<2> &a)
     {
-        *(daten) += a.get(0);
-        *(daten + 1) += a.get(1);
+        V1 += a.get(0);
+        V2 += a.get(1);
         return *this;
     };
 
     Vector2 operator-(Vector<2> &a)
     {
         double data[2] = {
-            *(daten)-a.get(0), *(daten + 1) - a.get(1)};
+            V1 - a.get(0),
+            V2 - a.get(1)};
         return Vector2(data);
     };
 
     Vector2 &operator-=(Vector<2> &a)
     {
-        *(daten) -= a.get(0);
-        *(daten + 1) -= a.get(1);
+        V1 -= a.get(0);
+        V2 -= a.get(1);
         return *this;
     };
 
@@ -96,15 +99,18 @@ public:
     Vector2 operator*(Vector<2> &v)
     {
         double neueDaten[2] = {
-            *(daten)*v.get(0),
-            *(daten + 1) * v.get(1)};
+            V1 * v.get(0),
+            V2 * v.get(1)};
         return Vector2(neueDaten);
     };
 
     Vector2 &operator*=(Vector<2> &v)
     {
-        *(daten) *= v.get(0);
-        *(daten + 1) *= v.get(1);
+        V1 *= v.get(0);
+        V2 *= v.get(1);
         return *this;
     };
 };
+
+#undef V1
+#undef V2

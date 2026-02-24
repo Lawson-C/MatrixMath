@@ -1,5 +1,11 @@
 #pragma once
 
+#define GETPTR(z, s) (daten + (z * Spalten + s))
+#define GETDPTR(d, z, s) (d + (z * Spalten + s))
+
+#define GET(z, s) (*(daten + (z * Spalten + s)))
+#define GETD(d, z, s) (*(d + (z * Spalten + s)))
+
 #include <malloc.h>
 #include <cstring>
 
@@ -13,19 +19,17 @@ protected:
     /*
      * ergibt den Pointer eines Eintrages der Matrix, erzeugt von einem Offset des "Daten"-Pointers
      */
-    double *wertPtr(int z, int s)
+    inline double *wertPtr(int z, int s)
     {
-        int offset = (z * Spalten + s);
-        return daten + offset;
+        return GETPTR(z, s);
     };
 
     /*
      * ergibt den Pointer eines Eintrages der Matrix, erzeugt von einem Offset des eingegebenen "d"-Pointers
      */
-    double *wertPtr(double *d, int z, int s)
+    inline double *wertPtr(double *d, int z, int s)
     {
-        int offset = (z * Spalten + s);
-        return d + offset;
+        return GETDPTR(d, z, s);
     };
 
 public:
@@ -47,7 +51,7 @@ public:
         {
             for (int s = 0; s < Spalten; s++)
             {
-                *wertPtr(z, s) = *wertPtr(data, z, s);
+                GET(z, s) = GETD(data, z, s);
             };
         };
     };
@@ -63,17 +67,17 @@ public:
     /*
      * gibt den Wert des Eintrags zur eingegebenen Position zurück
      */
-    double get(int z, int s)
+    inline double get(int z, int s)
     {
-        return *wertPtr(z, s);
+        return GET(z, s);
     };
 
     /*
      * ändert den Wert des Eintrags zur eingegebenen Position
      */
-    void set(int z, int s, double d)
+    inline void set(int z, int s, double d)
     {
-        *wertPtr(z, s) = d;
+        GET(z, s) = d;
     };
 
     /*
@@ -86,10 +90,10 @@ public:
         {
             for (int s = 0; s < Spalten; s++)
             {
-                m.set(s, z, *(daten + z * Spalten + s));
+                m.set(s, z, GET(z, s));
                 if (s == z || z >= Spalten || s >= Zeilen)
                     continue;
-                m.set(z, s, *(daten + s * Spalten + z));
+                m.set(z, s, GET(z, s));
             };
         };
         return m;
@@ -107,7 +111,7 @@ public:
         {
             for (int s = 0; s < Spalten; s++)
             {
-                *c.wertPtr(z, s) = *wertPtr(z, s) + a.get(z, s);
+                GET(z, s) = GET(z, s) + GET(z, s);
             };
         };
         return c;
@@ -122,7 +126,7 @@ public:
         {
             for (int s = 0; s < Spalten; s++)
             {
-                *wertPtr(z, s) += a.get(z, s);
+                GET(z, s) += a.get(z, s);
             };
         };
         return *this;
@@ -138,7 +142,7 @@ public:
         {
             for (int s = 0; s < Spalten; s++)
             {
-                c.set(z, s, *wertPtr(z, s) - a.get(z, s));
+                c.set(z, s, GET(z, s) - a.get(z, s));
             };
         };
         return c;
@@ -153,7 +157,7 @@ public:
         {
             for (int s = 0; s < Spalten; s++)
             {
-                *wertPtr(z, s) -= *a.wertPtr(z, s);
+                GET(z, s) -= *a.wertPtr(z, s);
             };
         };
         return *this;
@@ -171,7 +175,7 @@ public:
         {
             for (int s = 0; s < Spalten; s++)
             {
-                double d = (*wertPtr(z, s)) * k;
+                double d = (GET(z, s)) * k;
                 c.set(z, s, d);
             };
         };
@@ -187,7 +191,7 @@ public:
         {
             for (int s = 0; s < Spalten; s++)
             {
-                *wertPtr(z, s) *= k;
+                GET(z, s) *= k;
             };
         };
         return *this;
@@ -209,7 +213,7 @@ public:
                 double sum = 0;
                 for (int i = 0; i < Spalten; i++)
                 {
-                    sum += (*wertPtr(z, i)) * a.get(i, s);
+                    sum += (GET(z, i)) * a.get(i, s);
                 };
                 m.set(z, s, sum);
             };
@@ -230,14 +234,34 @@ public:
                 double sum = 0;
                 for (int i = 0; i < Spalten; i++)
                 {
-                    sum += (*wertPtr(z, i)) * m.get(i, s);
+                    sum += GET(z, i) * m.get(i, s);
                 };
-                *wertPtr(neueDaten, z, s) = sum;
+                GETD(neueDaten, z, s) = sum;
             };
         };
         free(daten);
         daten = neueDaten;
         return *this;
+    };
+
+    // Vectorenmultiplikation
+
+    /*
+     * multipliziert eine Matrix mit einem Vektor und ergibt jenen Vektor
+     */
+    Vector<Zeilen> operator*(Vector<Zeilen> &v)
+    {
+        double neueDaten[Zeilen];
+        for (int z = 0; z < Zeilen; z++)
+        {
+            int sum = 0;
+            for (int s = 0; s < Spalten; s++)
+            {
+                sum += GET(z, s) * v.get(z);
+            };
+            neueDaten[z] = sum;
+        };
+        return Vector<Zeilen>(neueDaten);
     };
 
     // string repräsentation
@@ -253,7 +277,7 @@ public:
             out += "\t";
             for (int s = 0; s < Spalten; s++)
             {
-                out += std::to_string(*wertPtr(z, s)) + "\t";
+                out += std::to_string(GET(z, s)) + "\t";
             };
             out += '\n';
         };
@@ -261,3 +285,8 @@ public:
         return out;
     };
 };
+
+#undef GETPTR
+#undef GETDPTR
+#undef GET
+#undef GETD

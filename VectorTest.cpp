@@ -23,6 +23,7 @@ int main()
     testVectorMult();
     testMatrixMult();
     testNormalize();
+    std::cout << "s is scho voabei" << std::endl;
     return 0;
 };
 
