@@ -29,7 +29,7 @@ Vector<Spalten> operator*(Matrix<Zeilen, Spalten> &m, Vector<Spalten> &v)
     return Vector<Spalten>(neueDaten);
 };
 
-Vector2 operator*(Matrix22 &m, Vector<2> &v)
+Vector2 operator*(Matrix22 &m, Vector2 &v)
 {
     double neueDaten[2] = {
         m.get(0, 0) * v.get(0) + m.get(0, 1) * v.get(1),
@@ -37,7 +37,7 @@ Vector2 operator*(Matrix22 &m, Vector<2> &v)
     return Vector2(neueDaten);
 };
 
-Vector3 operator*(Matrix33 &m, Vector<3> &v)
+Vector3 operator*(Matrix33 &m, Vector3 &v)
 {
     double neueDaten[3] = {
         m.get(0, 0) * v.get(0) + m.get(0, 1) * v.get(1) + m.get(0, 2) * v.get(2),
@@ -46,7 +46,7 @@ Vector3 operator*(Matrix33 &m, Vector<3> &v)
     return Vector3(neueDaten);
 };
 
-Vector4 operator*(Matrix44 &m, Vector<4> &v)
+Vector4 operator*(Matrix44 &m, Vector4 &v)
 {
     double neueDaten[4] = {
         m.get(0, 0) * v.get(0) + m.get(0, 1) * v.get(1) + m.get(0, 2) * v.get(2) + m.get(0, 3) * v.get(3),
@@ -106,7 +106,7 @@ Vector<Zeilen> operator*(Vector2 &v, Matrix<Zeilen, 2> &m)
     return Vector<Zeilen>(neueDaten);
 };
 
-Vector2 &operator*=(Vector2 &v, Matrix<2, 2> &m)
+Vector2 &operator*=(Vector2 &v, Matrix22 &m)
 {
     double *neueDaten = (double *)malloc(2 * sizeof(double));
     *(neueDaten) = v.get(0) * m.get(0, 0) + v.get(1) * m.get(1, 0);
@@ -126,7 +126,7 @@ Vector<Zeilen> operator*(Vector3 &v, Matrix<Zeilen, 3> &m)
     return Vector<Zeilen>(neueDaten);
 };
 
-Vector3 &operator*=(Vector3 &v, Matrix<3, 3> &m)
+Vector3 &operator*=(Vector3 &v, Matrix33 &m)
 {
     double *neueDaten = (double *)malloc(3 * sizeof(double));
     *(neueDaten) = v.get(0) * m.get(0, 0) + v.get(1) * m.get(1, 0) + v.get(2) * m.get(2, 0);
@@ -147,7 +147,7 @@ Vector<Zeilen> operator*(Vector4 &v, Matrix<Zeilen, 4> &m)
     return Vector<Zeilen>(neueDaten);
 };
 
-Vector4 &operator*=(Vector4 &v, Matrix<4, 4> &m)
+Vector4 &operator*=(Vector4 &v, Matrix44 &m)
 {
     double *neueDaten = (double *)malloc(4 * sizeof(double));
     *(neueDaten) = v.get(0) * m.get(0, 0) + v.get(1) * m.get(0, 1) + v.get(2) * m.get(0, 2) + v.get(3) * m.get(0, 3);
