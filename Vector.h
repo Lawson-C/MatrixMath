@@ -7,8 +7,6 @@
 #include <cstring>
 #include <cmath>
 
-#include "matrixmath.h"
-
 template <int Länge>
 class Vector
 {
@@ -42,6 +40,15 @@ public:
     ~Vector()
     {
         free(daten);
+    };
+
+    /*
+     * ersetzt die alten Daten mit den eingegebenen neuen Daten
+     */
+    void replace(double *neueDaten)
+    {
+        free(daten);
+        daten = neueDaten;
     };
 
     /*
@@ -127,7 +134,7 @@ public:
     {
         for (int n = 0; n < Länge; n++)
         {
-            GET(n) += *a.get(n);
+            GET(n) += a.get(n);
         };
         return a;
     };
@@ -140,7 +147,7 @@ public:
         Vector<Länge> c = Vector<Länge>();
         for (int n = 0; n < Länge; n++)
         {
-            *c.set(n, GET(n) - b.get(n));
+            c.set(n, GET(n) - b.get(n));
         };
         return c;
     };
@@ -168,7 +175,7 @@ public:
         Vector<Länge> v = Vector<Länge>();
         for (int n = 0; n < Länge; n++)
         {
-            *v.set(n, GET(n) * k);
+            v.set(n, GET(n) * k);
         };
         return v;
     };
@@ -180,49 +187,35 @@ public:
     {
         for (int n = 0; n < Länge; n++)
         {
-            GET(n) *= GET(n) * k;
+            GET(n) *= k;
         };
         return *this;
     };
 
-    // Matrixenmultiplikation
+    // Vektorenmultiplikation
 
     /*
-     * multipliziert den Vektor mit einer Matrix, wo deren Spaltenlänge gleich wie die Länge des Vektors ist
+     * multipliziert einen Vektor mit einem anderen, ohne Datenänderung
      */
-    template <int Zeilen>
-    Vector<Zeilen> operator*(Matrix<Zeilen, Länge> &m)
+    Vector<Länge> &operator*(Vector<Länge> &b)
     {
-        Vector<Länge> v = Vector<Länge>();
-        for (int i = 0; i < Zeilen; i++)
+        Vector<Länge> c = Vector<Länge>();
+        for (int n = 0; n < Länge; n++)
         {
-            double sum = 0;
-            for (int j = 0; j < Länge; j++)
-            {
-                sum += GET(j) * m.get(i, j);
-            };
-            v.set(i, sum);
+            c.set(n, GET(n) * b.get(n));
         };
-        return v;
+        return c;
     };
 
     /*
-     * multipliziert den Vektor mit einer Matrix, wo deren Spalten- und Zeilenlängen gleich wie die Länge des Vektors ist
+     * multipliziert einen Vektor mit einem anderen, mit Datenänderung
      */
-    Vector<Länge> &operator*(Matrix<Länge, Länge> &m)
+    Vector<Länge> &operator*=(Vector<Länge> &v)
     {
-        double *neueDaten = malloc(Länge * sizeof(double));
         for (int i = 0; i < Länge; i++)
         {
-            double sum = 0;
-            for (int j = 0; j < Länge; j++)
-            {
-                sum += GET(j) * m.get(i, j);
-            };
-            GET(i) = sum;
+            GET(i) *= v.get(i);
         };
-        free(daten);
-        daten = neueDaten;
         return *this;
     };
 

@@ -61,12 +61,9 @@ public:
 
     Vector3 &operator*=(double k)
     {
-        double *neueDaten = (double *)malloc(2 * sizeof(double));
-        *(neueDaten) = V1 * k;
-        *(neueDaten + 1) = V2 * k;
-        *(neueDaten + 2) = V3 * k;
-        free(daten);
-        daten = neueDaten;
+        V1 *= k;
+        V2 *= k;
+        V3 *= k;
         return *this;
     };
 
@@ -99,6 +96,25 @@ public:
         V1 -= a.get(0);
         V2 -= a.get(1);
         V3 -= a.get(2);
+        return *this;
+    };
+
+    // Vectorenmultiplikation
+
+    Vector3 operator*(Vector<3> &v)
+    {
+        double neueDaten[3] = {
+            V1 * v.get(0),
+            V2 * v.get(1),
+            V3 * v.get(2)};
+        return Vector3(neueDaten);
+    };
+
+    Vector3 &operator*=(Vector<3> &v)
+    {
+        V1 *= v.get(0);
+        V2 *= v.get(1);
+        V3 *= v.get(2);
         return *this;
     };
 };

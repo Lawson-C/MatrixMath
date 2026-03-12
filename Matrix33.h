@@ -111,17 +111,36 @@ public:
 
     // matrix multiplikation
 
+    Matrix33 operator*(Matrix<3, 3> &m)
+    {
+        double neueDaten[9] =
+            {
+                M00 * m.get(0, 0) + M01 * m.get(1, 0) + M02 * m.get(2, 0),
+                M00 * m.get(0, 1) + M01 * m.get(1, 1) + M02 * m.get(2, 1),
+                M00 * m.get(0, 2) + M01 * m.get(1, 2) + M02 * m.get(2, 2),
+
+                M10 * m.get(0, 0) + M11 * m.get(1, 0) + M12 * m.get(2, 0),
+                M10 * m.get(0, 1) + M11 * m.get(1, 1) + M12 * m.get(2, 1),
+                M10 * m.get(0, 2) + M11 * m.get(1, 2) + M12 * m.get(2, 2),
+
+                M20 * m.get(0, 0) + M21 * m.get(1, 0) + M22 * m.get(2, 0),
+                M20 * m.get(0, 1) + M21 * m.get(1, 1) + M22 * m.get(2, 1),
+                M20 * m.get(0, 2) + M21 * m.get(1, 2) + M22 * m.get(2, 2)};
+
+        return Matrix33(neueDaten);
+    };
+
     Matrix33 &operator*=(Matrix<3, 3> &m)
     {
-        double *neueDaten = (double *)malloc(4 * sizeof(double));
+        double *neueDaten = (double *)malloc(9 * sizeof(double));
 
         *(neueDaten) = M00 * m.get(0, 0) + M01 * m.get(1, 0) + M02 * m.get(2, 0);
-        *(neueDaten + 1) = M00 * m.get(0, 1) + M01 * m.get(1, 1) + M00 * m.get(2, 1);
-        *(neueDaten + 2) = M00 * m.get(0, 2) + M01 * m.get(1, 2) + M00 * m.get(2, 2);
+        *(neueDaten + 1) = M00 * m.get(0, 1) + M01 * m.get(1, 1) + M02 * m.get(2, 1);
+        *(neueDaten + 2) = M00 * m.get(0, 2) + M01 * m.get(1, 2) + M02 * m.get(2, 2);
 
-        *(neueDaten + 3) = M10 * m.get(0, 0) + M10 * m.get(1, 0) + M11 * m.get(2, 0);
-        *(neueDaten + 4) = M10 * m.get(0, 1) + M10 * m.get(1, 1) + M11 * m.get(2, 1);
-        *(neueDaten + 5) = M10 * m.get(0, 2) + M10 * m.get(1, 2) + M11 * m.get(2, 2);
+        *(neueDaten + 3) = M10 * m.get(0, 0) + M11 * m.get(1, 0) + M12 * m.get(2, 0);
+        *(neueDaten + 4) = M10 * m.get(0, 1) + M11 * m.get(1, 1) + M12 * m.get(2, 1);
+        *(neueDaten + 5) = M10 * m.get(0, 2) + M11 * m.get(1, 2) + M12 * m.get(2, 2);
 
         *(neueDaten + 6) = M20 * m.get(0, 0) + M21 * m.get(1, 0) + M22 * m.get(2, 0);
         *(neueDaten + 7) = M20 * m.get(0, 1) + M21 * m.get(1, 1) + M22 * m.get(2, 1);

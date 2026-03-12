@@ -1,5 +1,4 @@
 #pragma once
-#include "Matrix.h"
 
 #define M00 (*(daten))
 #define M01 (*(daten + 1))
@@ -148,14 +147,41 @@ public:
 
     // matrix multiplikation
 
+    Matrix44 operator*(Matrix<4, 4> &m)
+    {
+        double neueDaten[16] =
+            {
+                *(neueDaten) = M00*m.get(0, 0) + M01 * m.get(1, 0) + M02 * m.get(2, 0) + M03 * m.get(3, 0),
+                *(neueDaten + 1) = M00*m.get(0, 1) + M01 * m.get(1, 1) + M02*m.get(2, 1) + M03 * m.get(3, 1),
+                *(neueDaten + 2) = M00*m.get(0, 2) + M01 * m.get(1, 2) + M02*m.get(2, 2) + M03 * m.get(3, 2),
+                *(neueDaten + 3) = M00*m.get(0, 3) + M01 * m.get(1, 3) + M02*m.get(2, 3) + M03 * m.get(3, 3),
+
+                *(neueDaten + 4) = M10 * m.get(0, 0) + M11 * m.get(1, 0) + M12 * m.get(2, 0) + M13 * m.get(3, 0),
+                *(neueDaten + 5) = M10 * m.get(0, 1) + M11 * m.get(1, 1) + M12 * m.get(2, 1) + M13 * m.get(3, 1),
+                *(neueDaten + 6) = M10 * m.get(0, 2) + M11 * m.get(1, 2) + M12 * m.get(2, 2) + M13 * m.get(3, 2),
+                *(neueDaten + 7) = M10 * m.get(0, 3) + M11 * m.get(1, 3) + M12 * m.get(2, 3) + M13 * m.get(3, 3),
+
+                *(neueDaten + 8) = M20 * m.get(0, 0) + M21 * m.get(1, 0) + M22 * m.get(2, 0) + M23 * m.get(3, 0),
+                *(neueDaten + 9) = M20 * m.get(0, 1) + M21 * m.get(1, 1) + M22 * m.get(2, 1) + M23 * m.get(3, 1),
+                *(neueDaten + 10) = M20 * m.get(0, 2) + M21 * m.get(1, 2) + M22 * m.get(2, 2) + M23 * m.get(3, 2),
+                *(neueDaten + 11) = M20 * m.get(0, 3) + M21 * m.get(1, 3) + M22 * m.get(2, 3) + M23 * m.get(3, 3),
+
+                *(neueDaten + 12) = M30 * m.get(0, 0) + M31 * m.get(1, 0) + M32 * m.get(2, 0) + M33 * m.get(3, 0),
+                *(neueDaten + 13) = M30 * m.get(0, 1) + M31 * m.get(1, 1) + M32 * m.get(2, 1) + M33 * m.get(3, 1),
+                *(neueDaten + 14) = M30 * m.get(0, 2) + M31 * m.get(1, 2) + M32 * m.get(2, 2) + M33 * m.get(3, 2),
+                *(neueDaten + 15) = M30 * m.get(0, 3) + M31 * m.get(1, 3) + M32 * m.get(2, 3) + M33 * m.get(3, 3)};
+
+        return Matrix44(neueDaten);
+    };
+
     Matrix44 &operator*=(Matrix<4, 4> &m)
     {
-        double *neueDaten = (double *)malloc(4 * sizeof(double));
+        double *neueDaten = (double *)malloc(16 * sizeof(double));
 
         *(neueDaten) = M00 * m.get(0, 0) + M01 * m.get(1, 0) + M02 * m.get(2, 0) + M03 * m.get(3, 0);
-        *(neueDaten + 1) = M00 * m.get(0, 1) + M01 * m.get(1, 1) + M00 * m.get(2, 1) + M03 * m.get(3, 1);
-        *(neueDaten + 2) = M00 * m.get(0, 2) + M01 * m.get(1, 2) + M00 * m.get(2, 2) + M03 * m.get(3, 2);
-        *(neueDaten + 3) = M00 * m.get(0, 3) + M01 * m.get(1, 3) + M00 * m.get(2, 3) + M03 * m.get(3, 3);
+        *(neueDaten + 1) = M00 * m.get(0, 1) + M01 * m.get(1, 1) + M02 * m.get(2, 1) + M03 * m.get(3, 1);
+        *(neueDaten + 2) = M00 * m.get(0, 2) + M01 * m.get(1, 2) + M02 * m.get(2, 2) + M03 * m.get(3, 2);
+        *(neueDaten + 3) = M00 * m.get(0, 3) + M01 * m.get(1, 3) + M02 * m.get(2, 3) + M03 * m.get(3, 3);
 
         *(neueDaten + 4) = M10 * m.get(0, 0) + M11 * m.get(1, 0) + M12 * m.get(2, 0) + M13 * m.get(3, 0);
         *(neueDaten + 5) = M10 * m.get(0, 1) + M11 * m.get(1, 1) + M12 * m.get(2, 1) + M13 * m.get(3, 1);

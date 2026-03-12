@@ -64,13 +64,10 @@ public:
 
     Vector4 &operator*=(double k)
     {
-        double *neueDaten = (double *)malloc(2 * sizeof(double));
-        *(neueDaten) = V1 * k;
-        *(neueDaten + 1) = V2 * k;
-        *(neueDaten + 2) = V3 * k;
-        *(neueDaten + 3) = V4 * k;
-        free(daten);
-        daten = neueDaten;
+        V1 *= k;
+        V2 *= k;
+        V3 *= k;
+        V4 *= k;
         return *this;
     };
 
@@ -111,6 +108,27 @@ public:
         V2 -= a.get(1);
         V3 -= a.get(2);
         V4 -= a.get(3);
+        return *this;
+    };
+
+    // Vectorenmultiplikation
+
+    Vector4 operator*(Vector<4> &v)
+    {
+        double neueDaten[4] = {
+            V1 * v.get(0),
+            V2 * v.get(1),
+            V3 * v.get(2),
+            V4 * v.get(3)};
+        return Vector4(neueDaten);
+    };
+
+    Vector4 &operator*=(Vector<4> &v)
+    {
+        V1 *= v.get(0);
+        V2 *= v.get(1);
+        V3 *= v.get(2);
+        V4 *= v.get(3);
         return *this;
     };
 };

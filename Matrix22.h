@@ -98,13 +98,26 @@ public:
 
     // matrix multiplikation
 
+    Matrix22 operator*(Matrix<2, 2> &m)
+    {
+        double neueDaten[4] =
+            {
+                M00 * m.get(0, 0) + M01 * m.get(1, 0),
+                M00 * m.get(0, 1) + M01 * m.get(1, 1),
+
+                M10 * m.get(0, 0) + M11 * m.get(1, 0),
+                M10 * m.get(0, 1) + M11 * m.get(1, 1)};
+
+        return Matrix22(neueDaten);
+    };
+
     Matrix22 &operator*=(Matrix<2, 2> &m)
     {
         double *neueDaten = (double *)malloc(4 * sizeof(double));
-        M00 = M00 * m.get(0, 0) + M01 * m.get(1, 0);
-        M01 = M00 * m.get(0, 1) + M01 * m.get(0, 1);
-        M10 = M10 * m.get(0, 1) + M11 * m.get(1, 1);
-        M11 = M10 * m.get(0, 1) + M11 * m.get(1, 1);
+        *(neueDaten) = M00 * m.get(0, 0) + M01 * m.get(1, 0);
+        *(neueDaten + 1) = M00 * m.get(0, 1) + M01 * m.get(1, 1);
+        *(neueDaten + 2) = M10 * m.get(0, 0) + M11 * m.get(1, 0);
+        *(neueDaten + 3) = M10 * m.get(0, 1) + M11 * m.get(1, 1);
         free(daten);
         daten = neueDaten;
         return *this;

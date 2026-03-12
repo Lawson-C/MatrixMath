@@ -42,8 +42,7 @@ public:
             return Vector2(daten);
         double normalizierteDaten[3] = {
             V1 / mag,
-            V2 / mag,
-            *(daten + 2) / mag};
+            V2 / mag};
         Vector2 v = Vector2(normalizierteDaten);
         return v;
     };
@@ -53,17 +52,14 @@ public:
     Vector2 operator*(double k)
     {
         double data[2] = {
-            (*daten) * k, (V2)*k};
+            (V1)*k, (V2)*k};
         return Vector2(data);
     };
 
     Vector2 &operator*=(double k)
     {
-        double *neueDaten = (double *)malloc(2 * sizeof(double));
-        *(neueDaten) = V1 * k;
-        *(neueDaten + 1) = V2 * k;
-        free(daten);
-        daten = neueDaten;
+        V1 *= k;
+        V2 *= k;
         return *this;
     };
 
@@ -86,7 +82,8 @@ public:
     Vector2 operator-(Vector<2> &a)
     {
         double data[2] = {
-            V1 - a.get(0), V2 - a.get(1)};
+            V1 - a.get(0),
+            V2 - a.get(1)};
         return Vector2(data);
     };
 
@@ -94,6 +91,23 @@ public:
     {
         V1 -= a.get(0);
         V2 -= a.get(1);
+        return *this;
+    };
+
+    // Vectorenmultiplikation
+
+    Vector2 operator*(Vector<2> &v)
+    {
+        double neueDaten[2] = {
+            V1 * v.get(0),
+            V2 * v.get(1)};
+        return Vector2(neueDaten);
+    };
+
+    Vector2 &operator*=(Vector<2> &v)
+    {
+        V1 *= v.get(0);
+        V2 *= v.get(1);
         return *this;
     };
 };

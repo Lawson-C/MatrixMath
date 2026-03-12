@@ -9,8 +9,6 @@
 #include <malloc.h>
 #include <cstring>
 
-#include "matrixmath.h"
-
 template <int Zeilen, int Spalten>
 class Matrix
 {
@@ -236,9 +234,9 @@ public:
                 double sum = 0;
                 for (int i = 0; i < Spalten; i++)
                 {
-                    sum += (GET(z, i)) * m.get(i, s);
+                    sum += GET(z, i) * m.get(i, s);
                 };
-                GETD(z, s, neueDaten) = sum;
+                GETD(neueDaten, z, s) = sum;
             };
         };
         free(daten);
