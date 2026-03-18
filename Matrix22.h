@@ -19,9 +19,9 @@ public:
     /*
      * ergibt die Transponierung der Matrix
      */
-    Matrix<2, 2> transpose()
+    Matrix22 transpose()
     {
-        Matrix<2, 2> m = Matrix<2, 2>(daten);
+        Matrix22 m = Matrix22(daten);
         m.set(0, 1, M10);
         m.set(1, 0, M01);
         return m;
@@ -32,26 +32,26 @@ public:
         return (M00 * M11) - (M01 * M10);
     };
 
-    Matrix<2, 2> inverse()
+    Matrix22 inverse()
     {
         double d = determinant();
         double neueDaten[4] = {
             M11 / d, -M01 / d,
             -M10 / d, M00 / d};
-        return Matrix<2, 2>(neueDaten);
+        return Matrix22(neueDaten);
     };
 
     // mathematik addition/subtraktion
 
-    Matrix<2, 2> operator+(Matrix<2, 2> &a)
+    Matrix22 operator+(Matrix22 &a)
     {
         double data[4] = {
             M00 + a.get(0, 0), M01 + a.get(0, 1),
             M10 + a.get(1, 0), M11 + a.get(1, 1)};
-        return Matrix<2, 2>(data);
+        return Matrix22(data);
     };
 
-    Matrix22 &operator+=(Matrix<2, 2> &a)
+    Matrix22 &operator+=(Matrix22 &a)
     {
         M00 += a.get(0, 0);
         M01 += a.get(0, 1);
@@ -60,15 +60,15 @@ public:
         return *this;
     };
 
-    Matrix<2, 2> operator-(Matrix<2, 2> &a)
+    Matrix22 operator-(Matrix22 &a)
     {
         double data[4] = {
             M00 - a.get(0, 0), M01 - a.get(0, 1),
             M10 - a.get(1, 0), M11 - a.get(1, 1)};
-        return Matrix<2, 2>(data);
+        return Matrix22(data);
     };
 
-    Matrix22 &operator-=(Matrix<2, 2> &a)
+    Matrix22 &operator-=(Matrix22 &a)
     {
         M00 -= a.get(0, 0);
         M01 -= a.get(0, 1);
@@ -79,12 +79,12 @@ public:
 
     // skalar multiplikation
 
-    Matrix<2, 2> operator*(double k)
+    Matrix22 operator*(double k)
     {
         double data[4] = {
             M00 * k, M01 * k,
             M10 * k, M11 * k};
-        return Matrix<2, 2>(data);
+        return Matrix22(data);
     };
 
     Matrix22 &operator*=(double k)
@@ -98,7 +98,7 @@ public:
 
     // matrix multiplikation
 
-    Matrix22 operator*(Matrix<2, 2> &m)
+    Matrix22 operator*(Matrix22 &m)
     {
         double neueDaten[4] =
             {
@@ -111,7 +111,7 @@ public:
         return Matrix22(neueDaten);
     };
 
-    Matrix22 &operator*=(Matrix<2, 2> &m)
+    Matrix22 &operator*=(Matrix22 &m)
     {
         double *neueDaten = (double *)malloc(4 * sizeof(double));
         *(neueDaten) = M00 * m.get(0, 0) + M01 * m.get(1, 0);
@@ -121,6 +121,20 @@ public:
         free(daten);
         daten = neueDaten;
         return *this;
+    };
+
+    template<int Spalten>
+    Matrix<Spalten, 2> operator*(Matrix<2, Spalten> &m)
+    {
+        double neueDaten[4] =
+            {
+                M00 * m.get(0, 0) + M01 * m.get(1, 0),
+                M00 * m.get(0, 1) + M01 * m.get(1, 1),
+
+                M10 * m.get(0, 0) + M11 * m.get(1, 0),
+                M10 * m.get(0, 1) + M11 * m.get(1, 1)};
+
+        return Matrix22(neueDaten);
     };
 };
 

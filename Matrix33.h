@@ -24,9 +24,9 @@ public:
     /*
      * ergibt die Transponierung der Matrix
      */
-    Matrix<3, 3> transpose()
+    Matrix33 transpose()
     {
-        Matrix<3, 3> m = Matrix<3, 3>(daten);
+        Matrix33 m = Matrix33(daten);
         m.set(0, 1, M10);
         m.set(0, 2, M20);
         m.set(1, 2, M21);
@@ -38,16 +38,16 @@ public:
 
     // mathematik addition/subtraktion
 
-    Matrix<3, 3> operator+(Matrix<3, 3> &a)
+    Matrix33 operator+(Matrix33 &a)
     {
         double data[9] = {
             M00 + a.get(0, 0), M01 + a.get(0, 1), M02 + a.get(0, 2),
             M10 + a.get(1, 0), M11 + a.get(1, 1), M12 + a.get(1, 2),
             M20 + a.get(2, 0), M21 + a.get(2, 1), M22 + a.get(2, 2)};
-        return Matrix<3, 3>(data);
+        return Matrix33(data);
     };
 
-    Matrix33 &operator+=(Matrix<3, 3> &a)
+    Matrix33 &operator+=(Matrix33 &a)
     {
         M00 += a.get(0, 0);
         M01 += a.get(0, 1);
@@ -61,16 +61,16 @@ public:
         return *this;
     };
 
-    Matrix<3, 3> operator-(Matrix<3, 3> &a)
+    Matrix33 operator-(Matrix33 &a)
     {
         double data[9] = {
             M00 - a.get(0, 0), M01 - a.get(0, 1), M02 - a.get(0, 2),
             M10 - a.get(1, 0), M11 - a.get(1, 1), M12 - a.get(1, 2),
             M20 - a.get(2, 0), M21 - a.get(2, 1), M22 - a.get(2, 2)};
-        return Matrix<3, 3>(data);
+        return Matrix33(data);
     };
 
-    Matrix33 &operator-=(Matrix<3, 3> &a)
+    Matrix33 &operator-=(Matrix33 &a)
     {
         M00 -= a.get(0, 0);
         M01 -= a.get(0, 1);
@@ -86,13 +86,13 @@ public:
 
     // skalar multiplikation
 
-    Matrix<3, 3> operator*(double k)
+    Matrix33 operator*(double k)
     {
         double data[9] = {
             M00 * k, M01 * k, M02 * k,
             M10 * k, M11 * k, M12 * k,
             M20 * k, M21 * k, M22 * k};
-        return Matrix<3, 3>(data);
+        return Matrix33(data);
     };
 
     Matrix33 &operator*=(double k)
@@ -111,7 +111,7 @@ public:
 
     // matrix multiplikation
 
-    Matrix33 operator*(Matrix<3, 3> &m)
+    Matrix33 operator*(Matrix33 &m)
     {
         double neueDaten[9] =
             {
@@ -130,7 +130,7 @@ public:
         return Matrix33(neueDaten);
     };
 
-    Matrix33 &operator*=(Matrix<3, 3> &m)
+    Matrix33 &operator*=(Matrix33 &m)
     {
         double *neueDaten = (double *)malloc(9 * sizeof(double));
 
