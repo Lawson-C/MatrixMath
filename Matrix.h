@@ -99,6 +99,21 @@ public:
         return m;
     };
 
+    /*
+     * ersetzt jeden Wert mit f(Wert) und ergibt die Matrix
+     */
+    template <typename Function>
+    Matrix<Zeilen, Spalten> &map(Function f) {
+        for (int z = 0; z < Zeilen; z++)
+        {
+            for (int s = 0; s < Spalten; s++)
+            {
+                GET(z, s) = f(GET(z, s));
+            };
+        };
+        return *this;
+    };
+
     // mathematik addition/subtraktion
 
     /*
