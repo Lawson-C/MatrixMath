@@ -45,13 +45,22 @@ public:
      * ersetzt jeden Wert mit f(Wert) und ergibt die Matrix
      */
     template <typename Function>
-    Matrix22 &map(Function f) {
+    Matrix22 &map(Function f)
+    {
         M00 = f(M00);
         M01 = f(M01);
-        
+
         M10 = f(M10);
         M11 = f(M11);
         return *this;
+    };
+
+    template <typename Function>
+    Matrix22 map(Function f)
+    {
+        double data[4] = {f(M00), f(M01),
+                          f(M10), f(M11)};
+        return Matrix22(data);
     };
 
     // mathematik addition/subtraktion

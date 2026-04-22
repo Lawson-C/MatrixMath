@@ -59,10 +59,19 @@ public:
      * ersetzt jeden Wert mit f(Wert) und ergibt den Vektor
      */
     template <typename Function>
-    Vector2 &map(Function f) {
+    Vector2 &map(Function f)
+    {
         V0 = f(V0);
         V1 = f(V1);
         return *this;
+    };
+
+    template <typename Function>
+    Vector2 map(Function f)
+    {
+        double data[2] = {f(V0),
+                          f(V1)};
+        return Vector2(data);
     };
 
     // skalar multiplikation

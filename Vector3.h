@@ -73,6 +73,15 @@ public:
         return *this;
     };
 
+    template <typename Function>
+    Vector3 map(Function f)
+    {
+        double data[3] = {f(V0),
+                          f(V1),
+                          f(V2)};
+        return Vector3(data);
+    };
+
     // skalar multiplikation
 
     Vector3 operator*(double k)

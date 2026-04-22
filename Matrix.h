@@ -114,6 +114,20 @@ public:
         return *this;
     };
 
+
+    template <typename Function>
+    Matrix<Zeilen, Spalten> map_copy(Function f) {
+        double *neueDaten = malloc(Spalten * Zeilen * sizeof(double));
+        for (int z = 0; z < Zeilen; z++)
+        {
+            for (int s = 0; s < Spalten; s++)
+            {
+                GETD(neueDaten, z, s) = f(GET(z, s));
+            };
+        };
+        return Matrix<Zeilen, Spalten>(neueDaten);
+    };
+
     // mathematik addition/subtraktion
 
     /*

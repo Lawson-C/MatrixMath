@@ -123,6 +123,16 @@ public:
         };
         return *this;
     };
+    
+    template <typename Function>
+    Vector<Länge> map_copy(Function f) {
+        double *neueDaten = malloc(Länge * sizeof(double));
+        for (int i = 0; i < Länge; i++)
+        {
+            GETD(neueDaten, i) = f(GET(i));
+        };
+        return Vector<Länge>(neueDaten);
+    };
 
     // mathematik addition/subtraktion
 
