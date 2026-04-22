@@ -55,6 +55,16 @@ public:
         return V0 * v.get(0) - V1 * v.get(1);
     }
 
+    /*
+     * ersetzt jeden Wert mit f(Wert) und ergibt den Vektor
+     */
+    template <typename Function>
+    Vector2 &map(Function f) {
+        V0 = f(V0);
+        V1 = f(V1);
+        return *this;
+    };
+
     // skalar multiplikation
 
     Vector2 operator*(double k)

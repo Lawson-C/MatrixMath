@@ -41,6 +41,25 @@ public:
         return M00 * (M11 * M22 - M12 * M21) - M01 * (M10 * M22 - M12 * M20) + M02 * (M10 * M21 - M11 * M20);
     }
 
+    /*
+     * ersetzt jeden Wert mit f(Wert) und ergibt die Matrix
+     */
+    template <typename Function>
+    Matrix33 &map(Function f) {
+        M00 = f(M00);
+        M01 = f(M01);
+        M02 = f(M02);
+
+        M10 = f(M10);
+        M11 = f(M11);
+        M12 = f(M12);
+
+        M20 = f(M20);
+        M21 = f(M21);
+        M22 = f(M22);
+        return *this;
+    };
+
     // mathematik addition/subtraktion
 
     Matrix33 operator+(Matrix33 &a)

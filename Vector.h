@@ -112,6 +112,18 @@ public:
         return v;
     };
 
+    /*
+     * ersetzt jeden Wert mit f(Wert) und ergibt die Matrix
+     */
+    template <typename Function>
+    Vector<Länge> &map(Function f) {
+        for (int i = 0; i < Länge; i++)
+        {
+            GET(i) = f(GET(i));
+        };
+        return *this;
+    };
+
     // mathematik addition/subtraktion
 
     /*

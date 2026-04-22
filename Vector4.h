@@ -53,6 +53,18 @@ public:
         return v;
     };
 
+    /*
+     * ersetzt jeden Wert mit f(Wert) und ergibt den Vektor
+     */
+    template <typename Function>
+    Vector4 &map(Function f) {
+        V0 = f(V0);
+        V1 = f(V1);
+        V2 = f(V2);
+        V3 = f(V3);
+        return *this;
+    };
+
     // skalar multiplikation
 
     Vector4 operator*(double k)

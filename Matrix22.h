@@ -41,6 +41,19 @@ public:
         return Matrix22(neueDaten);
     };
 
+    /*
+     * ersetzt jeden Wert mit f(Wert) und ergibt die Matrix
+     */
+    template <typename Function>
+    Matrix22 &map(Function f) {
+        M00 = f(M00);
+        M01 = f(M01);
+        
+        M10 = f(M10);
+        M11 = f(M11);
+        return *this;
+    };
+
     // mathematik addition/subtraktion
 
     Matrix22 operator+(Matrix22 &a)

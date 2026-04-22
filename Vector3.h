@@ -62,6 +62,17 @@ public:
     return Vector3(data);
    }
 
+    /*
+     * ersetzt jeden Wert mit f(Wert) und ergibt den Vektor
+     */
+    template <typename Function>
+    Vector3 &map(Function f) {
+        V0 = f(V0);
+        V1 = f(V1);
+        V2 = f(V2);
+        return *this;
+    };
+
     // skalar multiplikation
 
     Vector3 operator*(double k)

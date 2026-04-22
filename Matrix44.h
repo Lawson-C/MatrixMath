@@ -48,6 +48,33 @@ public:
         return m;
     };
 
+    /*
+     * ersetzt jeden Wert mit f(Wert) und ergibt die Matrix
+     */
+    template <typename Function>
+    Matrix44 &map(Function f) {
+        M00 = f(M00);
+        M01 = f(M01);
+        M02 = f(M02);
+        M03 = f(M03);
+
+        M10 = f(M10);
+        M11 = f(M11);
+        M12 = f(M12);
+        M13 = f(M13);
+
+        M20 = f(M20);
+        M21 = f(M21);
+        M22 = f(M22);
+        M23 = f(M23);
+
+        M30 = f(M30);
+        M31 = f(M31);
+        M32 = f(M32);
+        M33 = f(M33);
+        return *this;
+    };
+
     // mathematik addition/subtraktion
 
     Matrix44 operator+(Matrix44 &a)
