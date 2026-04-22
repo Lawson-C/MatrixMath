@@ -47,6 +47,14 @@ public:
         return v;
     };
 
+    /*
+     * ergibt den Kreuzprodukt von zwei Vektoren
+     */
+    double cross(Vector<2> &v)
+    {
+        return V1 * v.get(0) - V2 * v.get(1);
+    }
+
     // skalar multiplikation
 
     Vector2 operator*(double k)

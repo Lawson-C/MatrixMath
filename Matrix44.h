@@ -29,9 +29,9 @@ public:
     /*
      * ergibt die Transponierung der Matrix
      */
-    Matrix<4, 4> transpose()
+    Matrix44 transpose()
     {
-        Matrix<4, 4> m = Matrix<4, 4>(daten);
+        Matrix44 m = Matrix44(daten);
         m.set(0, 1, M10);
         m.set(0, 2, M20);
         m.set(0, 3, M30);
@@ -50,17 +50,17 @@ public:
 
     // mathematik addition/subtraktion
 
-    Matrix<4, 4> operator+(Matrix<4, 4> &a)
+    Matrix44 operator+(Matrix44 &a)
     {
         double data[16] = {
             M00 + a.get(0, 0), M01 + a.get(0, 1), M02 + a.get(0, 2), M03 + a.get(0, 3),
             M10 + a.get(1, 0), M11 + a.get(1, 1), M12 + a.get(1, 2), M13 + a.get(1, 3),
             M20 + a.get(2, 0), M21 + a.get(2, 1), M22 + a.get(2, 2), M23 + a.get(2, 3),
             M30 + a.get(3, 0), M31 + a.get(3, 1), M32 + a.get(3, 2), M33 + a.get(3, 3)};
-        return Matrix<4, 4>(data);
+        return Matrix44(data);
     };
 
-    Matrix44 &operator+=(Matrix<4, 4> &a)
+    Matrix44 &operator+=(Matrix44 &a)
     {
         M00 += a.get(0, 0);
         M01 += a.get(0, 1);
@@ -81,17 +81,17 @@ public:
         return *this;
     };
 
-    Matrix<4, 4> operator-(Matrix<4, 4> &a)
+    Matrix44 operator-(Matrix44 &a)
     {
         double data[16] = {
             M00 - a.get(0, 0), M01 - a.get(0, 1), M02 - a.get(0, 2), M03 - a.get(0, 3),
             M10 - a.get(1, 0), M11 - a.get(1, 1), M12 - a.get(1, 2), M13 - a.get(1, 3),
             M20 - a.get(2, 0), M21 - a.get(2, 1), M22 - a.get(2, 2), M23 - a.get(2, 3),
             M30 - a.get(3, 0), M31 - a.get(3, 1), M32 - a.get(3, 2), M33 - a.get(3, 3)};
-        return Matrix<4, 4>(data);
+        return Matrix44(data);
     };
 
-    Matrix44 &operator-=(Matrix<4, 4> &a)
+    Matrix44 &operator-=(Matrix44 &a)
     {
         M00 -= a.get(0, 0);
         M01 -= a.get(0, 1);
@@ -114,14 +114,14 @@ public:
 
     // skalar multiplikation
 
-    Matrix<4, 4> operator*(double k)
+    Matrix44 operator*(double k)
     {
         double data[16] = {
             M00 * k, M01 * k, M02 * k, M03 * k,
             M10 * k, M11 * k, M12 * k, M13 * k,
             M20 * k, M21 * k, M22 * k, M23 * k,
             M30 * k, M31 * k, M32 * k, M33 * k};
-        return Matrix<4, 4>(data);
+        return Matrix44(data);
     };
 
     Matrix44 &operator*=(double k)
@@ -147,14 +147,14 @@ public:
 
     // matrix multiplikation
 
-    Matrix44 operator*(Matrix<4, 4> &m)
+    Matrix44 operator*(Matrix44 &m)
     {
         double neueDaten[16] =
             {
-                *(neueDaten) = M00*m.get(0, 0) + M01 * m.get(1, 0) + M02 * m.get(2, 0) + M03 * m.get(3, 0),
-                *(neueDaten + 1) = M00*m.get(0, 1) + M01 * m.get(1, 1) + M02*m.get(2, 1) + M03 * m.get(3, 1),
-                *(neueDaten + 2) = M00*m.get(0, 2) + M01 * m.get(1, 2) + M02*m.get(2, 2) + M03 * m.get(3, 2),
-                *(neueDaten + 3) = M00*m.get(0, 3) + M01 * m.get(1, 3) + M02*m.get(2, 3) + M03 * m.get(3, 3),
+                *(neueDaten) = M00 * m.get(0, 0) + M01 * m.get(1, 0) + M02 * m.get(2, 0) + M03 * m.get(3, 0),
+                *(neueDaten + 1) = M00 * m.get(0, 1) + M01 * m.get(1, 1) + M02 * m.get(2, 1) + M03 * m.get(3, 1),
+                *(neueDaten + 2) = M00 * m.get(0, 2) + M01 * m.get(1, 2) + M02 * m.get(2, 2) + M03 * m.get(3, 2),
+                *(neueDaten + 3) = M00 * m.get(0, 3) + M01 * m.get(1, 3) + M02 * m.get(2, 3) + M03 * m.get(3, 3),
 
                 *(neueDaten + 4) = M10 * m.get(0, 0) + M11 * m.get(1, 0) + M12 * m.get(2, 0) + M13 * m.get(3, 0),
                 *(neueDaten + 5) = M10 * m.get(0, 1) + M11 * m.get(1, 1) + M12 * m.get(2, 1) + M13 * m.get(3, 1),
@@ -174,7 +174,7 @@ public:
         return Matrix44(neueDaten);
     };
 
-    Matrix44 &operator*=(Matrix<4, 4> &m)
+    Matrix44 &operator*=(Matrix44 &m)
     {
         double *neueDaten = (double *)malloc(16 * sizeof(double));
 
@@ -201,6 +201,20 @@ public:
         free(daten);
         daten = neueDaten;
         return *this;
+    };
+
+    template <int Spalten>
+    Matrix<Spalten, 4> operator*(Matrix<4, Spalten> &m)
+    {
+        double *neueDaten = malloc(4 * Spalten * sizeof(double));
+        for (int z = 0; z < Spalten; z++)
+        {
+            *(neueDaten + 4 * z) = M00 * m.get(0, z) + M01 * m.get(1, z) + M02 * m.get(2, z) + M03 * m.get(3, z);
+            *(neueDaten + 4 * z + 1) = M10 * m.get(0, z) + M11 * m.get(1, z) + M12 * m.get(2, z) + M13 * m.get(3, z);
+            *(neueDaten + 4 * z + 2) = M20 * m.get(0, z) + M21 * m.get(1, z) + M22 * m.get(2, z) + M23 * m.get(3, z);
+            *(neueDaten + 4 * z + 3) = M30 * m.get(0, z) + M31 * m.get(1, z) + M32 * m.get(2, z) + M33 * m.get(3, z);
+        };
+        return Matrix<Spalten, 4>(neueDaten);
     };
 };
 
