@@ -50,6 +50,18 @@ public:
         return v;
     };
 
+    /*
+    * ergibt den Kreuzprodukt von zwei Vektoren
+    */
+   Vector3 cross(Vector<3>& v) {
+    double data[3] = {
+        V2 * v.get(2) - V3 * v.get(1),
+        -(V1 * v.get(2) - V3 * v.get(0)),
+        V1 * v.get(1) - V2 * v.get(0)
+    };
+    return Vector3(data);
+   }
+
     // skalar multiplikation
 
     Vector3 operator*(double k)
