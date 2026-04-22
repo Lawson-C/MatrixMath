@@ -36,10 +36,9 @@ public:
         return m;
     };
 
-    inline double determinant() {
-        return  M00 * (M11 * M22 - M12 * M21)
-              - M01 * (M10 * M22 - M12 * M20)
-              + M02 * (M10 * M21 - M11 * M20);
+    inline double determinant()
+    {
+        return M00 * (M11 * M22 - M12 * M21) - M01 * (M10 * M22 - M12 * M20) + M02 * (M10 * M21 - M11 * M20);
     }
 
     // mathematik addition/subtraktion
@@ -160,12 +159,12 @@ public:
     template <int Spalten>
     Matrix<Spalten, 3> operator*(Matrix<3, Spalten> &m)
     {
-        double neueDaten * = malloc(3 * Spalten * sizeof(double));
+        double *neueDaten = malloc(3 * Spalten * sizeof(double));
         for (int z = 0; z < Spalten; z++)
         {
-            (neueDaten + 3 * z)* = M00 * m.get(0, z) + M01 * m.get(1, z) + M02 * m.get(2, z);
-            (neueDaten + 3 * z + 1)* = M10 * m.get(0, z) + M11 * m.get(1, z) + M12 * m.get(2, z);
-            (neueDaten + 3 * z + 2)* = M20 * m.get(0, z) + M21 * m.get(1, z) + M22 * m.get(2, z);
+            *(neueDaten + 3 * z) = M00 * m.get(0, z) + M01 * m.get(1, z) + M02 * m.get(2, z);
+            *(neueDaten + 3 * z + 1) = M10 * m.get(0, z) + M11 * m.get(1, z) + M12 * m.get(2, z);
+            *(neueDaten + 3 * z + 2) = M20 * m.get(0, z) + M21 * m.get(1, z) + M22 * m.get(2, z);
         };
         return Matrix<Spalten, 3>(neueDaten);
     };

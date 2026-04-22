@@ -126,11 +126,11 @@ public:
     template <int Spalten>
     Matrix<Spalten, 2> operator*(Matrix<2, Spalten> &m)
     {
-        double neueDaten * = malloc(2 * Spalten * sizeof(double));
+        double *neueDaten = malloc(2 * Spalten * sizeof(double));
         for (int z = 0; z < Spalten; z++)
         {
-            (neueDaten + 2 * z)* = M00 * m.get(0, z) + M01 * m.get(1, z);
-            (neueDaten + 2 * z + 1)* = M10 * m.get(0, z) + M11 * m.get(1, z);
+            *(neueDaten + 2 * z) = M00 * m.get(0, z) + M01 * m.get(1, z);
+            *(neueDaten + 2 * z + 1) = M10 * m.get(0, z) + M11 * m.get(1, z);
         };
         return Matrix<Spalten, 2>(neueDaten);
     };
