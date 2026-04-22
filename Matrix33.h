@@ -36,6 +36,12 @@ public:
         return m;
     };
 
+    inline double determinant() {
+        return  M00 * (M11 * M22 - M12 * M21)
+              - M01 * (M10 * M22 - M12 * M20)
+              + M02 * (M10 * M21 - M11 * M20);
+    }
+
     // mathematik addition/subtraktion
 
     Matrix33 operator+(Matrix33 &a)
