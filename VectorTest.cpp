@@ -8,6 +8,7 @@ void testSkalarMult();
 void testVectorMult();
 void testMatrixMult();
 void testNormalize();
+void testCrossProduct();
 
 int main()
 {
@@ -23,6 +24,7 @@ int main()
     testVectorMult();
     testMatrixMult();
     testNormalize();
+    testCrossProduct();
     std::cout << "s is scho voabei" << std::endl;
     return 0;
 };
@@ -180,4 +182,20 @@ void testNormalize()
               << v3.normalize()._str() << std::endl
               << "norm(v4): " << std::endl
               << v4.normalize()._str() << std::endl;
+};
+
+void testCrossProduct()
+{
+    std::cout << std::endl
+              << "Testen zum Vektorenkreuzprodukt" << std::endl;
+    double data[4] = {
+        3, -4, 5};
+    double data2[4] = {
+        5, 4, -3};
+    Vector3 v1 = Vector3(data);
+    Vector3 v2 = Vector3(data2);
+    std::cout << "v1 x v2: " << std::endl
+              << v1.cross(v2)._str() << std::endl;
+    std::cout << "v2 x v1: " << std::endl
+              << v2.cross(v1)._str() << std::endl;
 };
