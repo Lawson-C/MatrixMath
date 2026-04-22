@@ -202,6 +202,20 @@ public:
         daten = neueDaten;
         return *this;
     };
+
+    template <int Spalten>
+    Matrix<Spalten, 4> operator*(Matrix<4, Spalten> &m)
+    {
+        double neueDaten * = malloc(4 * Spalten * sizeof(double));
+        for (int z = 0; z < Spalten; z++)
+        {
+            (neueDaten + 4 * z)* = M00 * m.get(0, z) + M01 * m.get(1, z) + M02 * m.get(2, z) + M03 * m.get(3, z);
+            (neueDaten + 4 * z + 1)* = M10 * m.get(0, z) + M11 * m.get(1, z) + M12 * m.get(2, z) + M13 * m.get(3, z);
+            (neueDaten + 4 * z + 2)* = M20 * m.get(0, z) + M21 * m.get(1, z) + M22 * m.get(2, z) + M23 * m.get(3, z);
+            (neueDaten + 4 * z + 3)* = M30 * m.get(0, z) + M31 * m.get(1, z) + M32 * m.get(2, z) + M33 * m.get(3, z);
+        };
+        return Matrix<Spalten, 4>(neueDaten);
+    };
 };
 
 #undef M00

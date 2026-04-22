@@ -123,18 +123,16 @@ public:
         return *this;
     };
 
-    template<int Spalten>
+    template <int Spalten>
     Matrix<Spalten, 2> operator*(Matrix<2, Spalten> &m)
     {
-        double neueDaten[4] =
-            {
-                M00 * m.get(0, 0) + M01 * m.get(1, 0),
-                M00 * m.get(0, 1) + M01 * m.get(1, 1),
-
-                M10 * m.get(0, 0) + M11 * m.get(1, 0),
-                M10 * m.get(0, 1) + M11 * m.get(1, 1)};
-
-        return Matrix22(neueDaten);
+        double neueDaten * = malloc(2 * Spalten * sizeof(double));
+        for (int z = 0; z < Spalten; z++)
+        {
+            (neueDaten + 2 * z)* = M00 * m.get(0, z) + M01 * m.get(1, z);
+            (neueDaten + 2 * z + 1)* = M10 * m.get(0, z) + M11 * m.get(1, z);
+        };
+        return Matrix<Spalten, 2>(neueDaten);
     };
 };
 
