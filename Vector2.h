@@ -52,7 +52,7 @@ public:
      */
     double cross(Vector<2> &v)
     {
-        return V1 * v.get(0) - V2 * v.get(1);
+        return V0 * v.get(0) - V1 * v.get(1);
     }
 
     // skalar multiplikation
