@@ -9,6 +9,7 @@ void testMatrixMult();
 void testVektorMult();
 void testTranspose();
 void testInverse();
+void testMap();
 
 int main()
 {
@@ -26,6 +27,7 @@ int main()
     testVektorMult();
     testTranspose();
     testInverse();
+    testMap();
     std::cout << "s is scho voabei" << std::endl;
     return 0;
 };
@@ -248,4 +250,14 @@ void testInverse()
     Matrix22 m = Matrix22(data);
     std::cout << "m^-1:\t" << std::endl
               << m.inverse()._str() << std::endl;
+};
+
+void testMap() {
+    double data[8] = {
+        3, 4, 6, 7,
+        2, 3, 4, 9
+    };
+    Matrix<2, 4> m = Matrix<2, 4>(data);
+    std::cout << "Testen zur mapfunktion" << std::endl <<
+    m.map([] (double x) { return x + 1; })._str() << std::endl;
 };
