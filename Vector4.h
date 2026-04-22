@@ -1,9 +1,9 @@
 #pragma once
 
-#define V1 (*(daten))
-#define V2 (*(daten + 1))
-#define V3 (*(daten + 2))
-#define V4 (*(daten + 3))
+#define V0 (*(daten))
+#define V1 (*(daten + 1))
+#define V2 (*(daten + 2))
+#define V3 (*(daten + 3))
 
 #include <malloc.h>
 #include <cstring>
@@ -18,7 +18,7 @@ public:
 
     inline double magnitude()
     {
-        return std::sqrt(V1 * V1 + V2 * V2 + V3 * V3 + V4 * V4);
+        return std::sqrt(V0 * V0 + V1 * V1 + V2 * V2 + V3 * V3);
     };
 
     /*
@@ -29,10 +29,10 @@ public:
         double mag = magnitude();
         if (mag == 1)
             return *this;
+        V0 /= mag;
         V1 /= mag;
         V2 /= mag;
         V3 /= mag;
-        V4 /= mag;
         return *this;
     };
 
@@ -45,10 +45,10 @@ public:
         if (mag == 1)
             return Vector4(daten);
         double normalizierteDaten[4] = {
+            V0 / mag,
             V1 / mag,
             V2 / mag,
-            V3 / mag,
-            V4 / mag};
+            V3 / mag};
         Vector4 v = Vector4(normalizierteDaten);
         return v;
     };
@@ -58,16 +58,16 @@ public:
     Vector4 operator*(double k)
     {
         double data[4] = {
-            V1 * k, V2 * k, V3 * k, V4 * k};
+            V0 * k, V1 * k, V2 * k, V3 * k};
         return Vector4(data);
     };
 
     Vector4 &operator*=(double k)
     {
+        V0 *= k;
         V1 *= k;
         V2 *= k;
         V3 *= k;
-        V4 *= k;
         return *this;
     };
 
@@ -76,38 +76,38 @@ public:
     Vector4 operator+(Vector<4> &a)
     {
         double data[4] = {
-            V1 + a.get(0),
-            V2 + a.get(1),
-            V3 + a.get(2),
-            V4 + a.get(3)};
+            V0 + a.get(0),
+            V1 + a.get(1),
+            V2 + a.get(2),
+            V3 + a.get(3)};
         return Vector4(data);
     };
 
     Vector4 &operator+=(Vector<4> &a)
     {
-        V1 += a.get(0);
-        V2 += a.get(1);
-        V3 += a.get(2);
-        V4 += a.get(3);
+        V0 += a.get(0);
+        V1 += a.get(1);
+        V2 += a.get(2);
+        V3 += a.get(3);
         return *this;
     };
 
     Vector4 operator-(Vector<4> &a)
     {
         double data[4] = {
-            V1 - a.get(0),
-            V2 - a.get(1),
-            V3 - a.get(2),
-            V4 - a.get(3)};
+            V0 - a.get(0),
+            V1 - a.get(1),
+            V2 - a.get(2),
+            V3 - a.get(3)};
         return Vector4(data);
     };
 
     Vector4 &operator-=(Vector<4> &a)
     {
-        V1 -= a.get(0);
-        V2 -= a.get(1);
-        V3 -= a.get(2);
-        V4 -= a.get(3);
+        V0 -= a.get(0);
+        V1 -= a.get(1);
+        V2 -= a.get(2);
+        V3 -= a.get(3);
         return *this;
     };
 
@@ -116,24 +116,24 @@ public:
     Vector4 operator*(Vector<4> &v)
     {
         double neueDaten[4] = {
-            V1 * v.get(0),
-            V2 * v.get(1),
-            V3 * v.get(2),
-            V4 * v.get(3)};
+            V0 * v.get(0),
+            V1 * v.get(1),
+            V2 * v.get(2),
+            V3 * v.get(3)};
         return Vector4(neueDaten);
     };
 
     Vector4 &operator*=(Vector<4> &v)
     {
-        V1 *= v.get(0);
-        V2 *= v.get(1);
-        V3 *= v.get(2);
-        V4 *= v.get(3);
+        V0 *= v.get(0);
+        V1 *= v.get(1);
+        V2 *= v.get(2);
+        V3 *= v.get(3);
         return *this;
     };
 };
 
+#undef V0
 #undef V1
 #undef V2
 #undef V3
-#undef V4
