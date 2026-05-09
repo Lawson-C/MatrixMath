@@ -4,7 +4,7 @@
 #define GETD(d, n) (*(d + n))
 
 #include <malloc.h>
-#include <cstring>
+#include <string>
 #include <cmath>
 
 template <int Länge>

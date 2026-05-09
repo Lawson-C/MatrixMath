@@ -12,7 +12,7 @@
 
 #include "Matrix.h"
 
-#include <cstring>
+#include <string>
 #include <malloc.h>
 
 class Matrix33 : public Matrix<3, 3>

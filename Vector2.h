@@ -4,7 +4,7 @@
 #define V1 (*(daten + 1))
 
 #include <malloc.h>
-#include <cstring>
+#include <string>
 
 #include "Vector.h"
 

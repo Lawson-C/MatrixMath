@@ -7,7 +7,7 @@
 #define GETD(d, z, s) (*(d + (z * Spalten + s)))
 
 #include <malloc.h>
-#include <cstring>
+#include <string>
 
 template <int Zeilen, int Spalten>
 class Matrix

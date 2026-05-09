@@ -17,7 +17,7 @@
 #define M32 (*(daten + 14))
 #define M33 (*(daten + 15))
 
-#include <cstring>
+#include <string>
 #include <malloc.h>
 
 class Matrix44 : public Matrix<4, 4>

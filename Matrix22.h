@@ -7,7 +7,7 @@
 
 #include "Matrix.h"
 
-#include <cstring>
+#include <string>
 #include <malloc.h>
 
 class Matrix22 : public Matrix<2, 2>

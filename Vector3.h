@@ -5,7 +5,7 @@
 #define V2 (*(daten + 2))
 
 #include <malloc.h>
-#include <cstring>
+#include <string>
 
 #include "Vector.h"
 

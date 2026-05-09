@@ -6,7 +6,7 @@
 #define V3 (*(daten + 3))
 
 #include <malloc.h>
-#include <cstring>
+#include <string>
 
 #include "Vector.h"
 
