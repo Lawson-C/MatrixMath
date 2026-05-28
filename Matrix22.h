@@ -1,9 +1,14 @@
 #pragma once
 
-#include <cstring>
-#include <malloc.h>
+#define M00 (*(daten))
+#define M01 (*(daten + 1))
+#define M10 (*(daten + 2))
+#define M11 (*(daten + 3))
 
-#include "matrixmath.h"
+#include "Matrix.h"
+
+#include <string>
+#include <malloc.h>
 
 class Matrix22 : public Matrix<2, 2>
 {
@@ -14,120 +19,124 @@ public:
     /*
      * ergibt die Transponierung der Matrix
      */
-    Matrix<2, 2> transpose()
+    Matrix22 transpose()
     {
-        Matrix<2, 2> m = Matrix<2, 2>(daten);
-        m.set(0, 1, *(daten + 2));
-        m.set(1, 0, *(daten + 1));
+        Matrix22 m = Matrix22(daten);
+        m.set(0, 1, M10);
+        m.set(1, 0, M01);
         return m;
     };
 
-    double determinant()
+    inline double determinant()
     {
-        return (*(daten) * *(daten + 3)) - (*(daten + 1) * *(daten + 2));
+        return (M00 * M11) - (M01 * M10);
     };
 
-    Matrix<2, 2> inverse()
+    Matrix22 inverse()
     {
         double d = determinant();
         double neueDaten[4] = {
-            *(daten + 3) / d, -*(daten + 1) / d,
-            -*(daten + 2) / d, *(daten) / d};
-        return Matrix<2, 2>(neueDaten);
+            M11 / d, -M01 / d,
+            -M10 / d, M00 / d};
+        return Matrix22(neueDaten);
     };
 
     // mathematik addition/subtraktion
 
-    Matrix<2, 2> operator+(Matrix<2, 2> &a)
+    Matrix22 operator+(Matrix22 &a)
     {
         double data[4] = {
-            *(daten) + a.get(0, 0), *(daten + 1) + a.get(0, 1),
-            *(daten + 2) + a.get(1, 0), *(daten + 3) + a.get(1, 1)};
-        return Matrix<2, 2>(data);
+            M00 + a.get(0, 0), M01 + a.get(0, 1),
+            M10 + a.get(1, 0), M11 + a.get(1, 1)};
+        return Matrix22(data);
     };
 
-    Matrix22 &operator+=(Matrix<2, 2> &a)
+    Matrix22 &operator+=(Matrix22 &a)
     {
-        *(daten) += a.get(0, 0);
-        *(daten + 1) += a.get(0, 1);
-        *(daten + 2) += a.get(1, 0);
-        *(daten + 3) += a.get(1, 1);
+        M00 += a.get(0, 0);
+        M01 += a.get(0, 1);
+        M10 += a.get(1, 0);
+        M11 += a.get(1, 1);
         return *this;
     };
 
-    Matrix<2, 2> operator-(Matrix<2, 2> &a)
+    Matrix22 operator-(Matrix22 &a)
     {
         double data[4] = {
-            *(daten)-a.get(0, 0), *(daten + 1) - a.get(0, 1),
-            *(daten + 2) - a.get(1, 0), *(daten + 3) - a.get(1, 1)};
-        return Matrix<2, 2>(data);
+            M00 - a.get(0, 0), M01 - a.get(0, 1),
+            M10 - a.get(1, 0), M11 - a.get(1, 1)};
+        return Matrix22(data);
     };
 
-    Matrix22 &operator-=(Matrix<2, 2> &a)
+    Matrix22 &operator-=(Matrix22 &a)
     {
-        *(daten) -= a.get(0, 0);
-        *(daten + 1) -= a.get(0, 1);
-        *(daten + 2) -= a.get(1, 0);
-        *(daten + 3) -= a.get(1, 1);
+        M00 -= a.get(0, 0);
+        M01 -= a.get(0, 1);
+        M10 -= a.get(1, 0);
+        M11 -= a.get(1, 1);
         return *this;
     };
 
     // skalar multiplikation
 
-    Matrix<2, 2> operator*(double k)
+    Matrix22 operator*(double k)
     {
         double data[4] = {
-            *(daten)*k, *(daten + 1) * k,
-            *(daten + 2) * k, *(daten + 3) * k};
-        return Matrix<2, 2>(data);
+            M00 * k, M01 * k,
+            M10 * k, M11 * k};
+        return Matrix22(data);
     };
 
     Matrix22 &operator*=(double k)
     {
-        *(daten) *= k;
-        *(daten + 1) *= k;
-        *(daten + 2) *= k;
-        *(daten + 3) *= k;
+        M00 *= k;
+        M01 *= k;
+        M10 *= k;
+        M11 *= k;
         return *this;
     };
 
     // matrix multiplikation
 
-    Matrix22 operator*(Matrix<2, 2> &m)
+    Matrix22 operator*(Matrix22 &m)
     {
         double neueDaten[4] =
             {
-                *(daten)*m.get(0, 0) + *(daten + 1) * m.get(1, 0),
-                *(daten) * m.get(0, 1) + *(daten + 1) * m.get(1, 1),
+                M00 * m.get(0, 0) + M01 * m.get(1, 0),
+                M00 * m.get(0, 1) + M01 * m.get(1, 1),
 
-                *(daten + 2) * m.get(0, 0) + *(daten + 3) * m.get(1, 0),
-                *(daten + 2) * m.get(0, 1) + *(daten + 3) * m.get(1, 1)};
+                M10 * m.get(0, 0) + M11 * m.get(1, 0),
+                M10 * m.get(0, 1) + M11 * m.get(1, 1)};
 
         return Matrix22(neueDaten);
     };
 
-    Matrix22 &operator*=(Matrix<2, 2> &m)
+    Matrix22 &operator*=(Matrix22 &m)
     {
         double *neueDaten = (double *)malloc(4 * sizeof(double));
-        *(neueDaten) = *(daten)*m.get(0, 0) + *(daten + 1) * m.get(1, 0);
-        *(neueDaten + 1) = *(daten)*m.get(0, 1) + *(daten + 1) * m.get(1, 1);
-        *(neueDaten + 2) = *(daten + 2) * m.get(0, 0) + *(daten + 3) * m.get(1, 0);
-        *(neueDaten + 3) = *(daten + 2) * m.get(0, 1) + *(daten + 3) * m.get(1, 1);
+        *(neueDaten) = M00 * m.get(0, 0) + M01 * m.get(1, 0);
+        *(neueDaten + 1) = M00 * m.get(0, 1) + M01 * m.get(1, 1);
+        *(neueDaten + 2) = M10 * m.get(0, 0) + M11 * m.get(1, 0);
+        *(neueDaten + 3) = M10 * m.get(0, 1) + M11 * m.get(1, 1);
         free(daten);
         daten = neueDaten;
         return *this;
     };
 
-    // Vectorenmultiplikation
-
-    /*
-     * multipliziert eine Matrix mit einem Vektor und ergibt jenen Vektor
-     */
-    Vector2 operator*(Vector<2> &v)
+    template <int Spalten>
+    Matrix<Spalten, 2> operator*(Matrix<2, Spalten> &m)
     {
-        double neueDaten[2] = {
-            *(daten)*v.get(0) + *(daten + 1) * v.get(1),
-            *(daten + 2) * v.get(0) + *(daten + 3) * v.get(1)};
-        return Vector2(neueDaten);
+        double *neueDaten = malloc(2 * Spalten * sizeof(double));
+        for (int z = 0; z < Spalten; z++)
+        {
+            *(neueDaten + 2 * z) = M00 * m.get(0, z) + M01 * m.get(1, z);
+            *(neueDaten + 2 * z + 1) = M10 * m.get(0, z) + M11 * m.get(1, z);
+        };
+        return Matrix<Spalten, 2>(neueDaten);
     };
 };
+
+#undef M00
+#undef M01
+#undef M10
+#undef M11
