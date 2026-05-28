@@ -165,27 +165,15 @@ public:
     /*
      * multipliziert jeden Eintrag des Vektors mit dem Faktor k, ohne Datenänderung
      */
-    Vector<Länge> operator*(double k)
+    double operator*(double k)
     {
 
-        Vector<Länge> v = Vector<Länge>();
+        double sum = 0;
         for (int n = 0; n < Länge; n++)
         {
-            *v.set(n, this->get(n) * k);
+            sum += this->get(n) * k;
         };
-        return v;
-    };
-
-    /*
-     * multipliziert jeden Eintrag der Matrix mit dem Faktor k
-     */
-    Vector<Länge> &operator*=(double k)
-    {
-        for (int n = 0; n < Länge; n++)
-        {
-            *(daten + n) *= *(daten + n) * k;
-        };
-        return *this;
+        return sum;
     };
 
     // string repräsentation

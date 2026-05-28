@@ -111,22 +111,8 @@ public:
 
     // Vectorenmultiplikation
 
-    Vector4 operator*(Vector<4> &v)
+    double operator*(Vector<4> &v)
     {
-        double neueDaten[4] = {
-            *(daten)*v.get(0),
-            *(daten + 1) * v.get(1),
-            *(daten + 2) * v.get(2),
-            *(daten + 3) * v.get(3)};
-        return Vector4(neueDaten);
-    };
-
-    Vector4 &operator*=(Vector<4> &v)
-    {
-        *(daten) *= v.get(0);
-        *(daten + 1) *= v.get(1);
-        *(daten + 2) *= v.get(2);
-        *(daten + 3) *= v.get(3);
-        return *this;
+        return *(daten)*v.get(0) + *(daten + 1) * v.get(1) + *(daten + 2) * v.get(2) + *(daten + 3) * v.get(3);
     };
 };

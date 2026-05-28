@@ -86,7 +86,7 @@ public:
     Vector3 operator-(Vector<3> &a)
     {
         double data[3] = {
-            *(daten) - a.get(0), *(daten + 1) - a.get(1), *(daten + 2) - a.get(2)};
+            *(daten)-a.get(0), *(daten + 1) - a.get(1), *(daten + 2) - a.get(2)};
         return Vector3(data);
     };
 
@@ -100,20 +100,8 @@ public:
 
     // Vectorenmultiplikation
 
-    Vector3 operator*(Vector<3> &v)
+    double operator*(Vector<3> &v)
     {
-        double neueDaten[3] = {
-            *(daten)*v.get(0),
-            *(daten + 1) * v.get(1),
-            *(daten + 2) * v.get(2)};
-        return Vector3(neueDaten);
-    };
-
-    Vector3 &operator*=(Vector<3> &v)
-    {
-        *(daten) *= v.get(0);
-        *(daten + 1) *= v.get(1);
-        *(daten + 2) *= v.get(2);
-        return *this;
+        return *(daten)*v.get(0) + *(daten + 1) * v.get(1) + *(daten + 2) * v.get(2);
     };
 };

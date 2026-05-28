@@ -96,18 +96,8 @@ public:
 
     // Vectorenmultiplikation
 
-    Vector2 operator*(Vector<2> &v)
+    double operator*(Vector<2> &v)
     {
-        double neueDaten[2] = {
-            *(daten)*v.get(0),
-            *(daten + 1) * v.get(1)};
-        return Vector2(neueDaten);
-    };
-
-    Vector2 &operator*=(Vector<2> &v)
-    {
-        *(daten) *= v.get(0);
-        *(daten + 1) *= v.get(1);
-        return *this;
+        return *(daten)*v.get(0) + *(daten + 1) * v.get(1);
     };
 };
