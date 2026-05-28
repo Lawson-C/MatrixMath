@@ -22,7 +22,7 @@ public:
     /*
      * normailiziert den Vector und gibt die Referenz zurück
      */
-    Vector2 &normalize()
+    inline Vector2 &normalize()
     {
         double mag = magnitude();
         if (mag == 1)
@@ -35,7 +35,7 @@ public:
     /*
      * gibt den normalizierten Vector zurück, ohne dass die Daten geändert werden
      */
-    Vector2 getNormal()
+    inline Vector2 getNormal()
     {
         double mag = magnitude();
         if (mag == 1)
@@ -50,21 +50,21 @@ public:
     /*
      * ergibt den Kreuzprodukt von zwei Vektoren
      */
-    double cross(Vector<2> &v)
+    inline double cross(Vector<2> &v)
     {
         return V0 * v.get(0) - V1 * v.get(1);
     }
 
     // skalar multiplikation
 
-    Vector2 operator*(double k)
+    inline Vector2 operator*(double k)
     {
         double data[2] = {
             (V0)*k, (V1)*k};
         return Vector2(data);
     };
 
-    Vector2 &operator*=(double k)
+    inline Vector2 &operator*=(double k)
     {
         V0 *= k;
         V1 *= k;
@@ -73,21 +73,21 @@ public:
 
     // mathematik addition/subtraktion
 
-    Vector2 operator+(Vector<2> &a)
+    inline Vector2 operator+(Vector<2> &a)
     {
         double data[2] = {
             V0 + a.get(0), V1 + a.get(1)};
         return Vector2(data);
     };
 
-    Vector2 &operator+=(Vector<2> &a)
+    inline Vector2 &operator+=(Vector<2> &a)
     {
         V0 += a.get(0);
         V1 += a.get(1);
         return *this;
     };
 
-    Vector2 operator-(Vector<2> &a)
+    inline Vector2 operator-(Vector<2> &a)
     {
         double data[2] = {
             V0 - a.get(0),
@@ -95,7 +95,7 @@ public:
         return Vector2(data);
     };
 
-    Vector2 &operator-=(Vector<2> &a)
+    inline Vector2 &operator-=(Vector<2> &a)
     {
         V0 -= a.get(0);
         V1 -= a.get(1);
@@ -104,7 +104,7 @@ public:
 
     // Vectorenmultiplikation
 
-    double operator*(Vector<2> &v)
+    inline double operator*(Vector<2> &v)
     {
         return V0 * v.get(0) + V1 * v.get(1);
     };

@@ -15,7 +15,7 @@ public:
     Vector3(double data[3]) : Vector<3>(data) {
                               };
 
-    double magnitude()
+    inline double magnitude()
     {
         return std::sqrt(V0 * V0 + V1 * V1 + V2 * V2);
     };
@@ -23,7 +23,7 @@ public:
     /*
      * normailiziert den Vector und gibt die Referenz zurück
      */
-    Vector3 &normalize()
+    inline Vector3 &normalize()
     {
         double mag = magnitude();
         if (mag == 1)
@@ -37,7 +37,7 @@ public:
     /*
      * gibt den normalizierten Vector zurück, ohne dass die Daten geändert werden
      */
-    Vector3 getNormal()
+    inline Vector3 getNormal()
     {
         double mag = magnitude();
         if (mag == 1)
@@ -53,7 +53,7 @@ public:
     /*
     * ergibt den Kreuzprodukt von zwei Vektoren
     */
-   Vector3 cross(Vector<3>& v) {
+   inline Vector3 cross(Vector<3>& v) {
     double data[3] = {
         V1 * v.get(2) - V2 * v.get(1),
         -(V0 * v.get(2) - V2 * v.get(0)),
@@ -64,14 +64,14 @@ public:
 
     // skalar multiplikation
 
-    Vector3 operator*(double k)
+    inline Vector3 operator*(double k)
     {
         double data[3] = {
             V0 * k, V1 * k, V2 * k};
         return Vector3(data);
     };
 
-    Vector3 &operator*=(double k)
+    inline Vector3 &operator*=(double k)
     {
         V0 *= k;
         V1 *= k;
@@ -81,14 +81,14 @@ public:
 
     // mathematik addition/subtraktion
 
-    Vector3 operator+(Vector<3> &a)
+    inline Vector3 operator+(Vector<3> &a)
     {
         double data[3] = {
             V0 + a.get(0), V1 + a.get(1), V2 + a.get(2)};
         return Vector3(data);
     };
 
-    Vector3 &operator+=(Vector<3> &a)
+    inline Vector3 &operator+=(Vector<3> &a)
     {
         V0 -= a.get(0);
         V1 -= a.get(1);
@@ -96,14 +96,14 @@ public:
         return *this;
     };
 
-    Vector3 operator-(Vector<3> &a)
+    inline Vector3 operator-(Vector<3> &a)
     {
         double data[3] = {
             V0 - a.get(0), V1 - a.get(1), V2 - a.get(2)};
         return Vector3(data);
     };
 
-    Vector3 &operator-=(Vector<3> &a)
+    inline Vector3 &operator-=(Vector<3> &a)
     {
         V0 -= a.get(0);
         V1 -= a.get(1);
@@ -113,7 +113,7 @@ public:
 
     // Vectorenmultiplikation
 
-    double operator*(Vector<3> &v)
+    inline double operator*(Vector<3> &v)
     {
         return V0 * v.get(0) + V1 * v.get(1) + V2 * v.get(2);
     };

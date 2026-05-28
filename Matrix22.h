@@ -19,7 +19,7 @@ public:
     /*
      * ergibt die Transponierung der Matrix
      */
-    Matrix22 transpose()
+    inline Matrix22 transpose()
     {
         Matrix22 m = Matrix22(daten);
         m.set(0, 1, M10);
@@ -32,7 +32,7 @@ public:
         return (M00 * M11) - (M01 * M10);
     };
 
-    Matrix22 inverse()
+    inline Matrix22 inverse()
     {
         double d = determinant();
         double neueDaten[4] = {
@@ -43,7 +43,7 @@ public:
 
     // mathematik addition/subtraktion
 
-    Matrix22 operator+(Matrix22 &a)
+    inline Matrix22 operator+(Matrix22 &a)
     {
         double data[4] = {
             M00 + a.get(0, 0), M01 + a.get(0, 1),
@@ -51,7 +51,7 @@ public:
         return Matrix22(data);
     };
 
-    Matrix22 &operator+=(Matrix22 &a)
+    inline Matrix22 &operator+=(Matrix22 &a)
     {
         M00 += a.get(0, 0);
         M01 += a.get(0, 1);
@@ -60,7 +60,7 @@ public:
         return *this;
     };
 
-    Matrix22 operator-(Matrix22 &a)
+    inline Matrix22 operator-(Matrix22 &a)
     {
         double data[4] = {
             M00 - a.get(0, 0), M01 - a.get(0, 1),
@@ -68,7 +68,7 @@ public:
         return Matrix22(data);
     };
 
-    Matrix22 &operator-=(Matrix22 &a)
+    inline Matrix22 &operator-=(Matrix22 &a)
     {
         M00 -= a.get(0, 0);
         M01 -= a.get(0, 1);
@@ -79,7 +79,7 @@ public:
 
     // skalar multiplikation
 
-    Matrix22 operator*(double k)
+    inline Matrix22 operator*(double k)
     {
         double data[4] = {
             M00 * k, M01 * k,
@@ -87,7 +87,7 @@ public:
         return Matrix22(data);
     };
 
-    Matrix22 &operator*=(double k)
+    inline Matrix22 &operator*=(double k)
     {
         M00 *= k;
         M01 *= k;
@@ -98,7 +98,7 @@ public:
 
     // matrix multiplikation
 
-    Matrix22 operator*(Matrix22 &m)
+    inline Matrix22 operator*(Matrix22 &m)
     {
         double neueDaten[4] =
             {
@@ -111,7 +111,7 @@ public:
         return Matrix22(neueDaten);
     };
 
-    Matrix22 &operator*=(Matrix22 &m)
+    inline Matrix22 &operator*=(Matrix22 &m)
     {
         double *neueDaten = (double *)malloc(4 * sizeof(double));
         *(neueDaten) = M00 * m.get(0, 0) + M01 * m.get(1, 0);
@@ -124,7 +124,7 @@ public:
     };
 
     template <int Spalten>
-    Matrix<Spalten, 2> operator*(Matrix<2, Spalten> &m)
+    inline Matrix<Spalten, 2> operator*(Matrix<2, Spalten> &m)
     {
         double *neueDaten = malloc(2 * Spalten * sizeof(double));
         for (int z = 0; z < Spalten; z++)

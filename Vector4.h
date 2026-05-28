@@ -24,7 +24,7 @@ public:
     /*
      * normailiziert den Vector und gibt die Referenz zurück
      */
-    Vector4 &normalize()
+    inline Vector4 &normalize()
     {
         double mag = magnitude();
         if (mag == 1)
@@ -39,7 +39,7 @@ public:
     /*
      * gibt den normalizierten Vector zurück, ohne dass die Daten geändert werden
      */
-    Vector4 getNormal()
+    inline Vector4 getNormal()
     {
         double mag = magnitude();
         if (mag == 1)
@@ -55,14 +55,14 @@ public:
 
     // skalar multiplikation
 
-    Vector4 operator*(double k)
+    inline Vector4 operator*(double k)
     {
         double data[4] = {
             V0 * k, V1 * k, V2 * k, V3 * k};
         return Vector4(data);
     };
 
-    Vector4 &operator*=(double k)
+    inline Vector4 &operator*=(double k)
     {
         V0 *= k;
         V1 *= k;
@@ -73,7 +73,7 @@ public:
 
     // mathematik addition/subtraktion
 
-    Vector4 operator+(Vector<4> &a)
+    inline Vector4 operator+(Vector<4> &a)
     {
         double data[4] = {
             V0 + a.get(0),
@@ -83,7 +83,7 @@ public:
         return Vector4(data);
     };
 
-    Vector4 &operator+=(Vector<4> &a)
+    inline Vector4 &operator+=(Vector<4> &a)
     {
         V0 += a.get(0);
         V1 += a.get(1);
@@ -92,7 +92,7 @@ public:
         return *this;
     };
 
-    Vector4 operator-(Vector<4> &a)
+    inline Vector4 operator-(Vector<4> &a)
     {
         double data[4] = {
             V0 - a.get(0),
@@ -102,7 +102,7 @@ public:
         return Vector4(data);
     };
 
-    Vector4 &operator-=(Vector<4> &a)
+    inline Vector4 &operator-=(Vector<4> &a)
     {
         V0 -= a.get(0);
         V1 -= a.get(1);
@@ -113,7 +113,7 @@ public:
 
     // Vectorenmultiplikation
 
-    double operator*(Vector<4> &v)
+    inline double operator*(Vector<4> &v)
     {
         return V0 * v.get(0) + V1 * v.get(1) + V2 * v.get(2) + V3 * v.get(3);
     };

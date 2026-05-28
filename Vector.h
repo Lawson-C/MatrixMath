@@ -45,7 +45,7 @@ public:
     /*
      * ersetzt die alten Daten mit den eingegebenen neuen Daten
      */
-    void replace(double *neueDaten)
+    inline void replace(double *neueDaten)
     {
         free(daten);
         daten = neueDaten;
@@ -70,7 +70,7 @@ public:
     /*
      * ergibt die 1D-Länge der Matrix
      */
-    double magnitude()
+    inline double magnitude()
     {
         double sum = 0;
         for (int i = 0; i < Länge; i++)
@@ -83,7 +83,7 @@ public:
     /*
      * normailiziert den Vector und gibt die Referenz zurück
      */
-    Vector<Länge> &normalize()
+    inline Vector<Länge> &normalize()
     {
         double mag = magnitude();
         if (mag == 1)
@@ -98,7 +98,7 @@ public:
     /*
      * gibt den normalizierten Vector zurück, ohne dass die Daten geändert werden
      */
-    Vector<Länge> getNormal()
+    inline Vector<Länge> getNormal()
     {
         double mag = magnitude();
         if (mag == 1)
@@ -117,7 +117,7 @@ public:
     /*
      * Standardaddition zwischen zwei Vektoren mit gleichen Dimensionen, wobei keiner deren Daten ändert
      */
-    Vector<Länge> operator+(Vector<Länge> &b)
+    inline Vector<Länge> operator+(Vector<Länge> &b)
     {
         Vector<Länge> c = Vector<Länge>();
         for (int n = 0; n < Länge; n++)
@@ -130,7 +130,7 @@ public:
     /*
      * Standardaddition zwischen zwei Vektoren mit gleichen Dimensionen, wobei die Daten des linken Vektors geändert werden
      */
-    Vector<Länge> &operator+=(Vector<Länge> &a)
+    inline Vector<Länge> &operator+=(Vector<Länge> &a)
     {
         for (int n = 0; n < Länge; n++)
         {
@@ -142,7 +142,7 @@ public:
     /*
      * Standardsubtraktion zwischen zwei Vektoren mit gleichen Dimensionen, wobei keiner deren Daten ändert
      */
-    Vector<Länge> operator-(Vector<Länge> &b)
+    inline Vector<Länge> operator-(Vector<Länge> &b)
     {
         Vector<Länge> c = Vector<Länge>();
         for (int n = 0; n < Länge; n++)
@@ -155,7 +155,7 @@ public:
     /*
      * Standardsubtraktion zwischen zwei Vektoren mit gleichen Dimensionen, wobei die Daten des linken Vektors geändert werden
      */
-    Vector<Länge> &operator-=(Vector<Länge> &a)
+    inline Vector<Länge> &operator-=(Vector<Länge> &a)
     {
         for (int n = 0; n < Länge; n++)
         {
@@ -169,7 +169,7 @@ public:
     /*
      * multipliziert jeden Eintrag des Vektors mit dem Faktor k, ohne Datenänderung
      */
-    double operator*(double k)
+    inline double operator*(double k)
     {
 
         Vector<Länge> v = Vector<Länge>();
@@ -183,7 +183,7 @@ public:
     /*
      * multipliziert jeden Eintrag der Matrix mit dem Faktor k
      */
-    Vector<Länge> &operator*=(double k)
+    inline Vector<Länge> &operator*=(double k)
     {
         for (int n = 0; n < Länge; n++)
         {
@@ -197,7 +197,7 @@ public:
     /*
      * multipliziert einen Vektor mit einem anderen, ohne Datenänderung
      */
-    double &operator*(Vector<Länge> &b)
+    inline double &operator*(Vector<Länge> &b)
     {
         double sum = 0;
         for (int n = 0; n < Länge; n++)
