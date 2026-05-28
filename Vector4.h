@@ -16,6 +16,13 @@ public:
     Vector4(double data[4]) : Vector<4>(data) {
                               };
 
+    Vector4(double x, double y, double z, double w) : Vector<4>() {
+        daten[0] = x;
+        daten[1] = y;
+        daten[2] = z;
+        daten[3] = w;
+    };
+
     inline double magnitude()
     {
         return std::sqrt(V0 * V0 + V1 * V1 + V2 * V2 + V3 * V3);

@@ -14,6 +14,11 @@ public:
     Vector2(double data[2]) : Vector<2>(data) {
                               };
 
+    Vector2(double x, double y) : Vector<2>() {
+        daten[0] = x;
+        daten[1] = y;
+    };
+
     inline double magnitude()
     {
         return std::sqrt(V0 * V0 + V1 * V1);

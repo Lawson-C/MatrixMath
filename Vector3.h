@@ -15,6 +15,12 @@ public:
     Vector3(double data[3]) : Vector<3>(data) {
                               };
 
+    Vector3(double x, double y, double z) : Vector<3>() {
+        daten[0] = x;
+        daten[1] = y;
+        daten[2] = z;
+    };
+
     inline double magnitude()
     {
         return std::sqrt(V0 * V0 + V1 * V1 + V2 * V2);
