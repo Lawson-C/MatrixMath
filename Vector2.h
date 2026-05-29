@@ -21,6 +21,9 @@ public:
         daten[1] = y;
     };
 
+    double& x = V0;
+    double& y = V1;
+
     inline double magnitude()
     {
         return std::sqrt(V0 * V0 + V1 * V1);

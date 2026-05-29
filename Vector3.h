@@ -23,6 +23,10 @@ public:
         daten[2] = z;
     };
 
+    double& x = V0;
+    double& y = V1;
+    double& z = V2;
+
     inline double magnitude()
     {
         return std::sqrt(V0 * V0 + V1 * V1 + V2 * V2);

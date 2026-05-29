@@ -24,6 +24,11 @@ public:
         daten[2] = z;
         daten[3] = w;
     };
+    
+    double& x = V0;
+    double& y = V1;
+    double& z = V2;
+    double& w = V3;
 
     inline double magnitude()
     {
