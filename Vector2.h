@@ -118,6 +118,20 @@ public:
     {
         return V0 * v.get(0) + V1 * v.get(1);
     };
+
+    // Vektorengleichung
+
+    inline Vector2 &operator=(Vector2 &b)
+    {
+        free(daten);
+        daten = b.daten;
+        return *this;
+    };
+
+    inline bool operator==(const Vector2 &b) const
+    {
+        return (V0 == b.x && V1 == b.y);
+    };
 };
 
 #undef V0

@@ -207,6 +207,28 @@ public:
         return sum;
     };
 
+    // Vektorengleichung
+
+    /*
+     * ersetzt die Daten des Vektors mit den Daten eines anderen Vektors
+     */
+    inline Vector<Länge> &operator=(Vector<Länge> &b)
+    {
+        free(daten);
+        daten = b.daten;
+        return *this;
+    };
+
+    inline bool &operator==(Vector<Länge> &b)
+    {
+        for (int n = 0; n < Länge; n++)
+        {
+            if (GET(n) != b.get(n))
+                return false;
+        };
+        return true;
+    };
+
     // string repräsentation
 
     /*
