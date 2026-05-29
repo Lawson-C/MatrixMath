@@ -12,10 +12,12 @@
 class Vector3 : public Vector<3>
 {
 public:
-    Vector3(double data[3]) : Vector<3>(data) {
-                              };
+    Vector3() : Vector<3>() {};
 
-    Vector3(double x, double y, double z) : Vector<3>() {
+    Vector3(double data[3]) : Vector<3>(data) {};
+
+    Vector3(double x, double y, double z) : Vector<3>()
+    {
         daten[0] = x;
         daten[1] = y;
         daten[2] = z;
@@ -57,16 +59,16 @@ public:
     };
 
     /*
-    * ergibt den Kreuzprodukt von zwei Vektoren
-    */
-   inline Vector3 cross(Vector<3>& v) {
-    double data[3] = {
-        V1 * v.get(2) - V2 * v.get(1),
-        -(V0 * v.get(2) - V2 * v.get(0)),
-        V0 * v.get(1) - V1 * v.get(0)
-    };
-    return Vector3(data);
-   }
+     * ergibt den Kreuzprodukt von zwei Vektoren
+     */
+    inline Vector3 cross(Vector<3> &v)
+    {
+        double data[3] = {
+            V1 * v.get(2) - V2 * v.get(1),
+            -(V0 * v.get(2) - V2 * v.get(0)),
+            V0 * v.get(1) - V1 * v.get(0)};
+        return Vector3(data);
+    }
 
     // skalar multiplikation
 

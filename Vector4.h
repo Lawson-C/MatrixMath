@@ -13,10 +13,12 @@
 class Vector4 : public Vector<4>
 {
 public:
-    Vector4(double data[4]) : Vector<4>(data) {
-                              };
+    Vector4() : Vector<4>() {};
 
-    Vector4(double x, double y, double z, double w) : Vector<4>() {
+    Vector4(double data[4]) : Vector<4>(data) {};
+
+    Vector4(double x, double y, double z, double w) : Vector<4>()
+    {
         daten[0] = x;
         daten[1] = y;
         daten[2] = z;
