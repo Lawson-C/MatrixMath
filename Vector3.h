@@ -12,6 +12,10 @@
 class Vector3 : public Vector<3>
 {
 public:
+    double &x = V0;
+    double &y = V1;
+    double &z = V2;
+
     Vector3() : Vector<3>() {};
 
     Vector3(double data[3]) : Vector<3>(data) {};
@@ -23,9 +27,13 @@ public:
         daten[2] = z;
     };
 
-    double& x = V0;
-    double& y = V1;
-    double& z = V2;
+    inline Vector3 &set(double x, double y, double z)
+    {
+        V0 = x;
+        V1 = y;
+        V2 = z;
+        return *this;
+    };
 
     inline double magnitude()
     {

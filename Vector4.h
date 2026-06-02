@@ -13,6 +13,11 @@
 class Vector4 : public Vector<4>
 {
 public:
+    double &x = V0;
+    double &y = V1;
+    double &z = V2;
+    double &w = V3;
+
     Vector4() : Vector<4>() {};
 
     Vector4(double data[4]) : Vector<4>(data) {};
@@ -24,11 +29,15 @@ public:
         daten[2] = z;
         daten[3] = w;
     };
-    
-    double& x = V0;
-    double& y = V1;
-    double& z = V2;
-    double& w = V3;
+
+    inline Vector4 &set(double x, double y, double z, double w)
+    {
+        V0 = x;
+        V1 = y;
+        V2 = z;
+        V3 = w;
+        return *this;
+    };
 
     inline double magnitude()
     {

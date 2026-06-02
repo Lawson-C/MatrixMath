@@ -11,6 +11,9 @@
 class Vector2 : public Vector<2>
 {
 public:
+    double &x = V0;
+    double &y = V1;
+
     Vector2() : Vector<2>() {};
 
     Vector2(double data[2]) : Vector<2>(data) {};
@@ -21,8 +24,12 @@ public:
         daten[1] = y;
     };
 
-    double& x = V0;
-    double& y = V1;
+    inline Vector2 &set(double x, double y)
+    {
+        V0 = x;
+        V1 = y;
+        return *this;
+    };
 
     inline double magnitude()
     {
