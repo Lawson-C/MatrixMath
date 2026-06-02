@@ -83,6 +83,13 @@ public:
 
     // mathematik addition/subtraktion
 
+    inline Vector2 &add(double x, double y)
+    {
+        V0 += x;
+        V1 += y;
+        return *this;
+    };
+
     inline Vector2 operator+(Vector<2> &a)
     {
         double data[2] = {

@@ -87,6 +87,15 @@ public:
 
     // mathematik addition/subtraktion
 
+    inline Vector4 &add(double x, double y, double z, double w)
+    {
+        V0 += x;
+        V1 += y;
+        V2 += z;
+        V3 += w;
+        return *this;
+    };
+
     inline Vector4 operator+(Vector<4> &a)
     {
         double data[4] = {
