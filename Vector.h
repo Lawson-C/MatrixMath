@@ -19,7 +19,7 @@ public:
      */
     Vector()
     {
-        daten = std::malloc(Länge * sizeof(double));
+        daten = (double *)std::malloc(Länge * sizeof(double));
     };
 
     /*
@@ -219,7 +219,7 @@ public:
         return *this;
     };
 
-    inline bool &operator==(Vector<Länge> &b)
+    inline bool operator==(Vector<Länge> &b)
     {
         for (int n = 0; n < Länge; n++)
         {
