@@ -16,15 +16,20 @@ public:
     Matrix22() : Matrix<2, 2>() {};
     Matrix22(double data[4]) : Matrix<2, 2>(data) {};
 
+    Matrix22(double m00, double m01, double m10, double m11) : Matrix<2, 2>()
+    {
+        M00 = m00;
+        M01 = m01;
+        M10 = m10;
+        M11 = m11;
+    };
+
     /*
      * ergibt die Transponierung der Matrix
      */
     inline Matrix22 transpose()
     {
-        Matrix22 m = Matrix22(daten);
-        m.set(0, 1, M10);
-        m.set(1, 0, M01);
-        return m;
+        return Matrix22(M00, M10, M01, M11);
     };
 
     inline double determinant()
@@ -35,20 +40,16 @@ public:
     inline Matrix22 inverse()
     {
         double d = determinant();
-        double neueDaten[4] = {
-            M11 / d, -M01 / d,
-            -M10 / d, M00 / d};
-        return Matrix22(neueDaten);
+        return Matrix22(M11 / d, -M01 / d,
+                        -M10 / d, M00 / d);
     };
 
     // mathematik addition/subtraktion
 
     inline Matrix22 operator+(Matrix22 &a)
     {
-        double data[4] = {
-            M00 + a.get(0, 0), M01 + a.get(0, 1),
-            M10 + a.get(1, 0), M11 + a.get(1, 1)};
-        return Matrix22(data);
+        return Matrix22(M00 + a.get(0, 0), M01 + a.get(0, 1),
+                        M10 + a.get(1, 0), M11 + a.get(1, 1));
     };
 
     inline Matrix22 &operator+=(Matrix22 &a)
@@ -62,10 +63,8 @@ public:
 
     inline Matrix22 operator-(Matrix22 &a)
     {
-        double data[4] = {
-            M00 - a.get(0, 0), M01 - a.get(0, 1),
-            M10 - a.get(1, 0), M11 - a.get(1, 1)};
-        return Matrix22(data);
+        return Matrix22(M00 - a.get(0, 0), M01 - a.get(0, 1),
+                        M10 - a.get(1, 0), M11 - a.get(1, 1));
     };
 
     inline Matrix22 &operator-=(Matrix22 &a)
@@ -81,10 +80,7 @@ public:
 
     inline Matrix22 operator*(double k)
     {
-        double data[4] = {
-            M00 * k, M01 * k,
-            M10 * k, M11 * k};
-        return Matrix22(data);
+        return Matrix22(M00 * k, M01 * k, M10 * k, M11 * k);
     };
 
     inline Matrix22 &operator*=(double k)
@@ -100,39 +96,31 @@ public:
 
     inline Matrix22 operator*(Matrix22 &m)
     {
-        double neueDaten[4] =
-            {
-                M00 * m.get(0, 0) + M01 * m.get(1, 0),
-                M00 * m.get(0, 1) + M01 * m.get(1, 1),
 
-                M10 * m.get(0, 0) + M11 * m.get(1, 0),
-                M10 * m.get(0, 1) + M11 * m.get(1, 1)};
-
-        return Matrix22(neueDaten);
+        return Matrix22(M00 * m.get(0, 0) + M01 * m.get(1, 0), M00 * m.get(0, 1) + M01 * m.get(1, 1),
+                        M10 * m.get(0, 0) + M11 * m.get(1, 0), M10 * m.get(0, 1) + M11 * m.get(1, 1));
     };
 
     inline Matrix22 &operator*=(Matrix22 &m)
     {
-        double *neueDaten = (double *)malloc(4 * sizeof(double));
-        *(neueDaten) = M00 * m.get(0, 0) + M01 * m.get(1, 0);
-        *(neueDaten + 1) = M00 * m.get(0, 1) + M01 * m.get(1, 1);
-        *(neueDaten + 2) = M10 * m.get(0, 0) + M11 * m.get(1, 0);
-        *(neueDaten + 3) = M10 * m.get(0, 1) + M11 * m.get(1, 1);
-        free(daten);
-        daten = neueDaten;
+        double m00 = M00, m01 = M01, m10 = M10, m11 = M11;
+        M00 = m00 * m.get(0, 0) + m01 * m.get(1, 0);
+        M01 = m00 * m.get(0, 1) + m01 * m.get(1, 1);
+        M10 = m10 * m.get(0, 0) + m11 * m.get(1, 0);
+        M11 = m10 * m.get(0, 1) + m11 * m.get(1, 1);
         return *this;
     };
 
     template <int Spalten>
     inline Matrix<Spalten, 2> operator*(Matrix<2, Spalten> &m)
     {
-        double *neueDaten = malloc(2 * Spalten * sizeof(double));
+        Matrix<Spalten, 2> result = Matrix<Spalten, 2>();
         for (int z = 0; z < Spalten; z++)
         {
-            *(neueDaten + 2 * z) = M00 * m.get(0, z) + M01 * m.get(1, z);
-            *(neueDaten + 2 * z + 1) = M10 * m.get(0, z) + M11 * m.get(1, z);
+            result.set(z, 0, M00 * m.get(0, z) + M01 * m.get(1, z));
+            result.set(z, 1, M10 * m.get(0, z) + M11 * m.get(1, z));
         };
-        return Matrix<Spalten, 2>(neueDaten);
+        return result;
     };
 };
 

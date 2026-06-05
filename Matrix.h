@@ -14,7 +14,7 @@ class Matrix
 {
 
 protected:
-    double *daten; // Einträge der Matrix
+    double daten[Zeilen * Spalten] = {}; // Einträge der Matrix
 
     /*
      * ergibt den Pointer eines Eintrages der Matrix, erzeugt von einem Offset des "Daten"-Pointers
@@ -36,17 +36,13 @@ public:
     /*
      * erzeugt eine Nullmatrix mit den gegebenen Zeilen- und Spaltenlängen
      */
-    Matrix()
-    {
-        daten = (double *)std::malloc(Zeilen * Spalten * sizeof(double));
-    };
+    Matrix() {};
 
     /*
      * erzeugt eine Matrix mit den gegebenen Zeilen- und Spaltenlängen, sowie die eingegebenen Einträge
      */
     Matrix(double data[Zeilen * Spalten])
     {
-        daten = (double *)std::malloc(Zeilen * Spalten * sizeof(double));
         for (int z = 0; z < Zeilen; z++)
         {
             for (int s = 0; s < Spalten; s++)
@@ -54,14 +50,6 @@ public:
                 GET(z, s) = GETD(data, z, s);
             };
         };
-    };
-
-    /*
-     * lässt den Speicherraum der Daten der Matrix frei
-     */
-    ~Matrix()
-    {
-        free(daten);
     };
 
     /*
@@ -226,7 +214,8 @@ public:
      */
     Matrix<Zeilen, Spalten> &operator*=(Matrix<Spalten, Spalten> &m)
     {
-        double *neueDaten = (double *)malloc(Zeilen * Spalten * sizeof(double));
+        double alteDaten[Zeilen * Spalten];
+        std::copy(daten, daten + (Zeilen * Spalten), alteDaten);
         for (int z = 0; z < Zeilen; z++)
         {
             for (int s = 0; s < Spalten; s++)
@@ -234,13 +223,11 @@ public:
                 double sum = 0;
                 for (int i = 0; i < Spalten; i++)
                 {
-                    sum += GET(z, i) * m.get(i, s);
+                    sum += GETD(alteDaten, z, i) * m.get(i, s);
                 };
-                GETD(neueDaten, z, s) = sum;
+                GET(z, s) = sum;
             };
         };
-        free(daten);
-        daten = neueDaten;
         return *this;
     };
 
@@ -251,7 +238,7 @@ public:
      */
     Vector<Zeilen> operator*(Vector<Zeilen> &v)
     {
-        double neueDaten[Zeilen];
+        Vector<Zeilen> result = Vector<Zeilen>();
         for (int z = 0; z < Zeilen; z++)
         {
             int sum = 0;
@@ -259,9 +246,9 @@ public:
             {
                 sum += GET(z, s) * v.get(z);
             };
-            neueDaten[z] = sum;
+            result.set(z, sum);
         };
-        return Vector<Zeilen>(neueDaten);
+        return result;
     };
 
     // string repräsentation
