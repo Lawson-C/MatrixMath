@@ -18,8 +18,8 @@
 class Matrix33 : public Matrix<3, 3>
 {
 public:
-    Matrix33(double data[9]) : Matrix<3, 3>(data) {
-                               };
+    Matrix33() : Matrix<3, 3>() {};
+    Matrix33(double data[9]) : Matrix<3, 3>(data) {};
 
     /*
      * ergibt die Transponierung der Matrix

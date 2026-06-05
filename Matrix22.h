@@ -13,8 +13,8 @@
 class Matrix22 : public Matrix<2, 2>
 {
 public:
-    Matrix22(double data[4]) : Matrix<2, 2>(data) {
-                               };
+    Matrix22() : Matrix<2, 2>() {};
+    Matrix22(double data[4]) : Matrix<2, 2>(data) {};
 
     /*
      * ergibt die Transponierung der Matrix

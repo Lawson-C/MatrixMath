@@ -23,8 +23,8 @@
 class Matrix44 : public Matrix<4, 4>
 {
 public:
-    Matrix44(double data[16]) : Matrix<4, 4>(data) {
-                                };
+    Matrix44() : Matrix<4, 4>() {};
+    Matrix44(double data[16]) : Matrix<4, 4>(data) {};
 
     /*
      * ergibt die Transponierung der Matrix
