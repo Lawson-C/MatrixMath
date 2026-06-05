@@ -16,7 +16,7 @@
 template <int Zeilen, int Spalten>
 Vector<Spalten> operator*(Matrix<Zeilen, Spalten> &m, Vector<Spalten> &v)
 {
-    double neueDaten[Spalten];
+    Vector<Spalten> result = Vector<Spalten>();
     for (int z = 0; z < Zeilen; z++)
     {
         int sum = 0;
@@ -24,36 +24,30 @@ Vector<Spalten> operator*(Matrix<Zeilen, Spalten> &m, Vector<Spalten> &v)
         {
             sum += m.get(z, s) * v.get(z);
         };
-        neueDaten[z] = sum;
+        result.set(z, sum);
     };
-    return Vector<Spalten>(neueDaten);
+    return result;
 };
 
 Vector2 operator*(Matrix22 &m, Vector2 &v)
 {
-    double neueDaten[2] = {
-        m.get(0, 0) * v.get(0) + m.get(0, 1) * v.get(1),
-        m.get(1, 0) * v.get(0) + m.get(1, 1) * v.get(1)};
-    return Vector2(neueDaten);
+    return Vector2(m.get(0, 0) * v.get(0) + m.get(0, 1) * v.get(1),
+                   m.get(1, 0) * v.get(0) + m.get(1, 1) * v.get(1));
 };
 
 Vector3 operator*(Matrix33 &m, Vector3 &v)
 {
-    double neueDaten[3] = {
-        m.get(0, 0) * v.get(0) + m.get(0, 1) * v.get(1) + m.get(0, 2) * v.get(2),
-        m.get(1, 0) * v.get(0) + m.get(1, 1) * v.get(1) + m.get(1, 2) * v.get(2),
-        m.get(2, 0) * v.get(0) + m.get(2, 1) * v.get(1) + m.get(2, 2) * v.get(2)};
-    return Vector3(neueDaten);
+    return Vector3(m.get(0, 0) * v.get(0) + m.get(0, 1) * v.get(1) + m.get(0, 2) * v.get(2),
+                   m.get(1, 0) * v.get(0) + m.get(1, 1) * v.get(1) + m.get(1, 2) * v.get(2),
+                   m.get(2, 0) * v.get(0) + m.get(2, 1) * v.get(1) + m.get(2, 2) * v.get(2));
 };
 
 Vector4 operator*(Matrix44 &m, Vector4 &v)
 {
-    double neueDaten[4] = {
-        m.get(0, 0) * v.get(0) + m.get(0, 1) * v.get(1) + m.get(0, 2) * v.get(2) + m.get(0, 3) * v.get(3),
-        m.get(1, 0) * v.get(0) + m.get(1, 1) * v.get(1) + m.get(1, 2) * v.get(2) + m.get(1, 3) * v.get(3),
-        m.get(2, 0) * v.get(0) + m.get(2, 1) * v.get(1) + m.get(2, 2) * v.get(2) + m.get(2, 3) * v.get(3),
-        m.get(3, 0) * v.get(0) + m.get(3, 1) * v.get(1) + m.get(3, 2) * v.get(2) + m.get(3, 3) * v.get(3)};
-    return Vector4(neueDaten);
+    return Vector4(m.get(0, 0) * v.get(0) + m.get(0, 1) * v.get(1) + m.get(0, 2) * v.get(2) + m.get(0, 3) * v.get(3),
+                   m.get(1, 0) * v.get(0) + m.get(1, 1) * v.get(1) + m.get(1, 2) * v.get(2) + m.get(1, 3) * v.get(3),
+                   m.get(2, 0) * v.get(0) + m.get(2, 1) * v.get(1) + m.get(2, 2) * v.get(2) + m.get(2, 3) * v.get(3),
+                   m.get(3, 0) * v.get(0) + m.get(3, 1) * v.get(1) + m.get(3, 2) * v.get(2) + m.get(3, 3) * v.get(3));
 };
 
 /*
@@ -62,7 +56,7 @@ Vector4 operator*(Matrix44 &m, Vector4 &v)
 template <int Länge, int Spalten>
 Vector<Spalten> operator*(Vector<Länge> &v, Matrix<Länge, Spalten> &m)
 {
-    double neueDaten[Spalten];
+    Vector<Spalten> result = Vector<Spalten>();
     for (int i = 0; i < Spalten; i++)
     {
         double sum = 0;
@@ -70,9 +64,9 @@ Vector<Spalten> operator*(Vector<Länge> &v, Matrix<Länge, Spalten> &m)
         {
             sum += v.get(j) * m.get(j, i);
         };
-        *(neueDaten + i) = sum;
+        result.set(i, sum);
     };
-    return Vector<Spalten>(neueDaten);
+    return result;
 };
 
 /*
@@ -81,79 +75,82 @@ Vector<Spalten> operator*(Vector<Länge> &v, Matrix<Länge, Spalten> &m)
 template <int Länge>
 Vector<Länge> &operator*=(Vector<Länge> &v, Matrix<Länge, Länge> &m)
 {
-    double *neueDaten = malloc(Länge * sizeof(double));
+    double alteDaten[Länge];
+    std::copy(v.daten, v.daten + Länge, alteDaten);
     for (int i = 0; i < Länge; i++)
     {
         double sum = 0;
         for (int j = 0; j < Länge; j++)
         {
-            sum += v.get(j) * m.get(i, j);
+            sum += alteDaten[j] * m.get(i, j);
         };
-        *(neueDaten + i) = sum;
+        v.set(i, sum);
     };
-    v.replace(neueDaten);
     return v;
 };
 
 template <int Zeilen>
 Vector<Zeilen> operator*(Vector2 &v, Matrix<Zeilen, 2> &m)
 {
-    double neueDaten[Zeilen];
+    Vector<Zeilen> result = Vector<Zeilen>();
     for (int i = 0; i < Zeilen; i++)
     {
-        neueDaten[i] = v.get(0) * m.get(0, i) + v.get(1) * m.get(1, i);
+        result.set(i, v.get(0) * m.get(0, i) + v.get(1) * m.get(1, i));
     };
-    return Vector<Zeilen>(neueDaten);
+    return result;
 };
 
 Vector2 &operator*=(Vector2 &v, Matrix22 &m)
 {
-    double *neueDaten = (double *)malloc(2 * sizeof(double));
-    *(neueDaten) = v.get(0) * m.get(0, 0) + v.get(1) * m.get(1, 0);
-    *(neueDaten + 1) = v.get(0) * m.get(0, 1) + v.get(1) * m.get(1, 1);
-    v.replace(neueDaten);
+    double v0 = v.get(0), v1 = v.get(1);
+
+    v.set(0, v0 * m.get(0, 0) + v1 * m.get(1, 0));
+    v.set(1, v0 * m.get(0, 1) + v1 * m.get(1, 1));
+
     return v;
 };
 
 template <int Zeilen>
 Vector<Zeilen> operator*(Vector3 &v, Matrix<Zeilen, 3> &m)
 {
-    double neueDaten[Zeilen];
+    Vector<Zeilen> result = Vector<Zeilen>();
     for (int i = 0; i < Zeilen; i++)
     {
-        neueDaten[i] = v.get(0) * m.get(0, i) + v.get(1) * m.get(1, i) + v.get(2) * m.get(2, i);
+        result.set(i, v.get(0) * m.get(0, i) + v.get(1) * m.get(1, i) + v.get(2) * m.get(2, i));
     };
-    return Vector<Zeilen>(neueDaten);
+    return result;
 };
 
 Vector3 &operator*=(Vector3 &v, Matrix33 &m)
 {
-    double *neueDaten = (double *)malloc(3 * sizeof(double));
-    *(neueDaten) = v.get(0) * m.get(0, 0) + v.get(1) * m.get(1, 0) + v.get(2) * m.get(2, 0);
-    *(neueDaten + 1) = v.get(0) * m.get(0, 1) + v.get(1) * m.get(1, 1) + v.get(2) * m.get(2, 1);
-    *(neueDaten + 2) = v.get(0) * m.get(0, 2) + v.get(1) * m.get(1, 2) + v.get(2) * m.get(2, 2);
-    v.replace(neueDaten);
+    double v0 = v.get(0), v1 = v.get(1), v2 = v.get(2);
+
+    v.set(0, v0 * m.get(0, 0) + v1 * m.get(1, 0) + v2 * m.get(2, 0));
+    v.set(1, v0 * m.get(0, 1) + v1 * m.get(1, 1) + v2 * m.get(2, 1));
+    v.set(2, v0 * m.get(0, 2) + v1 * m.get(1, 2) + v2 * m.get(2, 2));
+
     return v;
 };
 
 template <int Zeilen>
 Vector<Zeilen> operator*(Vector4 &v, Matrix<Zeilen, 4> &m)
 {
-    double neueDaten[Zeilen];
+    Vector<Zeilen> result = Vector<Zeilen>();
     for (int i = 0; i < Zeilen; i++)
     {
-        neueDaten[i] = v.get(0) * m.get(i, 0) + v.get(1) * m.get(i, 1) + v.get(2) * m.get(i, 2) + v.get(3) * m.get(i, 3);
+        result.set(i, v.get(0) * m.get(i, 0) + v.get(1) * m.get(i, 1) + v.get(2) * m.get(i, 2) + v.get(3) * m.get(i, 3));
     };
-    return Vector<Zeilen>(neueDaten);
+    return result;
 };
 
 Vector4 &operator*=(Vector4 &v, Matrix44 &m)
 {
-    double *neueDaten = (double *)malloc(4 * sizeof(double));
-    *(neueDaten) = v.get(0) * m.get(0, 0) + v.get(1) * m.get(0, 1) + v.get(2) * m.get(0, 2) + v.get(3) * m.get(0, 3);
-    *(neueDaten + 1) = v.get(0) * m.get(1, 0) + v.get(1) * m.get(1, 1) + v.get(2) * m.get(1, 2) + v.get(3) * m.get(1, 3);
-    *(neueDaten + 2) = v.get(0) * m.get(2, 0) + v.get(1) * m.get(2, 1) + v.get(2) * m.get(2, 2) + v.get(3) * m.get(2, 3);
-    *(neueDaten + 3) = v.get(0) * m.get(3, 0) + v.get(1) * m.get(3, 1) + v.get(2) * m.get(3, 2) + v.get(3) * m.get(3, 3);
-    v.replace(neueDaten);
+    double v0 = v.get(0), v1 = v.get(1), v2 = v.get(2), v3 = v.get(3);
+
+    v.set(0, v0 * m.get(0, 0) + v1 * m.get(0, 1) + v2 * m.get(0, 2) + v3 * m.get(0, 3));
+    v.set(1, v0 * m.get(1, 0) + v1 * m.get(1, 1) + v2 * m.get(1, 2) + v3 * m.get(1, 3));
+    v.set(2, v0 * m.get(2, 0) + v1 * m.get(2, 1) + v2 * m.get(2, 2) + v3 * m.get(2, 3));
+    v.set(3, v0 * m.get(3, 0) + v1 * m.get(3, 1) + v2 * m.get(3, 2) + v3 * m.get(3, 3));
+
     return v;
 };

@@ -32,7 +32,7 @@ public:
         daten[2] = z;
     };
 
-    inline Vector3 &set(double x, double y, double z)
+    inline Vector3 &replace(double x, double y, double z)
     {
         V0 = x;
         V1 = y;

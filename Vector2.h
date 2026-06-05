@@ -28,7 +28,7 @@ public:
         daten[1] = y;
     };
 
-    inline Vector2 &set(double x, double y)
+    inline Vector2 &replace(double x, double y)
     {
         V0 = x;
         V1 = y;

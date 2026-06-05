@@ -36,7 +36,7 @@ public:
         daten[3] = w;
     };
 
-    inline Vector4 &set(double x, double y, double z, double w)
+    inline Vector4 &replace(double x, double y, double z, double w)
     {
         V0 = x;
         V1 = y;
