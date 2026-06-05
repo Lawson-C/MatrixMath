@@ -20,7 +20,13 @@ public:
 
     Vector4() : Vector<4>() {};
 
-    Vector4(double data[4]) : Vector<4>(data) {};
+    Vector4(double data[4]) : Vector<4>()
+    {
+        V0 = data[0];
+        V1 = data[1];
+        V2 = data[2];
+        V3 = data[3];
+    };
 
     Vector4(double x, double y, double z, double w) : Vector<4>()
     {
@@ -67,22 +73,20 @@ public:
         double mag = magnitude();
         if (mag == 1)
             return Vector4(daten);
-        double normalizierteDaten[4] = {
-            V0 / mag,
-            V1 / mag,
-            V2 / mag,
-            V3 / mag};
-        Vector4 v = Vector4(normalizierteDaten);
-        return v;
+        return Vector4(V0 / mag,
+                       V1 / mag,
+                       V2 / mag,
+                       V3 / mag);
     };
 
     // skalar multiplikation
 
     inline Vector4 operator*(double k)
     {
-        double data[4] = {
-            V0 * k, V1 * k, V2 * k, V3 * k};
-        return Vector4(data);
+        return Vector4(V0 * k,
+                       V1 * k,
+                       V2 * k,
+                       V3 * k);
     };
 
     inline Vector4 &operator*=(double k)
@@ -107,12 +111,10 @@ public:
 
     inline Vector4 operator+(Vector<4> &a)
     {
-        double data[4] = {
-            V0 + a.get(0),
-            V1 + a.get(1),
-            V2 + a.get(2),
-            V3 + a.get(3)};
-        return Vector4(data);
+        return Vector4(V0 + a.get(0),
+                       V1 + a.get(1),
+                       V2 + a.get(2),
+                       V3 + a.get(3));
     };
 
     inline Vector4 &operator+=(Vector<4> &a)
@@ -126,12 +128,10 @@ public:
 
     inline Vector4 operator-(Vector<4> &a)
     {
-        double data[4] = {
-            V0 - a.get(0),
-            V1 - a.get(1),
-            V2 - a.get(2),
-            V3 - a.get(3)};
-        return Vector4(data);
+        return Vector4(V0 - a.get(0),
+                       V1 - a.get(1),
+                       V2 - a.get(2),
+                       V3 - a.get(3));
     };
 
     inline Vector4 &operator-=(Vector<4> &a)
@@ -154,8 +154,10 @@ public:
 
     inline Vector4 &operator=(Vector4 &b)
     {
-        free(daten);
-        daten = b.daten;
+        V0 = b.x;
+        V1 = b.y;
+        V2 = b.z;
+        V3 = b.w;
         return *this;
     };
 

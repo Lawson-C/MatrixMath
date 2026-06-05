@@ -11,44 +11,23 @@ template <int Länge>
 class Vector
 {
 protected:
-    double *daten; // Einträge des Vektors
+    double daten[Länge] = {}; // Einträge des Vektors
 
 public:
     /*
      * erzeugt einen Nullvektor mit der gegebenen Länge
      */
-    Vector()
-    {
-        daten = (double *)std::malloc(Länge * sizeof(double));
-    };
+    Vector() {};
 
     /*
      * erzeugt einen Vektor mit der gegebenen Länge und den gegebenen Daten
      */
     Vector(double data[Länge])
     {
-        daten = (double *)std::malloc(Länge * sizeof(double));
         for (int n = 0; n < Länge; n++)
         {
-            GET(n) = GETD(data, n);
+            GET(n) = data[n];
         };
-    };
-
-    /*
-     * lässt den Speicherraum des Vektors frei
-     */
-    ~Vector()
-    {
-        free(daten);
-    };
-
-    /*
-     * ersetzt die alten Daten mit den eingegebenen neuen Daten
-     */
-    inline void replace(double *neueDaten)
-    {
-        free(daten);
-        daten = neueDaten;
     };
 
     /*
@@ -103,13 +82,12 @@ public:
         double mag = magnitude();
         if (mag == 1)
             return Vector<Länge>(daten);
-        double normalizierteDaten[Länge] = {};
+        Vector<Länge> result = Vector<Länge>();
         for (int i = 0; i < Länge; i++)
         {
-            normalizierteDaten[i] = GET(i) / mag;
+            result.set(i, GET(i) / mag);
         };
-        Vector<Länge> v = Vector<Länge>(normalizierteDaten);
-        return v;
+        return result;
     };
 
     // mathematik addition/subtraktion
@@ -136,7 +114,7 @@ public:
         {
             GET(n) += a.get(n);
         };
-        return a;
+        return *this;
     };
 
     /*
@@ -161,7 +139,7 @@ public:
         {
             GET(n) -= a.get(n);
         };
-        return a;
+        return *this;
     };
 
     // skalar multiplikation
@@ -214,8 +192,10 @@ public:
      */
     inline Vector<Länge> &operator=(Vector<Länge> &b)
     {
-        free(daten);
-        daten = b.daten;
+        for (int n = 0; n < Länge; n++)
+        {
+            GET(n) = b.get(n);
+        };
         return *this;
     };
 

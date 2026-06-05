@@ -16,7 +16,11 @@ public:
 
     Vector2() : Vector<2>() {};
 
-    Vector2(double data[2]) : Vector<2>(data) {};
+    Vector2(double data[2]) : Vector<2>()
+    {
+        V0 = data[0];
+        V1 = data[1];
+    };
 
     Vector2(double x, double y) : Vector<2>()
     {
@@ -57,11 +61,7 @@ public:
         double mag = magnitude();
         if (mag == 1)
             return Vector2(daten);
-        double normalizierteDaten[3] = {
-            V0 / mag,
-            V1 / mag};
-        Vector2 v = Vector2(normalizierteDaten);
-        return v;
+        return Vector2(V0 / mag, V1 / mag);
     };
 
     /*
@@ -76,9 +76,7 @@ public:
 
     inline Vector2 operator*(double k)
     {
-        double data[2] = {
-            (V0)*k, (V1)*k};
-        return Vector2(data);
+        return Vector2((V0)*k, (V1)*k);
     };
 
     inline Vector2 &operator*=(double k)
@@ -99,9 +97,8 @@ public:
 
     inline Vector2 operator+(Vector<2> &a)
     {
-        double data[2] = {
-            V0 + a.get(0), V1 + a.get(1)};
-        return Vector2(data);
+        return Vector2(V0 + a.get(0),
+                       V1 + a.get(1));
     };
 
     inline Vector2 &operator+=(Vector<2> &a)
@@ -113,10 +110,8 @@ public:
 
     inline Vector2 operator-(Vector<2> &a)
     {
-        double data[2] = {
-            V0 - a.get(0),
-            V1 - a.get(1)};
-        return Vector2(data);
+        return Vector2(V0 - a.get(0),
+                       V1 - a.get(1));
     };
 
     inline Vector2 &operator-=(Vector<2> &a)
@@ -137,8 +132,8 @@ public:
 
     inline Vector2 &operator=(Vector2 &b)
     {
-        free(daten);
-        daten = b.daten;
+        V0 = b.x;
+        V1 = b.y;
         return *this;
     };
 

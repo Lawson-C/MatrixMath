@@ -18,7 +18,12 @@ public:
 
     Vector3() : Vector<3>() {};
 
-    Vector3(double data[3]) : Vector<3>(data) {};
+    Vector3(double data[3]) : Vector<3>()
+    {
+        V0 = data[0];
+        V1 = data[1];
+        V2 = data[2];
+    };
 
     Vector3(double x, double y, double z) : Vector<3>()
     {
@@ -62,12 +67,9 @@ public:
         double mag = magnitude();
         if (mag == 1)
             return Vector3(daten);
-        double normalizierteDaten[3] = {
-            V0 / mag,
-            V1 / mag,
-            V2 / mag};
-        Vector3 v = Vector3(normalizierteDaten);
-        return v;
+        return Vector3(V0 / mag,
+                       V1 / mag,
+                       V2 / mag);
     };
 
     /*
@@ -75,20 +77,18 @@ public:
      */
     inline Vector3 cross(Vector<3> &v)
     {
-        double data[3] = {
-            V1 * v.get(2) - V2 * v.get(1),
-            -(V0 * v.get(2) - V2 * v.get(0)),
-            V0 * v.get(1) - V1 * v.get(0)};
-        return Vector3(data);
+        return Vector3(V1 * v.get(2) - V2 * v.get(1),
+                       -(V0 * v.get(2) - V2 * v.get(0)),
+                       V0 * v.get(1) - V1 * v.get(0));
     }
 
     // skalar multiplikation
 
     inline Vector3 operator*(double k)
     {
-        double data[3] = {
-            V0 * k, V1 * k, V2 * k};
-        return Vector3(data);
+        return Vector3(V0 * k,
+                       V1 * k,
+                       V2 * k);
     };
 
     inline Vector3 &operator*=(double k)
@@ -111,9 +111,9 @@ public:
 
     inline Vector3 operator+(Vector<3> &a)
     {
-        double data[3] = {
-            V0 + a.get(0), V1 + a.get(1), V2 + a.get(2)};
-        return Vector3(data);
+        return Vector3(V0 + a.get(0),
+                       V1 + a.get(1),
+                       V2 + a.get(2));
     };
 
     inline Vector3 &operator+=(Vector<3> &a)
@@ -126,9 +126,9 @@ public:
 
     inline Vector3 operator-(Vector<3> &a)
     {
-        double data[3] = {
-            V0 - a.get(0), V1 - a.get(1), V2 - a.get(2)};
-        return Vector3(data);
+        return Vector3(V0 - a.get(0),
+        V1 - a.get(1),
+        V2 - a.get(2));
     };
 
     inline Vector3 &operator-=(Vector<3> &a)
@@ -150,8 +150,9 @@ public:
 
     inline Vector3 &operator=(Vector3 &b)
     {
-        free(daten);
-        daten = b.daten;
+        V0 = b.x;
+        V1 = b.y;
+        V2 = b.z;
         return *this;
     };
 
