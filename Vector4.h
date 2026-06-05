@@ -13,8 +13,31 @@
 class Vector4 : public Vector<4>
 {
 public:
-    Vector4(double data[4]) : Vector<4>(data) {
-                              };
+    double &x = V0;
+    double &y = V1;
+    double &z = V2;
+    double &w = V3;
+
+    Vector4() : Vector<4>() {};
+
+    Vector4(double data[4]) : Vector<4>(data) {};
+
+    Vector4(double x, double y, double z, double w) : Vector<4>()
+    {
+        daten[0] = x;
+        daten[1] = y;
+        daten[2] = z;
+        daten[3] = w;
+    };
+
+    inline Vector4 &set(double x, double y, double z, double w)
+    {
+        V0 = x;
+        V1 = y;
+        V2 = z;
+        V3 = w;
+        return *this;
+    };
 
     inline double magnitude()
     {
@@ -24,7 +47,7 @@ public:
     /*
      * normailiziert den Vector und gibt die Referenz zurück
      */
-    Vector4 &normalize()
+    inline Vector4 &normalize()
     {
         double mag = magnitude();
         if (mag == 1)
@@ -39,7 +62,7 @@ public:
     /*
      * gibt den normalizierten Vector zurück, ohne dass die Daten geändert werden
      */
-    Vector4 getNormal()
+    inline Vector4 getNormal()
     {
         double mag = magnitude();
         if (mag == 1)
@@ -55,14 +78,14 @@ public:
 
     // skalar multiplikation
 
-    Vector4 operator*(double k)
+    inline Vector4 operator*(double k)
     {
         double data[4] = {
             V0 * k, V1 * k, V2 * k, V3 * k};
         return Vector4(data);
     };
 
-    Vector4 &operator*=(double k)
+    inline Vector4 &operator*=(double k)
     {
         V0 *= k;
         V1 *= k;
@@ -73,7 +96,16 @@ public:
 
     // mathematik addition/subtraktion
 
-    Vector4 operator+(Vector<4> &a)
+    inline Vector4 &add(double x, double y, double z, double w)
+    {
+        V0 += x;
+        V1 += y;
+        V2 += z;
+        V3 += w;
+        return *this;
+    };
+
+    inline Vector4 operator+(Vector<4> &a)
     {
         double data[4] = {
             V0 + a.get(0),
@@ -83,7 +115,7 @@ public:
         return Vector4(data);
     };
 
-    Vector4 &operator+=(Vector<4> &a)
+    inline Vector4 &operator+=(Vector<4> &a)
     {
         V0 += a.get(0);
         V1 += a.get(1);
@@ -92,7 +124,7 @@ public:
         return *this;
     };
 
-    Vector4 operator-(Vector<4> &a)
+    inline Vector4 operator-(Vector<4> &a)
     {
         double data[4] = {
             V0 - a.get(0),
@@ -102,7 +134,7 @@ public:
         return Vector4(data);
     };
 
-    Vector4 &operator-=(Vector<4> &a)
+    inline Vector4 &operator-=(Vector<4> &a)
     {
         V0 -= a.get(0);
         V1 -= a.get(1);
@@ -113,23 +145,23 @@ public:
 
     // Vectorenmultiplikation
 
-    Vector4 operator*(Vector<4> &v)
+    inline double operator*(Vector<4> &v)
     {
-        double neueDaten[4] = {
-            V0 * v.get(0),
-            V1 * v.get(1),
-            V2 * v.get(2),
-            V3 * v.get(3)};
-        return Vector4(neueDaten);
+        return V0 * v.get(0) + V1 * v.get(1) + V2 * v.get(2) + V3 * v.get(3);
     };
 
-    Vector4 &operator*=(Vector<4> &v)
+    // Vektorengleichung
+
+    inline Vector4 &operator=(Vector4 &b)
     {
-        V0 *= v.get(0);
-        V1 *= v.get(1);
-        V2 *= v.get(2);
-        V3 *= v.get(3);
+        free(daten);
+        daten = b.daten;
         return *this;
+    };
+
+    inline bool operator==(const Vector4 &b) const
+    {
+        return (V0 == b.x && V1 == b.y && V2 == b.z && V3 == b.w);
     };
 };
 

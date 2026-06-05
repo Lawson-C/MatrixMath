@@ -18,13 +18,13 @@
 class Matrix33 : public Matrix<3, 3>
 {
 public:
-    Matrix33(double data[9]) : Matrix<3, 3>(data) {
-                               };
+    Matrix33() : Matrix<3, 3>() {};
+    Matrix33(double data[9]) : Matrix<3, 3>(data) {};
 
     /*
      * ergibt die Transponierung der Matrix
      */
-    Matrix33 transpose()
+    inline Matrix33 transpose()
     {
         Matrix33 m = Matrix33(daten);
         m.set(0, 1, M10);
@@ -43,7 +43,7 @@ public:
 
     // mathematik addition/subtraktion
 
-    Matrix33 operator+(Matrix33 &a)
+    inline Matrix33 operator+(Matrix33 &a)
     {
         double data[9] = {
             M00 + a.get(0, 0), M01 + a.get(0, 1), M02 + a.get(0, 2),
@@ -52,7 +52,7 @@ public:
         return Matrix33(data);
     };
 
-    Matrix33 &operator+=(Matrix33 &a)
+    inline Matrix33 &operator+=(Matrix33 &a)
     {
         M00 += a.get(0, 0);
         M01 += a.get(0, 1);
@@ -66,7 +66,7 @@ public:
         return *this;
     };
 
-    Matrix33 operator-(Matrix33 &a)
+    inline Matrix33 operator-(Matrix33 &a)
     {
         double data[9] = {
             M00 - a.get(0, 0), M01 - a.get(0, 1), M02 - a.get(0, 2),
@@ -75,7 +75,7 @@ public:
         return Matrix33(data);
     };
 
-    Matrix33 &operator-=(Matrix33 &a)
+    inline Matrix33 &operator-=(Matrix33 &a)
     {
         M00 -= a.get(0, 0);
         M01 -= a.get(0, 1);
@@ -91,7 +91,7 @@ public:
 
     // skalar multiplikation
 
-    Matrix33 operator*(double k)
+    inline Matrix33 operator*(double k)
     {
         double data[9] = {
             M00 * k, M01 * k, M02 * k,
@@ -100,7 +100,7 @@ public:
         return Matrix33(data);
     };
 
-    Matrix33 &operator*=(double k)
+    inline Matrix33 &operator*=(double k)
     {
         M00 *= k;
         M01 *= k;
@@ -116,7 +116,7 @@ public:
 
     // matrix multiplikation
 
-    Matrix33 operator*(Matrix33 &m)
+    inline Matrix33 operator*(Matrix33 &m)
     {
         double neueDaten[9] =
             {
@@ -135,7 +135,7 @@ public:
         return Matrix33(neueDaten);
     };
 
-    Matrix33 &operator*=(Matrix33 &m)
+    inline Matrix33 &operator*=(Matrix33 &m)
     {
         double *neueDaten = (double *)malloc(9 * sizeof(double));
 
@@ -157,7 +157,7 @@ public:
     };
 
     template <int Spalten>
-    Matrix<Spalten, 3> operator*(Matrix<3, Spalten> &m)
+    inline Matrix<Spalten, 3> operator*(Matrix<3, Spalten> &m)
     {
         double *neueDaten = malloc(3 * Spalten * sizeof(double));
         for (int z = 0; z < Spalten; z++)

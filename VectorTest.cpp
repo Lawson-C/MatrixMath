@@ -89,10 +89,7 @@ void testVectorMult()
     Vector4 v = Vector4(data);
     Vector4 v2 = Vector4(data2);
     std::cout << "v * v2:\t" << std::endl
-              << (v * v2)._str() << std::endl;
-    v *= v2;
-    std::cout << "v *= v2:\t" << std::endl
-              << v._str() << std::endl;
+              << (v * v2) << std::endl;
     double data3[3] = {
         4, 6, 8};
     double data4[3] = {
@@ -100,10 +97,7 @@ void testVectorMult()
     Vector3 v3 = Vector3(data3);
     Vector3 v4 = Vector3(data4);
     std::cout << "v3 * v4:\t" << std::endl
-              << (v3 * v4)._str() << std::endl;
-    v3 *= v4;
-    std::cout << "v3 *= v4:\t" << std::endl
-              << v3._str() << std::endl;
+              << (v3 * v4) << std::endl;
     double data5[2] = {
         4, 8};
     double data6[2] = {
@@ -111,10 +105,7 @@ void testVectorMult()
     Vector2 v5 = Vector2(data5);
     Vector2 v6 = Vector2(data6);
     std::cout << "v5 * v6:\t" << std::endl
-              << (v5 * v6)._str() << std::endl;
-    v5 *= v6;
-    std::cout << "v5 *= v6:\t" << std::endl
-              << v5._str() << std::endl;
+              << (v5 * v6) << std::endl;
 };
 
 void testMatrixMult()

@@ -83,7 +83,7 @@ public:
     /*
      * ergibt die Transponierung der Matrix, ohne dass deren Daten geändert wird
      */
-    Matrix<Spalten, Zeilen> transpose()
+    inline Matrix<Spalten, Zeilen> transpose()
     {
         Matrix<Spalten, Zeilen> m = Matrix<Spalten, Zeilen>();
         for (int z = 0; z < Zeilen; z++)
@@ -104,7 +104,7 @@ public:
     /*
      * Standardaddition zwischen zwei Matrixen mit gleichen Dimensionen, wobei keiner deren Daten ändert
      */
-    Matrix<Zeilen, Spalten> operator+(Matrix<Zeilen, Spalten> &a)
+    inline Matrix<Zeilen, Spalten> operator+(Matrix<Zeilen, Spalten> &a)
     {
         Matrix<Zeilen, Spalten> c = Matrix<Zeilen, Spalten>();
         for (int z = 0; z < Zeilen; z++)
@@ -120,7 +120,7 @@ public:
     /*
      * Standardaddition zwischen zwei Matrixen mit gleichen Dimensionen, wobei die Daten der linken Matrix geändert werden
      */
-    Matrix<Zeilen, Spalten> &operator+=(Matrix<Zeilen, Spalten> &a)
+    inline Matrix<Zeilen, Spalten> &operator+=(Matrix<Zeilen, Spalten> &a)
     {
         for (int z = 0; z < Zeilen; z++)
         {
@@ -135,7 +135,7 @@ public:
     /*
      * Standardsubtraktion zwischen zwei Matrixen mit gleichen Dimensionen, wobei keiner deren Daten ändert
      */
-    Matrix<Zeilen, Spalten> operator-(Matrix<Zeilen, Spalten> &a)
+    inline Matrix<Zeilen, Spalten> operator-(Matrix<Zeilen, Spalten> &a)
     {
         Matrix<Zeilen, Spalten> c = Matrix<Zeilen, Spalten>();
         for (int z = 0; z < Zeilen; z++)
@@ -151,7 +151,7 @@ public:
     /*
      * Standardsubtraktion zwischen zwei Matrixen mit gleichen Dimensionen, wobei die Daten der linken Matrix geändert werden
      */
-    Matrix<Zeilen, Spalten> &operator-=(Matrix<Zeilen, Spalten> &a)
+    inline Matrix<Zeilen, Spalten> &operator-=(Matrix<Zeilen, Spalten> &a)
     {
         for (int z = 0; z < Zeilen; z++)
         {
@@ -168,7 +168,7 @@ public:
     /*
      * multipliziert jeden Eintrag der Matrix mit dem Faktor k, ohne Datenänderung
      */
-    Matrix<Zeilen, Spalten> operator*(double k)
+    inline Matrix<Zeilen, Spalten> operator*(double k)
     {
         Matrix<Zeilen, Spalten> c = Matrix<Zeilen, Spalten>();
         for (int z = 0; z < Zeilen; z++)
@@ -185,7 +185,7 @@ public:
     /*
      * multipliziert jeden Eintrag der Matrix mit dem Faktor k
      */
-    Matrix<Zeilen, Spalten> &operator*=(double k)
+    inline Matrix<Zeilen, Spalten> &operator*=(double k)
     {
         for (int z = 0; z < Zeilen; z++)
         {

@@ -23,13 +23,13 @@
 class Matrix44 : public Matrix<4, 4>
 {
 public:
-    Matrix44(double data[16]) : Matrix<4, 4>(data) {
-                                };
+    Matrix44() : Matrix<4, 4>() {};
+    Matrix44(double data[16]) : Matrix<4, 4>(data) {};
 
     /*
      * ergibt die Transponierung der Matrix
      */
-    Matrix44 transpose()
+    inline Matrix44 transpose()
     {
         Matrix44 m = Matrix44(daten);
         m.set(0, 1, M10);
@@ -50,7 +50,7 @@ public:
 
     // mathematik addition/subtraktion
 
-    Matrix44 operator+(Matrix44 &a)
+    inline Matrix44 operator+(Matrix44 &a)
     {
         double data[16] = {
             M00 + a.get(0, 0), M01 + a.get(0, 1), M02 + a.get(0, 2), M03 + a.get(0, 3),
@@ -60,7 +60,7 @@ public:
         return Matrix44(data);
     };
 
-    Matrix44 &operator+=(Matrix44 &a)
+    inline Matrix44 &operator+=(Matrix44 &a)
     {
         M00 += a.get(0, 0);
         M01 += a.get(0, 1);
@@ -81,7 +81,7 @@ public:
         return *this;
     };
 
-    Matrix44 operator-(Matrix44 &a)
+    inline Matrix44 operator-(Matrix44 &a)
     {
         double data[16] = {
             M00 - a.get(0, 0), M01 - a.get(0, 1), M02 - a.get(0, 2), M03 - a.get(0, 3),
@@ -91,7 +91,7 @@ public:
         return Matrix44(data);
     };
 
-    Matrix44 &operator-=(Matrix44 &a)
+    inline Matrix44 &operator-=(Matrix44 &a)
     {
         M00 -= a.get(0, 0);
         M01 -= a.get(0, 1);
@@ -114,7 +114,7 @@ public:
 
     // skalar multiplikation
 
-    Matrix44 operator*(double k)
+    inline Matrix44 operator*(double k)
     {
         double data[16] = {
             M00 * k, M01 * k, M02 * k, M03 * k,
@@ -124,7 +124,7 @@ public:
         return Matrix44(data);
     };
 
-    Matrix44 &operator*=(double k)
+    inline Matrix44 &operator*=(double k)
     {
         M00 *= k;
         M01 *= k;
@@ -147,7 +147,7 @@ public:
 
     // matrix multiplikation
 
-    Matrix44 operator*(Matrix44 &m)
+    inline Matrix44 operator*(Matrix44 &m)
     {
         double neueDaten[16] =
             {
@@ -174,7 +174,7 @@ public:
         return Matrix44(neueDaten);
     };
 
-    Matrix44 &operator*=(Matrix44 &m)
+    inline Matrix44 &operator*=(Matrix44 &m)
     {
         double *neueDaten = (double *)malloc(16 * sizeof(double));
 
@@ -204,7 +204,7 @@ public:
     };
 
     template <int Spalten>
-    Matrix<Spalten, 4> operator*(Matrix<4, Spalten> &m)
+    inline Matrix<Spalten, 4> operator*(Matrix<4, Spalten> &m)
     {
         double *neueDaten = malloc(4 * Spalten * sizeof(double));
         for (int z = 0; z < Spalten; z++)
