@@ -24,10 +24,7 @@ public:
      */
     Vector(double data[Länge])
     {
-        for (int n = 0; n < Länge; n++)
-        {
-            GET(n) = data[n];
-        };
+        std::copy(data, data + Länge, daten);
     };
 
     /*

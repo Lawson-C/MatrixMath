@@ -25,29 +25,7 @@ class Matrix44 : public Matrix<4, 4>
 public:
     Matrix44() : Matrix<4, 4>() {};
     Matrix44(double data[16]) : Matrix<4, 4>(data) {};
-
-    Matrix44(double m00, double m01, double m02, double m03,
-             double m10, double m11, double m12, double m13,
-             double m20, double m21, double m22, double m23,
-             double m30, double m31, double m32, double m33) : Matrix<4, 4>()
-    {
-        M00 = m00;
-        M01 = m01;
-        M02 = m02;
-        M03 = m03;
-        M10 = m10;
-        M11 = m11;
-        M12 = m12;
-        M13 = m13;
-        M20 = m20;
-        M21 = m21;
-        M22 = m22;
-        M23 = m23;
-        M30 = m30;
-        M31 = m31;
-        M32 = m32;
-        M33 = m33;
-    };
+    Matrix44(double m00, double m01, double m02, double m03, double m10, double m11, double m12, double m13, double m20, double m21, double m22, double m23, double m30, double m31, double m32, double m33) : Matrix<4, 4>(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) {};
 
     /*
      * ergibt die Transponierung der Matrix

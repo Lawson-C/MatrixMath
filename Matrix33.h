@@ -20,21 +20,7 @@ class Matrix33 : public Matrix<3, 3>
 public:
     Matrix33() : Matrix<3, 3>() {};
     Matrix33(double data[9]) : Matrix<3, 3>(data) {};
-
-    Matrix33(double m00, double m01, double m02,
-             double m10, double m11, double m12,
-             double m20, double m21, double m22) : Matrix<3, 3>()
-    {
-        M00 = m00;
-        M01 = m01;
-        M02 = m02;
-        M10 = m10;
-        M11 = m11;
-        M12 = m12;
-        M20 = m20;
-        M21 = m21;
-        M22 = m22;
-    };
+    Matrix33(double m00, double m01, double m02, double m10, double m11, double m12, double m20, double m21, double m22) : Matrix<3, 3>(m00, m01, m02, m10, m11, m12, m20, m21, m22) {};
 
     /*
      * ergibt die Transponierung der Matrix

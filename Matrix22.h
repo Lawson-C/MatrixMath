@@ -15,14 +15,7 @@ class Matrix22 : public Matrix<2, 2>
 public:
     Matrix22() : Matrix<2, 2>() {};
     Matrix22(double data[4]) : Matrix<2, 2>(data) {};
-
-    Matrix22(double m00, double m01, double m10, double m11) : Matrix<2, 2>()
-    {
-        M00 = m00;
-        M01 = m01;
-        M10 = m10;
-        M11 = m11;
-    };
+    Matrix22(double m00, double m01, double m10, double m11) : Matrix<2, 2>(m00, m01, m10, m11) {};
 
     /*
      * ergibt die Transponierung der Matrix

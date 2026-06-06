@@ -15,18 +15,8 @@ public:
     double &y = V1;
 
     Vector2() : Vector<2>() {};
-
-    Vector2(double data[2]) : Vector<2>()
-    {
-        V0 = data[0];
-        V1 = data[1];
-    };
-
-    Vector2(double x, double y) : Vector<2>()
-    {
-        daten[0] = x;
-        daten[1] = y;
-    };
+    Vector2(double data[2]) : Vector<2>(), x(data[0]), y(data[1]) {};
+    Vector2(double x, double y) : Vector<2>(), x(x), y(y) {};
 
     inline Vector2 &replace(double x, double y)
     {

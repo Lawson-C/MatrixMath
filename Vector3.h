@@ -17,20 +17,8 @@ public:
     double &z = V2;
 
     Vector3() : Vector<3>() {};
-
-    Vector3(double data[3]) : Vector<3>()
-    {
-        V0 = data[0];
-        V1 = data[1];
-        V2 = data[2];
-    };
-
-    Vector3(double x, double y, double z) : Vector<3>()
-    {
-        daten[0] = x;
-        daten[1] = y;
-        daten[2] = z;
-    };
+    Vector3(double data[3]) : Vector<3>(), x(data[0]), y(data[1]), z(data[2]) {};
+    Vector3(double x, double y, double z) : Vector<3>(), x(x), y(y), z(z) {};
 
     inline Vector3 &replace(double x, double y, double z)
     {
@@ -127,8 +115,8 @@ public:
     inline Vector3 operator-(Vector<3> &a)
     {
         return Vector3(V0 - a.get(0),
-        V1 - a.get(1),
-        V2 - a.get(2));
+                       V1 - a.get(1),
+                       V2 - a.get(2));
     };
 
     inline Vector3 &operator-=(Vector<3> &a)

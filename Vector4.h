@@ -19,22 +19,8 @@ public:
     double &w = V3;
 
     Vector4() : Vector<4>() {};
-
-    Vector4(double data[4]) : Vector<4>()
-    {
-        V0 = data[0];
-        V1 = data[1];
-        V2 = data[2];
-        V3 = data[3];
-    };
-
-    Vector4(double x, double y, double z, double w) : Vector<4>()
-    {
-        daten[0] = x;
-        daten[1] = y;
-        daten[2] = z;
-        daten[3] = w;
-    };
+    Vector4(double data[4]) : Vector<4>(), x(data[0]), y(data[1]), z(data[2]), w(data[3]) {};
+    Vector4(double x, double y, double z, double w) : Vector<4>(), x(x), y(y), z(z), w(w) {};
 
     inline Vector4 &replace(double x, double y, double z, double w)
     {
