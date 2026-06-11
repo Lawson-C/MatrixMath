@@ -13,14 +13,14 @@
 class Vector4 : public Vector<4>
 {
 public:
-    double &x = V0;
-    double &y = V1;
-    double &z = V2;
-    double &w = V3;
+    double &x() {return V0; };
+    double &y() {return V1; };
+    double &z() {return V2; };
+    double &w() {return V3; };
 
     Vector4() : Vector<4>() {};
-    Vector4(double data[4]) : Vector<4>(), x(data[0]), y(data[1]), z(data[2]), w(data[3]) {};
-    Vector4(double x, double y, double z, double w) : Vector<4>(), x(x), y(y), z(z), w(w) {};
+    Vector4(double data[4]) : Vector<4>() {};
+    Vector4(double x, double y, double z, double w) : Vector<4>() {};
 
     inline Vector4 &replace(double x, double y, double z, double w)
     {
@@ -157,18 +157,18 @@ public:
 
     // Vektorengleichung
 
-    inline Vector4 &operator=(Vector4 &b)
+    inline Vector4 &operator=(Vector<4> &b)
     {
-        V0 = b.x;
-        V1 = b.y;
-        V2 = b.z;
-        V3 = b.w;
+        V0 = b.get(0);
+        V1 = b.get(1);
+        V2 = b.get(2);
+        V3 = b.get(3);
         return *this;
     };
 
-    inline bool operator==(const Vector4 &b) const
+    inline bool operator==(Vector<4> &b)
     {
-        return (V0 == b.x && V1 == b.y && V2 == b.z && V3 == b.w);
+        return (V0 == b.get(0) && V1 == b.get(1) && V2 == b.get(2) && V3 == b.get(3));
     };
 };
 

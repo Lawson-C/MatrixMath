@@ -12,13 +12,13 @@
 class Vector3 : public Vector<3>
 {
 public:
-    double &x = V0;
-    double &y = V1;
-    double &z = V2;
+    double &x() {return V0; };
+    double &y() {return V1; };
+    double &z() {return V2; };
 
     Vector3() : Vector<3>() {};
-    Vector3(double data[3]) : Vector<3>(), x(data[0]), y(data[1]), z(data[2]) {};
-    Vector3(double x, double y, double z) : Vector<3>(), x(x), y(y), z(z) {};
+    Vector3(double data[3]) : Vector<3>() {};
+    Vector3(double x, double y, double z) : Vector<3>() {};
 
     inline Vector3 &replace(double x, double y, double z)
     {
@@ -153,17 +153,17 @@ public:
 
     // Vektorengleichung
 
-    inline Vector3 &operator=(Vector3 &b)
+    inline Vector3 &operator=(Vector<3> &b)
     {
-        V0 = b.x;
-        V1 = b.y;
-        V2 = b.z;
+        V0 = b.get(0);
+        V1 = b.get(1);
+        V2 = b.get(2);
         return *this;
     };
 
-    inline bool operator==(const Vector3 &b) const
+    inline bool operator==(Vector<3> &b)
     {
-        return (V0 == b.x && V1 == b.y && V2 == b.z);
+        return (V0 == b.get(0) && V1 == b.get(1) && V2 == b.get(2));
     };
 };
 

@@ -11,12 +11,12 @@
 class Vector2 : public Vector<2>
 {
 public:
-    double &x = V0;
-    double &y = V1;
+    double &x() {return V0; };
+    double &y() {return V1; };
 
     Vector2() : Vector<2>() {};
-    Vector2(double data[2]) : Vector<2>(), x(data[0]), y(data[1]) {};
-    Vector2(double x, double y) : Vector<2>(), x(x), y(y) {};
+    Vector2(double data[2]) : Vector<2>() {};
+    Vector2(double x, double y) : Vector<2>() {};
 
     inline Vector2 &replace(double x, double y)
     {
@@ -135,16 +135,16 @@ public:
 
     // Vektorengleichung
 
-    inline Vector2 &operator=(Vector2 &b)
+    inline Vector2 &operator=(Vector<2> &b)
     {
-        V0 = b.x;
-        V1 = b.y;
+        V0 = b.get(0);
+        V1 = b.get(0);
         return *this;
     };
 
-    inline bool operator==(const Vector2 &b) const
+    inline bool operator==(Vector<2> &b)
     {
-        return (V0 == b.x && V1 == b.y);
+        return (V0 == b.get(0) && V1 == b.get(1));
     };
 };
 
