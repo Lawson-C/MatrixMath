@@ -87,6 +87,23 @@ public:
         return *this;
     };
 
+    // skalar division
+
+    inline Vector3 operator/(double k)
+    {
+        return Vector3(V0 / k,
+                       V1 / k,
+                       V2 / k);
+    };
+
+    inline Vector3 &operator/=(double k)
+    {
+        V0 /= k;
+        V1 /= k;
+        V2 /= k;
+        return *this;
+    };
+
     // mathematik addition/subtraktion
 
     inline Vector3 &add(double x, double y, double z)

@@ -167,6 +167,26 @@ public:
         return *this;
     };
 
+    // skalar division
+
+    inline Vector3 operator/(double k)
+    {
+        Vector<Länge> v = Vector<Länge>();
+        for (int n = 0; n < Länge; n++)
+        {
+            v.set(n, GET(n) / k);
+        };
+        return v;
+    };
+
+    inline Vector3 &operator/=(double k)
+    {
+        for (int n; n < Länge; n++) {
+            GET(n) /= k;
+        };
+        return *this;
+    };
+
     // Vektorenmultiplikation
 
     /*

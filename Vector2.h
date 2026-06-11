@@ -76,6 +76,21 @@ public:
         return *this;
     };
 
+    // skalar division
+
+    inline Vector2 operator/(double k)
+    {
+        return Vector2(V0 / k,
+                       V1 / k);
+    };
+
+    inline Vector2 &operator/=(double k)
+    {
+        V0 /= k;
+        V1 /= k;
+        return *this;
+    };
+
     // mathematik addition/subtraktion
 
     inline Vector2 &add(double x, double y)
