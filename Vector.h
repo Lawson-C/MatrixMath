@@ -30,7 +30,7 @@ public:
     /*
      * ergibt den Wert zur gegebenen Position des Vektors
      */
-    inline double get(int n)
+    inline double &get(int n)
     {
         return GET(n);
     };
@@ -169,7 +169,7 @@ public:
 
     // skalar division
 
-    inline Vector3 operator/(double k)
+    inline Vector<Länge> operator/(double k)
     {
         Vector<Länge> v = Vector<Länge>();
         for (int n = 0; n < Länge; n++)
@@ -179,9 +179,10 @@ public:
         return v;
     };
 
-    inline Vector3 &operator/=(double k)
+    inline Vector<Länge> &operator/=(double k)
     {
-        for (int n; n < Länge; n++) {
+        for (int n; n < Länge; n++)
+        {
             GET(n) /= k;
         };
         return *this;
