@@ -232,26 +232,6 @@ public:
         return *this;
     };
 
-    // Vectorenmultiplikation
-
-    /*
-     * multipliziert eine Matrix mit einem Vektor und ergibt jenen Vektor
-     */
-    Vector<Zeilen> operator*(Vector<Zeilen> &v)
-    {
-        Vector<Zeilen> result = Vector<Zeilen>();
-        for (int z = 0; z < Zeilen; z++)
-        {
-            int sum = 0;
-            for (int s = 0; s < Spalten; s++)
-            {
-                sum += GET(z, s) * v.get(z);
-            };
-            result.set(z, sum);
-        };
-        return result;
-    };
-
     // string repräsentation
 
     /*
